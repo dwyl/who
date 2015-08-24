@@ -15,3 +15,17 @@ Read the Commit History for all the dwyl repos on GitHub!
 
 Lets start with 1 and proceed to 2 when we have time.
 (*and invite people to add their own bios & links*)
+
+## Record Fields
+
+```js
+{
+  fullname: 'Ines Teles',
+  avatar: 'https://avatars1.githubusercontent.com/u/4185328',
+  github: 'iteles',
+  twitter: 'iteles',
+  instagram: 'isnteles',
+  bio: 'Coorganiser @ladieswhocode LDN. Cheerleader @founderscoders. web-focused, productivity fan, paper lover, microfinance buff, proponent of smiles',
+  link: 'http://www.dwyl.io/ines'
+}
+```
