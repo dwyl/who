@@ -26,6 +26,8 @@ Lets start with 1 and proceed to 2 when we have time.
   twitter: 'iteles',
   instagram: 'isnteles',
   bio: 'Coorganiser @ladieswhocode LDN. Cheerleader @founderscoders. web-focused, productivity fan, paper lover, microfinance buff, proponent of smiles',
-  link: 'http://www.dwyl.io/ines'
+  link: 'http://www.dwyl.io/ines',
+  loves: 'Origami, Outdoors, Singing, Wall Planners, Colors',
+  wantstoimprove: 'discipline, communication, '
 }
 ```
