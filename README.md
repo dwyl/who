@@ -64,9 +64,15 @@ At the time of writing this, that is 25 people fewer than 40% of contributors.
 ## GitHub Scraper Profile Fields
 
 Using [**github-scraper**](https://github.com/nelsonic/github-scraper)
-we can fetch the list of people who have made their membership of dwyl public.
+we can fetch the list of people who have made their membership of dwyl ***public***.
 
-
+```sh
+alanshaw,anniva,besarthoxhaj,codepreneur,Danwhy,edwardcodes,
+gabrielperales,gregaubs,heron2014,iteles,izaakrogan,Jasonspd,
+krosti,Lukars,MIJOTHY,minaorangina,Neats29,nelsonic,nikhilaravi,
+nofootnotes,rjmk,rorysedgwick,rub1e,sarahabimay,SimonLab,tunnckoCore
+```
+With this list we can fetch the list of people and get their basic profile details:
 
 ```js
 {
