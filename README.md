@@ -31,3 +31,7 @@ Lets start with 1 and proceed to 2 when we have time.
   wantstoimprove: 'discipline, communication, '
 }
 ```
+
+## Rough Sketch (*idea*)
+
+![who mobile first sketch](http://i.imgur.com/qBgMnJQ.jpg)
