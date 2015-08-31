@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/nelsonic/who/issues"
   },
-  "homepage": "https://github.com/nelsonic/who#readme"
+  "homepage": "https://github.com/nelsonic/who#readme",
+  "dependencies": {
+    "github-scraper": "^3.0.21"
+  }
 }
