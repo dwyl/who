@@ -1,0 +1,22 @@
+{
+  "name": "whom",
+  "version": "1.0.0",
+  "description": "Who are the people making dwyl?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nelsonic/who.git"
+  },
+  "keywords": [
+    "who"
+  ],
+  "author": "@nelsonic & dwylers",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/nelsonic/who/issues"
+  },
+  "homepage": "https://github.com/nelsonic/who#readme"
+}

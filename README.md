@@ -50,3 +50,8 @@ page will only give us the people who have made their Org membership ***public**
 At the time of writing this, that is 25 people fewer than 40% of contributors.
 (there are many out-standing invitations - thanks GitHub notifications! - and
   most people don't realise that they have to *manually* make their membership public...)
+
+## Research
+
++ *Hilarious/insightful* explanation of when to use **Who vs. Whom**:
+http://theoatmeal.com/comics/who_vs_whom
