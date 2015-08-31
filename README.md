@@ -34,9 +34,9 @@ Lets start with 1 and proceed to 2 when we have time.
 
 # implementation
 
-## Record Fields
+## Fields
 
-Each record in the `people.json` file *can* have the following fields
+Each person in the `people.json` file *can* have the following fields
 
 ```js
 {
@@ -54,6 +54,11 @@ Each record in the `people.json` file *can* have the following fields
 ```
 
 ## Rough Sketch (*idea*)
+
+Listing people by name is kinda boring.  
+There's *significant* evidence that seeing ***pictures***
+of people is *way* more *engaging*
+so I sketched out a *mobile-first* view of a **Who?** section:
 
 ![who mobile first sketch](http://i.imgur.com/qBgMnJQ.jpg)
 
