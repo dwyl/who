@@ -8,6 +8,21 @@ console.log(dir);
 var profiles = dir.filter(function(file){ return file.match(/json/) });
 console.log(' - - - - - - - - - - - - - - - - - ');
 console.log(profiles);
+var lists = dir.filter(function(file){ return file.match(/csv/) });
+console.log(' - - - - - - - - - - - - - - - - - ');
+console.log(lists)
+var people = [];
+lists.forEach( function (list) {
+  var names = fs.readFileSync(__dirname+'/'+list, 'utf8').trim().split('\n');
+  // console.log(names);
+  names.forEach(function(name){ people.push(name) })
+});
+console.log(people.length);
+// remove duplicate people to avoid re-crawling
+var unique = people.filter(function(item, pos) {
+    return people.indexOf(item) == pos;
+})
+console.log(people.length);
 // fs.readFileSync()
   // data.entries.forEach(function(person){
   //   gs('/'+person, function(err, profile){
