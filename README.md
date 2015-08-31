@@ -4,29 +4,39 @@ The *answer* to ***Who is (working on) dwyl?***
 
 ## *Why*?
 
-
+The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) section is *woefully* out of date.  
+(*this was [noted](https://github.com/dwyl/start-here/issues/9) a while back... but sadly was not made a priorty at the time...*)  
+This mini-project addresses [dwyl/start-here/issues/9](https://github.com/dwyl/start-here/issues/9)
 
 ## *What*?
 
-
+A more attractive, interesting, informative, engaging, useful, dynamic ...  
+"***people***" page for http://www.dwyl.io/
 
 ## *How*?
 
-There are two ways of discovering this list of people.
+There are two ways of discovering the list of people who are contributing to the **dwyl mission**:
 
-### 1. Visit the Org's People Page on GitHub
+### 1. *dwyl* Org's *People Page* on GitHub
 
-https://github.com/orgs/dwyl/people
+Visit: https://github.com/orgs/dwyl/people and grab the list.  
+*simple. effective. incomplete*.  
+(*read on to understand why this list only scratches the surface!*)
 
 ### 2. List all Contributors to dwyl repos on GitHub
 
 Read the Commit History for all the dwyl repos on GitHub!
 
+### Approach Taken
 
 Lets start with 1 and proceed to 2 when we have time.
 (*and invite people to add their own bios & links*)
 
+# implementation
+
 ## Record Fields
+
+Each record in the `people.json` file *can* have the following fields
 
 ```js
 {
