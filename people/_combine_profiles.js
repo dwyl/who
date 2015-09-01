@@ -1,4 +1,5 @@
-var fs  = require('fs');
+var fs     = require('fs');
+var sortBy = require('lodash.sortby');
 // load all the files in the people directory
 var dir = fs.readdirSync('./people');
 // console.log(dir);
@@ -24,16 +25,8 @@ profiles.forEach( function (p) {
   // console.log(parsed);
   people.push(json);
 });
-// http://stackoverflow.com/a/1129270/1148249
-function compare(a,b) {
-  if (a.lady< b.lady)
-    return -1;
-  if (a.lady > b.lady)
-    return 1;
-  return 0;
-}
-
-people.sort(compare);
-
-// console.log(people);
-fs.writeFileSync(__dirname + '/z_people.json', JSON.stringify(people, null, 2) );
+// http://stackoverflow.com/a/10542368/1148249
+var ladiesfirst = sortBy( people, 'lady' );
+console.log(ladiesfirst);
+fs.writeFileSync(__dirname + '/z_people.json',
+JSON.stringify(ladiesfirst, null, 2) );

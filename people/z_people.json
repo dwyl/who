@@ -1,31 +1,5 @@
 [
   {
-    "github": "iteles",
-    "fullname": "Ines Teles",
-    "website": "http://www.twitter.com/iteles",
-    "avatar": "https://avatars1.githubusercontent.com/u/4185328?v=3&s=460",
-    "lady": "1"
-  },
-  {
-    "github": "Danwhy",
-    "fullname": "Daniel Whyte",
-    "website": "https://github.com/Danwhy",
-    "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAJIAAAAJGJjZTE0NDBlLTEzNTEtNGExOS1iOTgzLWU3ODg1MzE5NzFlYw.jpg",
-    "linkedin": "https://uk.linkedin.com/pub/daniel-whyte/100/385/732"
-  },
-  {
-    "github": "Lukars",
-    "fullname": "Lukars",
-    "website": "https://github.com/Lukars",
-    "avatar": "https://avatars2.githubusercontent.com/u/11869649?v=3&s=460"
-  },
-  {
-    "github": "MIJOTHY",
-    "fullname": "",
-    "website": "https://github.com/MIJOTHY",
-    "avatar": "https://avatars1.githubusercontent.com/u/10106320?v=3&s=460"
-  },
-  {
     "github": "NataliaLKB",
     "fullname": "Natalia Baltazar",
     "website": "https://github.com/NataliaLKB",
@@ -38,6 +12,103 @@
     "website": "https://uk.linkedin.com/in/anitaamini",
     "avatar": "https://avatars2.githubusercontent.com/u/9632022?v=3&s=460",
     "lady": "1"
+  },
+  {
+    "github": "anniva",
+    "fullname": "Anni Väänänen",
+    "website": "https://github.com/anniva",
+    "avatar": "https://avatars1.githubusercontent.com/u/10906215?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "heron2014",
+    "fullname": "Anita",
+    "website": "https://github.com/heron2014",
+    "avatar": "https://avatars1.githubusercontent.com/u/8476884?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "iteles",
+    "fullname": "Ines Teles",
+    "website": "http://www.twitter.com/iteles",
+    "avatar": "https://avatars1.githubusercontent.com/u/4185328?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "minaorangina",
+    "fullname": "Mina Gyimah",
+    "website": "https://github.com/minaorangina",
+    "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAARRAAAAJGM1NWYzNjg5LTk3MzUtNDM0NC1iNWJjLWE2MTA1OTFlMzJhMg.jpg",
+    "linkedin": "https://uk.linkedin.com/in/minagyimah",
+    "lady": "1"
+  },
+  {
+    "github": "msmichellegar",
+    "fullname": "Michelle",
+    "website": "http://www.twitter.com/msmichellegar",
+    "avatar": "https://avatars2.githubusercontent.com/u/10683087?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "nikhilaravi",
+    "fullname": "Nikhila Ravi",
+    "website": "https://github.com/nikhilaravi",
+    "avatar": "https://avatars3.githubusercontent.com/u/5912647?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "nofootnotes",
+    "fullname": "Claire Mitchell",
+    "website": "https://github.com/nofootnotes",
+    "avatar": "https://avatars1.githubusercontent.com/u/10425219?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "oluoluoxenfree",
+    "fullname": "Olu Niyi-Awosusi",
+    "website": "http://www.opentagclosetag.com/",
+    "avatar": "https://avatars3.githubusercontent.com/u/3077443?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "sarahabimay",
+    "fullname": "Sarah Johnston",
+    "website": "https://uk.linkedin.com/pub/sarah-johnston/15/317/741",
+    "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/005/0b6/395/06aa1cb.jpg",
+    "linkedin": "https://uk.linkedin.com/pub/sarah-johnston/15/317/741",
+    "lady": "1"
+  },
+  {
+    "github": "tsop14",
+    "fullname": "Emma Milner",
+    "website": "https://github.com/tsop14",
+    "avatar": "https://avatars3.githubusercontent.com/u/8484757?v=3&s=460",
+    "lady": "1"
+  },
+  {
+    "github": "Danwhy",
+    "fullname": "Daniel Whyte",
+    "website": "https://github.com/Danwhy",
+    "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAJIAAAAJGJjZTE0NDBlLTEzNTEtNGExOS1iOTgzLWU3ODg1MzE5NzFlYw.jpg",
+    "linkedin": "https://uk.linkedin.com/pub/daniel-whyte/100/385/732"
+  },
+  {
+    "github": "Jasonspd",
+    "fullname": "Jason Luu",
+    "website": "https://github.com/Jasonspd",
+    "avatar": "https://avatars3.githubusercontent.com/u/10106517?v=3&s=460"
+  },
+  {
+    "github": "Lukars",
+    "fullname": "Lukars",
+    "website": "https://github.com/Lukars",
+    "avatar": "https://avatars2.githubusercontent.com/u/11869649?v=3&s=460"
+  },
+  {
+    "github": "MIJOTHY",
+    "fullname": "",
+    "website": "https://github.com/MIJOTHY",
+    "avatar": "https://avatars1.githubusercontent.com/u/10106320?v=3&s=460"
   },
   {
     "github": "SimonLab",
@@ -62,13 +133,6 @@
     "fullname": "Alex Ilyaev",
     "website": "http://about.me/alexilyaev",
     "avatar": "https://avatars3.githubusercontent.com/u/480469?v=3&s=460"
-  },
-  {
-    "github": "anniva",
-    "fullname": "Anni Väänänen",
-    "website": "https://github.com/anniva",
-    "avatar": "https://avatars1.githubusercontent.com/u/10906215?v=3&s=460",
-    "lady": "1"
   },
   {
     "github": "beechware",
@@ -143,23 +207,10 @@
     "avatar": "https://avatars2.githubusercontent.com/u/101693?v=3&s=460"
   },
   {
-    "github": "heron2014",
-    "fullname": "Anita",
-    "website": "https://github.com/heron2014",
-    "avatar": "https://avatars1.githubusercontent.com/u/8476884?v=3&s=460",
-    "lady": "1"
-  },
-  {
     "github": "hyprstack",
     "fullname": "Mario Mendes",
     "website": "https://github.com/hyprstack",
     "avatar": "https://avatars1.githubusercontent.com/u/5845311?v=3&s=460"
-  },
-  {
-    "github": "Jasonspd",
-    "fullname": "Jason Luu",
-    "website": "https://github.com/Jasonspd",
-    "avatar": "https://avatars3.githubusercontent.com/u/10106517?v=3&s=460"
   },
   {
     "github": "izaakrogan",
@@ -198,52 +249,16 @@
     "avatar": "https://avatars1.githubusercontent.com/u/336152?v=3&s=460"
   },
   {
-    "github": "minaorangina",
-    "fullname": "Mina Gyimah",
-    "website": "https://github.com/minaorangina",
-    "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAARRAAAAJGM1NWYzNjg5LTk3MzUtNDM0NC1iNWJjLWE2MTA1OTFlMzJhMg.jpg",
-    "linkedin": "https://uk.linkedin.com/in/minagyimah",
-    "lady": "1"
-  },
-  {
-    "github": "msmichellegar",
-    "fullname": "Michelle",
-    "website": "http://www.twitter.com/msmichellegar",
-    "avatar": "https://avatars2.githubusercontent.com/u/10683087?v=3&s=460",
-    "lady": "1"
-  },
-  {
     "github": "nelsonic",
     "fullname": "Nelson",
     "website": "http://www.dwyl.io/",
     "avatar": "https://avatars3.githubusercontent.com/u/194400?v=3&s=460"
   },
   {
-    "github": "nikhilaravi",
-    "fullname": "Nikhila Ravi",
-    "website": "https://github.com/nikhilaravi",
-    "avatar": "https://avatars3.githubusercontent.com/u/5912647?v=3&s=460",
-    "lady": "1"
-  },
-  {
-    "github": "nofootnotes",
-    "fullname": "Claire Mitchell",
-    "website": "https://github.com/nofootnotes",
-    "avatar": "https://avatars1.githubusercontent.com/u/10425219?v=3&s=460",
-    "lady": "1"
-  },
-  {
     "github": "olizilla",
     "fullname": "Oli Evans",
     "website": "http://oli.zilla.org.uk",
     "avatar": "https://avatars0.githubusercontent.com/u/58871?v=3&s=460"
-  },
-  {
-    "github": "oluoluoxenfree",
-    "fullname": "Olu Niyi-Awosusi",
-    "website": "http://www.opentagclosetag.com/",
-    "avatar": "https://avatars3.githubusercontent.com/u/3077443?v=3&s=460",
-    "lady": "1"
   },
   {
     "github": "paulvi",
@@ -270,14 +285,6 @@
     "avatar": "https://avatars3.githubusercontent.com/u/11595920?v=3&s=460"
   },
   {
-    "github": "sarahabimay",
-    "fullname": "Sarah Johnston",
-    "website": "https://uk.linkedin.com/pub/sarah-johnston/15/317/741",
-    "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/005/0b6/395/06aa1cb.jpg",
-    "linkedin": "https://uk.linkedin.com/pub/sarah-johnston/15/317/741",
-    "lady": "1"
-  },
-  {
     "github": "ssassi",
     "fullname": "Sebastián Sassi",
     "website": "http://sophilabs.com",
@@ -288,13 +295,6 @@
     "fullname": "Tony Daly",
     "website": "http://mootpointer.co/",
     "avatar": "https://avatars3.githubusercontent.com/u/68354?v=3&s=460"
-  },
-  {
-    "github": "tsop14",
-    "fullname": "Emma Milner",
-    "website": "https://github.com/tsop14",
-    "avatar": "https://avatars3.githubusercontent.com/u/8484757?v=3&s=460",
-    "lady": "1"
   },
   {
     "github": "tunnckoCore",
