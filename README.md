@@ -118,6 +118,10 @@ With this list we can fetch the list of people and get their basic profile detai
      '/node-girls https://avatars2.githubusercontent.com/u/13981928?v=3&s=84' ] }
 ```
 
+### Combining Many Profiles into a single `people.json`
+
+
+
 ## Research
 
 + *Hilarious/insightful* explanation of when to use **Who vs. Whom**:
