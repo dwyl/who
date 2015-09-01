@@ -7,7 +7,7 @@ The *answer* to ***Who is (working on) dwyl?***
 ## *Why*?
 
 The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) section is *woefully* out of date.  
-(*this was [noted](https://github.com/dwyl/start-here/issues/9) a while back... but sadly was not made a priorty at the time...*)  
+(*this was [noted](https://github.com/dwyl/start-here/issues/9) a while back... but sadly was not made a priority at the time...*)  
 This mini-project addresses [dwyl/start-here/issues/9](https://github.com/dwyl/start-here/issues/9)
 
 ## *What*?
