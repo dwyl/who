@@ -15,7 +15,9 @@
       <h1>Who?</h1>
       <header>
       </header>
-
+      <section class='desc'>
+        <strong>dwyl</strong> is made by <em>many</em> people all over the world!
+      </section>
       <ul id='faces'>
 
       </ul>
@@ -36,13 +38,40 @@
 </script>
 
 <style>
+  /*https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/*/
+  html {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+  }
+  body{
+    margin: 0;
+    padding:0;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #403f3f;
+    font-size:1em;
+    height: 100%;
+    margin-left: 1em;
+  }
+  /* reset margins */
+  ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+  }
+
   .avatar {
     float: left;
   }
   .avatar img {
     width: 100px;
     padding: 1px;
-    border-radius: 5px;
+    border-radius: 7px;
   }
 </style>
 
