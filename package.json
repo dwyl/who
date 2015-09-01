@@ -1,9 +1,10 @@
 {
   "name": "whom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Who are the people making dwyl?",
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/.bin/nodemon static-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,9 @@
   },
   "homepage": "https://github.com/nelsonic/who#readme",
   "dependencies": {
-    "github-scraper": "^3.0.21"
+    "github-scraper": "^3.0.21",
+    "hapi": "^9.0.3",
+    "inert": "^3.0.1",
+    "nodemon": "^1.4.1"
   }
 }

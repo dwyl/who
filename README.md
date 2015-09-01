@@ -2,6 +2,8 @@
 
 The *answer* to ***Who is (working on) dwyl?***
 
+![who WiP](https://cloud.githubusercontent.com/assets/194400/9602290/1fbf39b6-509f-11e5-9d0b-4bc5bc49a127.png)
+
 ## *Why*?
 
 The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) section is *woefully* out of date.  

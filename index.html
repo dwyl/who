@@ -1,0 +1,50 @@
+<html lang=”en-GB”>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>dwyl - Who?</title>
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Adding google fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7COpen+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+    <!--favicon -->
+    <link rel="shortcut icon" href="http://www.dwyl.io/images/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="main-content">
+      <h1>Who?</h1>
+      <header>
+      </header>
+
+      <ul id='faces'>
+
+      </ul>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+  var html = '';
+  $.get('/people/z_people.json', function(data){
+    // console.log(data);
+    data.forEach(function(person){
+      console.log(person.avatar);
+      html += '<li class="avatar">'
+      html += '<img src="' +person.avatar + '" />'
+      html += '</li>'
+    })
+    $('#faces').append(html);
+  })
+</script>
+
+<style>
+  .avatar {
+    float: left;
+  }
+  .avatar img {
+    width: 100px;
+    padding: 1px;
+    border-radius: 5px;
+  }
+</style>
+
+  </body>
+</html>
