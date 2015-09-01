@@ -2,7 +2,7 @@
 
 The *answer* to ***Who is (working on) dwyl?***
 
-![who WiP](https://cloud.githubusercontent.com/assets/194400/9602290/1fbf39b6-509f-11e5-9d0b-4bc5bc49a127.png)
+![who WiP](https://cloud.githubusercontent.com/assets/194400/9602526/421d5ebe-50a1-11e5-8351-410829582d7b.png)
 
 ## *Why*?
 
