@@ -16,7 +16,8 @@
       <header>
       </header>
       <section class='desc'>
-        <strong>dwyl</strong> is made by <em>many</em> people all over the world!
+        <strong>dwyl</strong> is made by <em>many</em> people
+        all <em>over</em> the world!
       </section>
       <ul id='faces'><!-- client-side rendered --> </ul>
     </div>
@@ -55,14 +56,23 @@
   /* reset margins */
   ul, menu, dir {
     display: block;
-    list-style-type: disc;
     -webkit-margin-before: 0em;
+    margin-before: 0em;
     -webkit-margin-after: 0em;
+    margin-after: 0em;
     -webkit-margin-start: 0px;
+    margin-start: 0px;
     -webkit-margin-end: 0px;
+    margin-end: 0px;
     -webkit-padding-start: 0px;
+    padding-start: 0px;
   }
-
+  ul {
+     list-style-type: none;
+  }
+  .desc {
+    margin-bottom: 1em;
+  }
   .avatar {
     float: left;
   }
