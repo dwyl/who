@@ -12,8 +12,14 @@
   </head>
   <body>
     <div id="main-content">
-      <h1>Who?</h1>
       <header>
+        <ul class='nav'>
+          <li>Why?</li>
+          <li>Who?</li>
+          <li>What?</li>
+          <li>Where?</li>
+          <li>How?</li>
+        </ul>
       </header>
       <section class='desc'>
         <strong>dwyl</strong> is made by <em>many</em> people
@@ -27,12 +33,15 @@
   $.get('/people/z_people.json', function(data){
     // console.log(data);
     data.forEach(function(person){
-      console.log(person.avatar);
-      html += '<li class="avatar">'
+      // console.log(person.avatar);
+      html += '<li class="avatar" id="' + person.github + '">'
       html += '<img src="' +person.avatar + '" />'
       html += '</li>'
     })
     $('#faces').append(html);
+    $('.avatar').click(function(){
+      console.log(this.id);
+    })
   })
 </script>
 
@@ -52,6 +61,23 @@
     font-size:1em;
     height: 100%;
     margin-left: 1em;
+  }
+  header {
+    width: 100%;
+    height: 60px;
+    display: block;
+    background-color: red;
+    clear: both;
+  }
+  ul.nav li {
+    float:left;
+    background-color: #82a43a;
+    width:17%;
+    padding: 1em;
+    margin: auto;
+  }
+  ul.nav li:hover {
+    background-color: #3a82a4;
   }
   /* reset margins */
   ul, menu, dir {
