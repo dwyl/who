@@ -25,23 +25,33 @@
         <strong>dwyl</strong> is made by <em>many</em> people
         all <em>over</em> the world!
       </section>
+      <div id='profile'> </div>
       <ul id='faces'><!-- client-side rendered --> </ul>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-  var html = '';
+  var people = {}; // our client-side people "database"
   $.get('/people/z_people.json', function(data){
-    // console.log(data);
-    data.forEach(function(person){
-      // console.log(person.avatar);
+    var html = ''; // string we will append to the DOM
+    data.forEach(function(person) {
+      people[person.github] = person; // assign to map for later
       html += '<li class="avatar" id="' + person.github + '">'
       html += '<img src="' +person.avatar + '" />'
       html += '</li>'
     })
     $('#faces').append(html);
+
+    // event handler for avatar clicks:
     $('.avatar').click(function(){
       console.log(this.id);
-      window.location = window.location.origin + '#' + this.id
+      // window.location = window.location.origin + '#' + this.id
+      var person = people[this.id];
+      console.log(person);
+      var html = '';
+      html += '<div>'
+      html += '<img src="' +person.avatar + '" />'
+      html += '</div>'
+      $('#profile').html(html);
     })
 
   })
