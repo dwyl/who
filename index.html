@@ -17,10 +17,10 @@
           <li>Why?</li>
           <li>Who?</li>
           <li>What?</li>
-          <li>Where?</li>
           <li>How?</li>
         </ul>
       </header>
+
       <section class='desc'>
         <strong>dwyl</strong> is made by <em>many</em> people
         all <em>over</em> the world!
@@ -41,7 +41,9 @@
     $('#faces').append(html);
     $('.avatar').click(function(){
       console.log(this.id);
+      window.location = window.location.origin + '#' + this.id
     })
+
   })
 </script>
 
@@ -60,24 +62,34 @@
     color: #403f3f;
     font-size:1em;
     height: 100%;
-    margin-left: 1em;
+
   }
   header {
     width: 100%;
-    height: 60px;
+    height: 5em;
     display: block;
-    background-color: red;
+    background-color: #0288d1;
     clear: both;
   }
+  ul.nav {
+    margin-left: 1em;
+  }
   ul.nav li {
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
     float:left;
-    background-color: #82a43a;
-    width:17%;
+    background-color: #0288d1;
+    width:15%;
     padding: 1em;
     margin: auto;
+    border-top: 3px solid #0288d1;
   }
   ul.nav li:hover {
-    background-color: #3a82a4;
+    background-color: white;
+    border-top: 3px solid #0288d1;
+    border-bottom: 3px solid white;
+    color: #0288d1;
   }
   /* reset margins */
   ul, menu, dir {
@@ -96,8 +108,13 @@
   ul {
      list-style-type: none;
   }
+  .desc .faces {
+    margin-left: 1em;
+  }
   .desc {
+    margin-top:1em;
     margin-bottom: 1em;
+    font-size: 1.2em;
   }
   .avatar {
     float: left;
