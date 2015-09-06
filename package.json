@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon static-server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "profiles": "node people/_acquire_profiles.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "hapi": "^9.0.3",
     "inert": "^3.0.1",
     "lodash.sortby": "^3.1.5",
-    "nodemon": "^1.4.1"
+    "nodemon": "^1.4.1",
+    "ordem": "^1.0.6"
   }
 }
