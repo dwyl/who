@@ -122,7 +122,11 @@ With this list we can fetch the list of people and get their basic profile detai
 
 ### Combining Many Profiles into a single `people.json`
 
+To run this simply type the following command in your terminal:
 
+```sh
+npm install && npm run profiles
+```
 
 ## Research
 
