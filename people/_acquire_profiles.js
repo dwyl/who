@@ -1,20 +1,10 @@
 // this script just executes the other node scripts in order:
+require('./_scrape_people_list.js')
 
-var ordem = require('ordem'); // we need the scripts to be run in order...
+setTimeout(function() {
+  require('./_scrape_profiles.js');
+}, 2000);
 
-ordem([
-  function(callback){
-    require('./_scrape_people_list.js')
-    callback(null, 'done')
-  },
-  function(err, callback) {
-    require('./_scrape_profiles.js');
-    callback(null, 'done');
-  },
-  function(err, callback){
-    require('./_combine_profiles.js')
-    callback(null, 'done')
-  }
-], function callback(err, result) {
-  console.log(result);
-});
+setTimeout(function() {
+  require('./_combine_profiles.js')
+}, 5000);
