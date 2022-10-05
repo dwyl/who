@@ -55,6 +55,15 @@ defmodule App.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
 
+      # Check/get Environment Variables: https://github.com/dwyl/envar
+      {:envar, "~> 1.0.8"},
+      # Auth with ONE Environment Variable™: github.com/dwyl/auth_plug
+      {:auth_plug, "~> 1.4.14"},
+      # Easily Encrypt Senstive Data: github.com/dwyl/fields
+      {:fields, "~> 2.9.1"},
+      # Useful functions: github.com/dwyl/useful
+      {:useful, "~> 1.0.8", override: true},
+
       # Create docs on localhost by running "mix docs"
       {:ex_doc, "~> 0.28.4", only: :dev, runtime: false},
       # Track test coverage

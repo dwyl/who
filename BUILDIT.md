@@ -49,6 +49,8 @@ That way you can also see the UI as you progress.
 
 With that in place, let's get building! 
 
+
+
 - [Build Log 👩‍💻](#build-log-)
 - [1. Create a New `Phoenix` App](#1-create-a-new-phoenix-app)
   - [1.1 Run the `Phoenix` App](#11-run-the-phoenix-app)
@@ -59,6 +61,7 @@ With that in place, let's get building!
   - [1.5 Update `router.ex`](#15-update-routerex)
   - [1.6 Update Tests](#16-update-tests)
   - [1.7 Delete Page-related Files](#17-delete-page-related-files)
+  - [Run Tests with Coverage](#run-tests-with-coverage)
 - [2. Create Schemas to Store Data](#2-create-schemas-to-store-data)
   - [_Explanation_ of the Schemas](#explanation-of-the-schemas)
     - [`item`](#item)
@@ -255,7 +258,10 @@ file
 and add the following line of `HTML`:
 
 ```html
-<h1 class="">LiveView App Page!</h1>
+<h1 class="text-3xl text-white py-3 text-center 
+  bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow-lg">
+  LiveView App Page with Tailwind!
+</h1>
 ```
 
 Finally, to make the **root layout** simpler, 
@@ -300,7 +306,7 @@ end
 Now if you refresh the page 
 you should see the following:
 
-![liveveiw-page-with-tailwind-style](https://user-images.githubusercontent.com/194400/176137805-34467c88-add2-487f-9593-931d0314df62.png)
+![liveveiw-page-with-tailwind-style](https://user-images.githubusercontent.com/194400/194404823-4daebd7f-a32f-45c1-8c50-7db93a9478c0.png)
 
 ## 1.6 Update Tests
 
@@ -333,7 +339,8 @@ Finished in 0.1 seconds (0.06s async, 0.1s sync)
 3 tests, 1 failure
 ```
 
-Create a new directory: `test/app_web/live`
+Create a new directory: 
+`test/app_web/live`
 
 Then create the file: 
 `test/app_web/live/app_live_test.exs`
@@ -346,7 +353,7 @@ defmodule AppWeb.AppLiveTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
-    assert html_response(conn, 200) =~ "LiveView App Page!"
+    assert html_response(conn, 200) =~ "LiveView App Page"
   end
 end
 ```
@@ -384,41 +391,30 @@ our **`Phoenix + LiveView`** project
 is now fully setup
 and ready to start _building_!
 
-<!-- temp commenting this out as it's a bit of a side-track ...
+## Run Tests with Coverage
 
-### Side Note: _Data_-first Design 💡
+```
+mix c
+```
 
-There are _several_ ways to design and build Apps.
-One of the popular approaches 
-is to start by trying to define the UI/UX
-e.g: by creating a wireframe in **`Figma`**.
-This makes an implicit assumption
-about how we expect people to interact
-with the App.
-We often build Apps UI/UX-first
-because moving boxes/buttons & text 
-around in a low-fidelity wireframe
-is a _lot_ cheaper/easier/faster
-than writing code. 
-However when we are doing an _exploratory_
-MVP tightly defining the UI/UX
-can create regidity too early.
-Another approach is to think about the 
-**`data`** we want to capture
-and how we may want 
-to _transform_ that **`data`**.
+You should see output similar to the following:
 
-For a _much_ more elequent
-explanation of why **`data`** first
-development makese sense,
-watch
-"Make Data Structures" 
-by Richard Feldman:
-https://youtu.be/x1FU3e0sT1I
-You don't need to know _any_ `Elm`
-to watch this talk.
+```sh
+Compiling 1 file (.ex)
+...
 
--->
+Finished in 0.1 seconds (0.04s async, 0.08s sync)
+3 tests, 0 failures
+
+Randomized with seed 538897
+----------------
+COV    FILE                                        LINES RELEVANT   MISSED
+100.0% lib/app_web/live/app_live.ex                    7        1        0
+100.0% lib/app_web/router.ex                          27        2        0
+100.0% lib/app_web/views/error_view.ex                16        1        0
+[TOTAL] 100.0%
+----------------
+```
 
 # 2. Create Schemas to Store Data
 

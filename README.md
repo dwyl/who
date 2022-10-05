@@ -14,7 +14,7 @@ to the question:
 We needed a easy/fast way 
 to keep track
 of who is joining
-the `@dwyl` community
+the `@dwyl` community <br />
 so that we can 
 see the growth over time. 📈
 
@@ -38,7 +38,7 @@ contributing to the
 ## 1. *dwyl* Org's *People Page* on GitHub
 
 Visit: https://github.com/orgs/dwyl/people and grab the list.  
-*simple. effective. incomplete*.  
+*simple. effective. incomplete*. 
 (*read on to understand why this list only scratches the surface!*)
 
 ## 2. List all Contributors to dwyl repos on GitHub
@@ -57,8 +57,8 @@ So we _had_ to create an mini-App to do it for us! 💡
 We built this mini-App 
 using the 
 [**`PETAL`** Stack](https://github.com/dwyl/technology-stack/#the-petal-stack)
-because we feel it's 
-the _fastest_ 
+because we feel <br />
+it's the _fastest_ 
 and most _effective_ way
 to ship a web app.
 
@@ -70,15 +70,49 @@ read:
 [**`BUILDIT.md`**](https://github.com/dwyl/who/blob/main/BUILDIT.md)
 
 
-## _Run_ the App!
+## Run the MVP App on your `localhost` ⬇️
 
-To _run_ the App,
-you will need to have
-`Elixir`
-and
-`Postgres`
-installed.
-See: 
+> **Note**: You will need to have 
+**`Elixir`** and **`Postgres` installed**, <br />
+see: 
+[learn-elixir#installation](https://github.com/dwyl/learn-elixir#installation)
+and 
+[learn-postgresql#installation](https://github.com/dwyl/learn-postgresql#installation)
+
+> **Tip**: check the prerequisites in:
+> [**/phoenix-chat-example**](https://github.com/dwyl/phoenix-chat-example#0-pre-requisites-before-you-start)
+
+On your `localhost`, 
+run the following commands 
+in your terminal:
+
+```sh
+git clone git@github.com:dwyl/app-mvp.git && cd app-mvp
+source .env_sample
+mix setup
+```
+That will download the **`code`**, 
+install dependencies
+and create the necessary database + tables.
+
+The line 
+`source .env_sample` 
+loads the 
+[environment variables](https://github.com/dwyl/learn-environment-variables)
+required to run the App.
+
+
+
+Once the `mix setup` command completes,
+you can run the app with:
+
+```sh
+mix s
+```
+
+Open the App in your web browser
+[**`localhost:4000`**](http://localhost:4000/)
+and start your tour! 
 
 
 <br />
@@ -104,3 +138,7 @@ please see:
 [dwyl/**contributing**](https://github.com/dwyl/contributing)
 
 ### More Features? 🔔
+
+If you have feature ideas, that's great! 🎉 <br />
+Please _share_ them: 
+[**who/issues**](https://github.com/dwyl/who/issues)
