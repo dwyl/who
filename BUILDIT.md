@@ -418,6 +418,16 @@ COV    FILE                                        LINES RELEVANT   MISSED
 
 # 2. Create Schemas to Store Data
 
+This app stores data in two schemas:
+
+1. `users` - https://docs.github.com/en/rest/users/users
+2. `repos` - https://docs.github.com/en/rest/repos/repos
+
+For each of these schemas we are storing
+a subset of the data; only what we need right now.
+We can always add more later as needed.
+
+
 Create database schemas 
 to store the data
 with the following 
@@ -425,14 +435,18 @@ with the following
 commands:
 
 ```sh
-mix phx.gen.schema Item items person_id:integer status:integer text:string
-mix phx.gen.schema Timer timers item_id:references:items start:naive_datetime stop:naive_datetime
+mix phx.gen.schema User users login:string avatar_url:string name:string company:string bio:string blog:string location:string email:string created_at:string two_factor_authentication:boolean followers:integer following:integer
+mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
 ```
+
+
 
 At the end of this step,
 we have the following database
 [Entity Relationship Diagram](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
 (ERD):
+
+
 
 ![mvp-erd-items-timers](https://user-images.githubusercontent.com/194400/183075195-c1b50232-5988-47cb-ad18-47dfd4c0bcc3.png)
 
