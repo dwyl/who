@@ -22,8 +22,11 @@ The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d
 section is *woefully* out of date.  
 (_this was 
 [noted](https://github.com/dwyl/start-here/issues/9) 
-a while back... but sadly was not made a priority at the time..._)  
-This mini-project addresses [dwyl/start-here/issues/9](https://github.com/dwyl/start-here/issues/9)
+a while back... 
+but sadly was not made 
+a priority at the time..._)  
+This mini-project addresses 
+[dwyl/start-here/issues/9](https://github.com/dwyl/start-here/issues/9)
 
 # *What*?
 
@@ -51,13 +54,53 @@ So we _had_ to create an mini-App to do it for us! 💡
 
 # *How*?
 
-We built our mini-App using the 
+We built this mini-App 
+using the 
 [**`PETAL`** Stack](https://github.com/dwyl/technology-stack/#the-petal-stack)
-because we feel that it's 
-the _fastest_ way
+because we feel it's 
+the _fastest_ 
+and most _effective_ way
 to ship a web app.
 
+## Build Log 👷‍♀️
 
+If you want to **understand _every_ step**
+of the process of **_building_** the **mini-app**,
+read: 
+[**`BUILDIT.md`**](https://github.com/dwyl/who/blob/main/BUILDIT.md)
+
+
+## _Run_ the App!
 
 To _run_ the App,
+you will need to have
+`Elixir`
+and
+`Postgres`
+installed.
+See: 
 
+
+<br />
+
+## Contributing 👩‍💻
+
+All contributions 
+from typo fixes
+to feature requests
+are always welcome! 🙌
+
+Please start by: <br />
+a. **Star** the repo on GitHub 
+  so you have a "bookmark" you can return to. ⭐ <br />
+b. **Fork** the repo 
+  so you have a copy you can "hack" on. 🍴 <br />
+c. **Clone** the repo to your `localhost` 
+  and run it! (see below) 👩‍💻 <br />
+
+
+For more detail,
+please see:
+[dwyl/**contributing**](https://github.com/dwyl/contributing)
+
+### More Features? 🔔
