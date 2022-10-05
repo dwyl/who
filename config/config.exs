@@ -35,6 +35,26 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# https://github.com/dwyl/learn-tailwind#part-2-tailwind-in-phoenix
+config :tailwind,
+  version: "3.1.0",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
+
+# https://hexdocs.pm/joken/introduction.html#usage
+config :joken, default_signer: System.get_env("SECRET_KEY_BASE")
+
+# https://github.com/dwyl/auth_plug
+config :auth_plug,
+  api_key: System.get_env("AUTH_API_KEY")
+
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

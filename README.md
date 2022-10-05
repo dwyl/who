@@ -32,7 +32,6 @@ of discovering
 the list of people 
 contributing to the 
 **dwyl mission**:
-
 ## 1. *dwyl* Org's *People Page* on GitHub
 
 Visit: https://github.com/orgs/dwyl/people and grab the list.  
@@ -48,13 +47,17 @@ As you can imagine,
 this second option 
 is _painful_ to do _manually_ ... ⏳
 
-So we _had_ to create an App to do it for us! 💡
+So we _had_ to create an mini-App to do it for us! 💡
 
 # *How*?
 
+We built our mini-App using the 
+[**`PETAL`** Stack](https://github.com/dwyl/technology-stack/#the-petal-stack)
+because we feel that it's 
+the _fastest_ way
+to ship a web app.
 
 
-## Research
 
-+ *Hilarious/insightful* explanation of when to use **Who vs. Whom**:
-http://theoatmeal.com/comics/who_vs_whom
+To _run_ the App,
+
