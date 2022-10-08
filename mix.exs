@@ -70,7 +70,7 @@ defmodule App.MixProject do
       # Create docs on localhost by running "mix docs"
       {:ex_doc, "~> 0.28.4", only: :dev, runtime: false},
       # Track test coverage
-      {:excoveralls, "~> 0.14.5", only: [:test, :dev]},
+      {:excoveralls, "~> 0.15.0", only: [:test, :dev]},
       # git pre-commit hook runs tests before allowing commits
       {:pre_commit, "~> 0.3.4"},
       # Credo static analysis: https://github.com/rrrene/credo
