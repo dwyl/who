@@ -64,6 +64,9 @@ defmodule App.MixProject do
       # Useful functions: github.com/dwyl/useful
       {:useful, "~> 1.0.8", override: true},
 
+      # JSON Parsing: https://hex.pm/packages/poison
+      {:poison, "~> 5.0.0"},
+
       # Create docs on localhost by running "mix docs"
       {:ex_doc, "~> 0.28.4", only: :dev, runtime: false},
       # Track test coverage
@@ -74,7 +77,10 @@ defmodule App.MixProject do
       {:credo, "~> 1.6.4", only: [:dev, :test], runtime: false},
 
       # Ref: github.com/dwyl/learn-tailwind
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+
+      # Elixir GitHub REST API lib: github.com/edgurgel/tentacat
+      {:tentacat, "~> 2.0"}
     ]
   end
 

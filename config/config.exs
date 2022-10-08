@@ -50,10 +50,12 @@ config :tailwind,
 # https://hexdocs.pm/joken/introduction.html#usage
 config :joken, default_signer: System.get_env("SECRET_KEY_BASE")
 
-# https://github.com/dwyl/auth_plug
-config :auth_plug,
-  api_key: System.get_env("AUTH_API_KEY")
+# # https://github.com/dwyl/auth_plug
+# config :auth_plug,
+#   api_key: System.get_env("AUTH_API_KEY")
 
+config :tentacat,
+  access_token: System.get_env("GH_PERSONAL_ACCESS_TOKEN")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

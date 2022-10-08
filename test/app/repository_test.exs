@@ -1,0 +1,22 @@
+defmodule App.RepositoryTest do
+  use App.DataCase
+
+  test "App.Repository.create/1" do
+    repo = %{
+      created_at: "2014-03-02T13:20:04Z",
+      description: "This your first repo!",
+      fork: false,
+      forks_count: 110,
+      full_name: "dwyl/start-here",
+      id: 17338019,
+      name: "start-here",
+      open_issues_count: 98,
+      pushed_at: "2022-08-10T07:41:05Z",
+      stargazers_count: 1604,
+      topics: Enum.join(["beginner", "beginner-friendly", "how-to", "howto", "learn",
+       "starter-kit"], ","),
+      watchers_count: 1604
+    }
+    assert {:ok, _res} = App.Repository.create(repo)
+  end
+end

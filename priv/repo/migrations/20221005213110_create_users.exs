@@ -15,6 +15,8 @@ defmodule App.Repo.Migrations.CreateUsers do
       add :two_factor_authentication, :boolean, default: false, null: false
       add :followers, :integer
       add :following, :integer
+      add :hireable, :boolean, default: false, null: false
+      add :public_repos, :integer
 
       timestamps()
     end

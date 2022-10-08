@@ -63,12 +63,9 @@ With that in place, let's get building!
   - [1.7 Delete Page-related Files](#17-delete-page-related-files)
   - [Run Tests with Coverage](#run-tests-with-coverage)
 - [2. Create Schemas to Store Data](#2-create-schemas-to-store-data)
-  - [_Explanation_ of the Schemas](#explanation-of-the-schemas)
-    - [`item`](#item)
-    - [`timer`](#timer)
   - [2.1 Run Tests!](#21-run-tests)
-- [3. Input `items`](#3-input-items)
-  - [3.1 Make the `item` Tests Pass](#31-make-the-item-tests-pass)
+- [3. Input `users`](#3-input-users)
+  - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
 - [4. Create `Timer`](#4-create-timer)
   - [Make `timer` tests pass](#make-timer-tests-pass)
 - [5. `items` with `timers`](#5-items-with-timers)
@@ -439,91 +436,19 @@ mix phx.gen.schema User users login:string avatar_url:string name:string company
 mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
 ```
 
-
-
 At the end of this step,
 we have the following database
 [Entity Relationship Diagram](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
 (ERD):
 
 
-
-![mvp-erd-items-timers](https://user-images.githubusercontent.com/194400/183075195-c1b50232-5988-47cb-ad18-47dfd4c0bcc3.png)
-
+![erd](https://user-images.githubusercontent.com/194400/194425189-e44d6161-c8df-4a0d-9d86-bc1045785c95.png)
 
 We created **2 database tables**;
-`items`  and `timers`.
-Let's run through them.
-
-## _Explanation_ of the Schemas
-
-This is a quick breakdown of the schemas created above:
-
-### `item`
-
-An `item` is the most basic unit of content.
-An **`item`** is just a **`String`** of **`text`**.
-Later we will be able to 
-e.g: a "note", "task", "reminder", etc.
-The name **`item`** is **_deliberately_ generic**
-as it maintains complete flexibility 
-for what we are building later on.
-
-+ `id`: `Int` - the auto-incrementing `id`.
-+ `text`: `Binary` (_encrypted_) - the free text you want to capture.
-+ `person_id`: `Integer` 
-   the "owner" of the `item`)
-+ `status`: `Integer`  the `status` of the `item` 
-  e.g: **`3`** = 
-  [**`active`**](https://github.com/dwyl/statuses/blob/176acda7ea4a177da90011100ad2758bd90415b1/lib/statuses.ex#L24-L28)
-+ `inserted_at`: `NaiveDateTime` - created/managed by `Phoenix`
-+ `updated_at`: `NaiveDateTime`
-
-
-<!--
-> **Note**: The keen-eyed observer 
-(with PostgreSQL experience)
-will have noticed that `items.person_id` is an `Integer` (`int4`) data type.
-This means we are _limted_ to **`2147483647` people** using the MVP.
-See:
-[/datatype-numeric.html](https://www.postgresql.org/docs/current/datatype-numeric.html)
-We aren't expecting more than 
-***2 billion*** people to use the MVP. 😜
--->
-
-### `timer`
-
-A `timer` is associated with an `item`
-to track how long it takes to ***complete***.
-
-  + `id`: `Int`
-  + `item_id` (Foreign Key `item.id`)
-  + `start`: `NaiveDateTime` - start time for the timer
-  + `stop`: `NaiveDateTime` - stop time for the timer
-  + `inserted_at`: `NaiveDateTime` - record insertion time
-  + `updated_at`: `NaiveDateTime`
-
-An `item` can have zero or more `timers`.
-
-Each time an `item` (`task`) is worked on
-a **_new_ `timer`** is created/started (_and stopped_).
-Meaning a `person` can split the completion 
-of an `item` (`task`) across multiple sessions.
-That allows us to get a running total
-of the amount of time that has
-been taken.
-
-<!--
-> **Note**: 
-> The point of having a distinct `start` and `stop`
-instead of just reusing the `inserted_at`
-and `updated_at` is simple:
-it will allow people to set their timer `start` and/or `stop`
-to a different time than the automatic one. 
-But they will not be able to update the `inserted_at` or `updated_at`
-so we always know when the record was created/updated.
--->
-
+`users`  and `repositories`.
+At present the two tables are unrelated 
+but eventually `repository.owner_id` will refer to `user.id`
+and we will be creating other schemas below.
 
 
 <br />
@@ -542,24 +467,25 @@ We note that the test coverage
 has dropped considerably:
 
 ```sh
-Finished in 0.1 seconds (0.08s async, 0.09s sync)
+Finished in 0.1 seconds (0.07s async, 0.09s sync)
 3 tests, 0 failures
 
+Randomized with seed 18453
 ----------------
 COV    FILE                                        LINES RELEVANT   MISSED
-  0.0% lib/app/item.ex                                19        2        2
-  0.0% lib/app/timer.ex                               20        2        2
-100.0% lib/app_web/live/app_live.ex                   11        2        0
-100.0% lib/app_web/router.ex                          18        2        0
+  0.0% lib/app/repository.ex                          28        2        2
+  0.0% lib/app/user.ex                                28        2        2
+100.0% lib/app_web/live/app_live.ex                    7        1        0
+100.0% lib/app_web/router.ex                          27        2        0
 100.0% lib/app_web/views/error_view.ex                16        1        0
-[TOTAL]  38.5%
+[TOTAL]  50.0%
 ----------------
 ```
 
 Specifically the files:
-`lib/app/item.ex`
+`lib/app/repository.ex`
 and 
-`lib/app/timer.ex`
+`lib/app/user.ex`
 have **_zero_ test coverage**. 
 
 We will address this test coverage shortfall in the next section.
@@ -573,7 +499,7 @@ See: https://en.wikipedia.org/wiki/Scaffold_(programming)
 
 <br />
 
-# 3. Input `items`
+# 3. Input `users`
 
 We're going to 
 
@@ -642,7 +568,7 @@ This is expected as the code is not there yet!
 
 
 
-## 3.1 Make the `item` Tests Pass
+## 3.1 Make the `user` Tests Pass
 
 Open the 
 `lib/app/item.ex` 

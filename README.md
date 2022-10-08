@@ -11,12 +11,11 @@ to the question:
 
 # *Why*? 
 
-We needed a easy/fast way 
-to keep track
-of who is joining
-the `@dwyl` community <br />
+We needed a **easy/fast/reliable _system_** 
+to **_visualise_ who** is joining
+the **`@dwyl` community** <br />
 so that we can 
-see the growth over time. 📈
+**track growth** over time. 📈
 
 The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) 
 section is *woefully* out of date.  
