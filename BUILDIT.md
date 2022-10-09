@@ -64,6 +64,9 @@ With that in place, let's get building!
   - [Run Tests with Coverage](#run-tests-with-coverage)
 - [2. Create Schemas to Store Data](#2-create-schemas-to-store-data)
   - [2.1 Run Tests!](#21-run-tests)
+  - [2.2 Write Tests for Schema/Scaffold Code](#22-write-tests-for-schemascaffold-code)
+    - [2.2.1 User Tests](#221-user-tests)
+    - [2.2.2 Repository Tests](#222-repository-tests)
 - [3. Input `users`](#3-input-users)
   - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
 - [4. Create `Timer`](#4-create-timer)
@@ -498,6 +501,157 @@ for the next stage.
 See: https://en.wikipedia.org/wiki/Scaffold_(programming)
 
 <br />
+
+## 2.2 Write Tests for Schema/Scaffold Code
+
+The **`mix phx.gen.schema`** command 
+doesn't create the test files for the schemas.
+We can create these quick.
+
+### 2.2.1 User Tests
+
+Create a new file with the path:
+`test/app/user_test.exs`
+
+Open the file and add the following test:
+
+```elixir
+defmodule App.UserTest do
+  use App.DataCase
+
+  test "App.User.create/1" do
+    user = %{
+      avatar_url: "https://avatars.githubusercontent.com/u/4185328?v=4",
+      bio: "Co-founder @dwyl",
+      blog: "https://www.twitter.com/iteles",
+      company: "@dwyl",
+      created_at: "2013-04-17T21:10:06Z",
+      email: nil,
+      followers: 378,
+      following: 79,
+      hireable: true,
+      html_url: "https://github.com/iteles",
+      id: 4185328,
+      location: "London, UK",
+      login: "iteles",
+      name: "Ines TC",
+      organizations_url: "https://api.github.com/users/iteles/orgs",
+      public_gists: 0,
+      public_repos: 31
+    }
+    assert {:ok, inserted_user} = App.User.create(user)
+    assert inserted_user.name == user.name
+  end
+end
+```
+
+If you run this test now:
+
+```sh
+mix test test/app/user_test.exs
+```
+
+it will _fail_ because the 
+`App.User.create/1` function
+does not yet exist.
+
+Open the 
+`lib/app/user.ex` file 
+and add the following function defintion:
+
+```elixir
+  @doc """
+  Creates a `user`.
+  """
+  def create(attrs) do
+    %User{}
+    |> changeset(attrs)
+    |> Repo.insert()
+  end
+```
+
+Now when you re-run the test you should see it pass:
+
+```sh
+mix test test/app/user_test.exs
+.
+
+Finished in 0.05 seconds (0.00s async, 0.05s sync)
+1 test, 0 failures
+```
+
+### 2.2.2 Repository Tests
+
+Create a file with the path: 
+`test/app/repository_test.exs`
+
+Add the following test code to the file:
+
+```elixir
+defmodule App.RepositoryTest do
+  use App.DataCase
+
+  test "App.Repository.create/1" do
+    repo = %{
+      created_at: "2014-03-02T13:20:04Z",
+      description: "This your first repo!",
+      fork: false,
+      forks_count: 110,
+      full_name: "dwyl/start-here",
+      id: 17338019,
+      name: "start-here",
+      open_issues_count: 98,
+      pushed_at: "2022-08-10T07:41:05Z",
+      stargazers_count: 1604,
+      topics: Enum.join(["beginner", "beginner-friendly", "how-to", "howto", "learn",
+       "starter-kit"], ","),
+      watchers_count: 1604
+    }
+    assert {:ok, inserted_repo} = App.Repository.create(repo)
+    assert inserted_repo.name == repo.name
+  end
+end
+```
+
+If you run this test with the command:
+
+```sh
+mix t test/app/repository_test.exs
+```
+
+You will see it _fail_ because the 
+`App.Repository.create/1` function 
+does not yet exist.
+
+Open the
+`lib/app/repository.ex`
+file and add the following function to the bottom:
+
+```elixir
+
+```
+
+If you get stuck, you can always refer to the
+file in the finished project:
+
+
+
+
+
+
+At this point, 
+if you re-run _all_ the tests with coverage:
+
+```sh
+mix c
+```
+
+
+
+
+
+
+<br /><br /><br /><br /><br />
 
 # 3. Input `users`
 
