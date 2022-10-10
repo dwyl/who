@@ -197,7 +197,7 @@ sequenceDiagram
     John-->>-Alice: Hi Alice, I can hear you!
     John-->>-Alice: I feel great!
 
--->
+
 
 ```mermaid
 sequenceDiagram
@@ -205,3 +205,5 @@ sequenceDiagram
     GitHub-->>+App: Hi Alice, I can hear you!
     App-->>-Alice: I feel great!
 ```
+
+-->
