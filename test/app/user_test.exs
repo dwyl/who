@@ -5,7 +5,7 @@ defmodule App.UserTest do
     user = %{
       avatar_url: "https://avatars.githubusercontent.com/u/4185328?v=4",
       bio: "Co-founder @dwyl",
-      blog: "http://www.twitter.com/iteles",
+      blog: "https://www.twitter.com/iteles",
       company: "@dwyl",
       created_at: "2013-04-17T21:10:06Z",
       email: nil,
@@ -21,6 +21,7 @@ defmodule App.UserTest do
       public_gists: 0,
       public_repos: 31
     }
-    assert {:ok, _res} = App.User.create(user)
+    assert {:ok, inserted_user} = App.User.create(user)
+    assert inserted_user.name == user.name
   end
 end

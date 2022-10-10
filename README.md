@@ -24,7 +24,8 @@ so that we can
 **track growth** over time. 📈
 
 The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) 
-section is *woefully* out of date.  
+section ~~is~~ _was_ *woefully* out of date
+because we had to update it _manually_. ⏳
 (_this was 
 [noted](https://github.com/dwyl/start-here/issues/9) 
 a while back... 
@@ -42,13 +43,16 @@ of discovering
 the list of people 
 contributing to the 
 **dwyl mission**:
-## 1. *dwyl* Org's *People Page* on GitHub
+## 1. _Manually_ check *dwyl* Org *People Page* on GitHub
 
-Visit: https://github.com/orgs/dwyl/people and grab the list.  
-*simple. effective. incomplete*. 
-(*read on to understand why this list only scratches the surface!*)
+Visit  
+[github.com/orgs/dwyl/people](https://github.com/orgs/dwyl/people)
+you can see a list of people 
+who are _members_ of the Org. 
+*Simple. effective. incomplete*. 
+This list only scratches the surface!
 
-## 2. List all Contributors to dwyl repos on GitHub
+## 2. List all contributors to dwyl repos on GitHub
 
 Read the Commit History for all the dwyl repos on GitHub
 and extract the names of people ... 
@@ -57,7 +61,9 @@ As you can imagine,
 this second option 
 is _painful_ to do _manually_ ... ⏳
 
-So we _had_ to create an mini-App to do it for us! 💡
+So we _had_ to create a mini-App 
+to do it for us 
+via the **`GitHub` API**! 💡
 
 # *How*?
 
@@ -101,6 +107,7 @@ That will download the **`code`**,
 install dependencies
 and create the necessary database + tables.
 
+_Next+ you need to do **`1 minute`** of setup. ⏱️
 ### Create `.env` file
 
 Create an `.env` file by copying the sample:
@@ -122,8 +129,8 @@ you will need to generate a
 [github.com/settings/tokens](https://github.com/settings/tokens)
 
 Click on the **`Generate new token`** button.
-Name it something memorable
-once you've created the token,
+Name it something memorable.
+Once you've created the token,
 copy it to your clipboard for the next step.
 
 ### Add your `GitHub` token to the `.env` file

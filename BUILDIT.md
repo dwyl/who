@@ -67,7 +67,8 @@ With that in place, let's get building!
   - [2.2 Write Tests for Schema/Scaffold Code](#22-write-tests-for-schemascaffold-code)
     - [2.2.1 User Tests](#221-user-tests)
     - [2.2.2 Repository Tests](#222-repository-tests)
-- [3. Input `users`](#3-input-users)
+    - [2.2.3 Re-run the Tests](#223-re-run-the-tests)
+- [3. Setup `GitHub` API](#3-setup-github-api)
   - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
 - [4. Create `Timer`](#4-create-timer)
   - [Make `timer` tests pass](#make-timer-tests-pass)
@@ -628,16 +629,22 @@ Open the
 file and add the following function to the bottom:
 
 ```elixir
-
+@doc """
+Creates a `repository`.
+"""
+def create(attrs) do
+  %Repository{}
+  |> changeset(attrs)
+  |> Repo.insert()
+end
 ```
 
 If you get stuck, you can always refer to the
 file in the finished project:
+[`/lib/app/repository.ex`](https://github.com/dwyl/who/blob/56e3445a37fff07f4e7e8561083d7ec77296ed3f/lib/app/repository.ex)
 
 
-
-
-
+### 2.2.3 Re-run the Tests
 
 At this point, 
 if you re-run _all_ the tests with coverage:
@@ -646,16 +653,37 @@ if you re-run _all_ the tests with coverage:
 mix c
 ```
 
+```sh
+Finished in 1.0 seconds (0.09s async, 0.9s sync)
+7 tests, 0 failures
 
+Randomized with seed 406814
+----------------
+COV    FILE                                        LINES RELEVANT   MISSED
+100.0% lib/app/repository.ex                          40        3        0
+100.0% lib/app/user.ex                                42        3        0
+100.0% lib/app_web/live/app_live.ex                    7        1        0
+100.0% lib/app_web/router.ex                          27        2        0
+100.0% lib/app_web/views/error_view.ex                16        1        0
+[TOTAL] 100.0%
+----------------
+```
+
+We have our starting point for the project,
+let's write some code!
 
 
 
 
 <br /><br /><br /><br /><br />
 
-# 3. Input `users`
+# 3. Setup `GitHub` API 
 
-We're going to 
+We're going to make _many_ requests 
+to the **`GitHub` REST API`**.
+So we need an effective way of doing that.
+
+
 
 
 Create the directory `test/app`

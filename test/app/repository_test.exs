@@ -17,6 +17,7 @@ defmodule App.RepositoryTest do
        "starter-kit"], ","),
       watchers_count: 1604
     }
-    assert {:ok, _res} = App.Repository.create(repo)
+    assert {:ok, inserted_repo} = App.Repository.create(repo)
+    assert inserted_repo.name == repo.name
   end
 end
