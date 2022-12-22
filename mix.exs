@@ -62,7 +62,7 @@ defmodule App.MixProject do
       # Easily Encrypt Senstive Data: github.com/dwyl/fields
       {:fields, "~> 2.10.3"},
       # Useful functions: github.com/dwyl/useful
-      {:useful, "~> 1.0.8", override: true},
+      {:useful, "~> 1.10.0", override: true},
 
       # JSON Parsing: https://hex.pm/packages/poison
       {:poison, "~> 5.0.0"},
