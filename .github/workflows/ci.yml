@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     name: Build and test
-    environment: dwylauth
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -25,10 +24,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Elixir
-      uses: erlef/setup-beam@v1
+      uses: erlef/setup-beam@v1 # https://github.com/erlef/setup-beam
       with:
         elixir-version: '1.14.2' # Define the elixir version [required]
-        otp-version: '25.1.2' # Define the OTP version [required]
+        otp-version: '25.0' # Define the OTP version [required]
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
