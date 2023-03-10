@@ -5,7 +5,7 @@ defmodule App.GitHub do
   """
   require Logger
 
-  @access_token Application.get_env(:tentacat, :access_token)
+  @access_token Application.compile_env(:tentacat, :access_token)
   @client Tentacat.Client.new(%{access_token: @access_token})
 
 
@@ -25,6 +25,6 @@ defmodule App.GitHub do
     Logger.info "Fetching user #{username}"
     {_status, data, _res} = Tentacat.Users.find @client, username
     data |> Useful.atomize_map_keys()
-    
+
   end
 end

@@ -8,9 +8,17 @@ The **quick _answer_**
 to the question: 
 **_Who_ is in the `@dwyl` community?**
 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/who/ci.yml?label=build&style=flat-square&branch=main)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
+[![Hex.pm](https://img.shields.io/hexpm/v/elixir_auth_google?color=brightgreen&style=flat-square)](https://hex.pm/packages/elixir_auth_google)
+[![contributions welcome](https://img.shields.io/badge/feedback-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/app-who/issues)
+[![HitCount](https://hits.dwyl.com/dwyl/app-who.svg)](https://hits.dwyl.com/dwyl/app-who)
+
+
+
 </div>
 
-# **`TODO`**: re-generate the "wall of faces" using latest data
+# **`TODO`**: re-generate the "wall of faces" using latest data `#HelpWanted`
 
 ![face wall](https://user-images.githubusercontent.com/194400/28011265-a95f52d4-6559-11e7-823e-6133d947921a.jpg)
 
@@ -83,7 +91,7 @@ read:
 [**`BUILDIT.md`**](https://github.com/dwyl/who/blob/main/BUILDIT.md)
 
 
-## Run the MVP App on your `localhost` ⬇️
+## Run the who App on your `localhost` ⬇️
 
 > **Note**: You will need to have 
 **`Elixir`** and **`Postgres` installed**, <br />
@@ -100,7 +108,7 @@ run the following commands
 in your terminal:
 
 ```sh
-git clone git@github.com:dwyl/app-mvp.git && cd app-mvp
+git clone git@github.com:dwyl/app-who.git && cd app-who
 mix setup
 ```
 That will download the **`code`**, 
