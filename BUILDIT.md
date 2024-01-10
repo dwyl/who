@@ -2,7 +2,7 @@
 
 # Build Log 👩‍💻 
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dwyl/who/Elixir%20CI?label=build&style=flat-square)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/who/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/who/actions/workflows/ci.yml)
 
 This is a log 
 of the steps taken 
@@ -23,14 +23,16 @@ it in **10 minutes**. 🏁
 > the other tutorials/examples,
 > but they are linked in case you get stuck.
 
-In this log we have written the "CRUD" functions first
-and _then_ built the UI. <br />
+In this log we have written the 
+"[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)" 
+functions first
+and _then_ built the interface. <br />
 We were able to do this because we had a good idea
 of which functions we were going to need. <br />
 If you are reading through this
 and scratching your head 
 wondering where a particular function will be used,
-simply scroll down to the UI section
+simply scroll down to the interface section
 where (_hopefully_) it will all be clear. 
 
 At the end of each step,
@@ -55,7 +57,7 @@ With that in place, let's get building!
 - [1. Create a New `Phoenix` App](#1-create-a-new-phoenix-app)
   - [1.1 Run the `Phoenix` App](#11-run-the-phoenix-app)
   - [1.2 Run the tests:](#12-run-the-tests)
-    - [Test Coverage?](#test-coverage)
+    - [Test Coverage? ](#test-coverage-)
   - [1.3 Setup `Tailwind`](#13-setup-tailwind)
   - [1.4 Setup `LiveView`](#14-setup-liveview)
   - [1.5 Update `router.ex`](#15-update-routerex)
@@ -172,14 +174,14 @@ Finished in 0.1 seconds (0.07s async, 0.07s sync)
 That tells us everything is working as expected. 🚀
 
 
-### Test Coverage?
+### Test Coverage? [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
 
 If you prefer to see **test coverage** - we certainly do -
 then you will need to add a few lines to the 
-[`mix.exs`](https://github.com/dwyl/app-mvp/blob/main/mix.exs)
+[`mix.exs`](https://github.com/dwyl/who/blob/main/mix.exs)
 file and
 create a 
-[`coveralls.json`](https://github.com/dwyl/app-mvp/blob/main/coveralls.json)
+[`coveralls.json`](https://github.com/dwyl/who/blob/main/coveralls.json)
 file to exclude `Phoenix` files from `excoveralls` checking.
 Add alias (shortcuts) in `mix.exs` `defp aliases do` list. 
 
@@ -203,7 +205,7 @@ mix c
 
 You should see output similar to the following:
 
-<img width="653" alt="Phoenix tests passing coverage 100%" src="https://user-images.githubusercontent.com/194400/175767439-4f609357-24c0-4975-a3d4-6ed6057bb321.png">
+<img alt="Who tests passing coverage 100%" src="https://github.com/dwyl/who/assets/194400/a82c55f2-d57b-4c97-a781-3b529855ef68">
 
 
 ## 1.3 Setup `Tailwind`

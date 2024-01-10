@@ -8,7 +8,7 @@ The **quick _answer_**
 to the question: 
 **_Who_ is in the `@dwyl` community?**
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/who/ci.yml?label=build&style=flat-square&branch=main)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/who/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/who/actions/workflows/ci.yml)
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
 [![Hex.pm](https://img.shields.io/hexpm/v/elixir_auth_google?color=brightgreen&style=flat-square)](https://hex.pm/packages/elixir_auth_google)
 [![contributions welcome](https://img.shields.io/badge/feedback-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/app-who/issues)
@@ -26,14 +26,14 @@ to the question:
 # *Why*? 
 
 We needed an **easy/fast/reliable _system_** 
-to **_visualise_ who** is joining
+to **_visualize_ who** is joining
 the **`@dwyl` community** <br />
 so that we can 
 **track growth** over time. 📈
 
 The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) 
 section ~~is~~ _was_ *woefully* out of date
-because we had to update it _manually_. ⏳
+because we had to update it _manually_. ⏳ <br />
 (_this was 
 [noted](https://github.com/dwyl/start-here/issues/9) 
 a while back... 
@@ -91,7 +91,7 @@ read:
 [**`BUILDIT.md`**](https://github.com/dwyl/who/blob/main/BUILDIT.md)
 
 
-## Run the who App on your `localhost` ⬇️
+## Run the `Who` App on your `localhost` ⬇️
 
 > **Note**: You will need to have 
 **`Elixir`** and **`Postgres` installed**, <br />
@@ -108,7 +108,7 @@ run the following commands
 in your terminal:
 
 ```sh
-git clone git@github.com:dwyl/app-who.git && cd app-who
+git clone git@github.com:dwyl/who.git && cd who
 mix setup
 ```
 That will download the **`code`**, 
@@ -197,21 +197,11 @@ Please _share_:
 [**who/issues**](https://github.com/dwyl/who/issues) 🙏
 
 
-<!--
+# Features (Todo)
 
-sequenceDiagram
-    Alice->>+John: Hello John, how are you?
-    Alice->>+John: John, can you hear me?
-    John-->>-Alice: Hi Alice, I can hear you!
-    John-->>-Alice: I feel great!
++ List Repos in the Org: 
+  https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories
 
-
-
-```mermaid
-sequenceDiagram
-    App->>+GitHub: GET @dwyl Organization members
-    GitHub-->>+App: Hi Alice, I can hear you!
-    App-->>-Alice: I feel great!
-```
-
--->
++ List of people that Star a given repo:
+  
++ 
