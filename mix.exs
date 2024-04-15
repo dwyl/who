@@ -70,7 +70,7 @@ defmodule App.MixProject do
       {:poison, "~> 5.0.0"},
 
       # Create docs on localhost by running "mix docs"
-      {:ex_doc, "~> 0.31.0", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.32.1", only: :dev, runtime: false},
       # Track test coverage
       {:excoveralls, "~> 0.18.0", only: [:test, :dev]},
       # git pre-commit hook runs tests before allowing commits
