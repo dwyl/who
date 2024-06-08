@@ -49,8 +49,8 @@ mix test
 This will help you keep track of where you are
 and retrace your steps if something is not working as expected.
 
-We suggest keeping two terminal tabs/windows running
-one for the server `mix phx.server` and the other for the tests.
+We suggest keeping two terminal tabs/windows running; <br />
+one for the server `mix phx.server` and the other for the **tests**. <br />
 That way you can also see the UI as you progress.
 
 With that in place, let's get building! 
@@ -318,8 +318,8 @@ you should see the following:
 ## 1.6 Update Tests
 
 At this point we have made a few changes 
-that mean our automated test suite will no longer pass ... 
-Run the tests in your command line with the following command:
+that mean our automated test suite will no longer pass ... <br />
+Run the tests in your terminal:
 
 ```sh
 mix test
