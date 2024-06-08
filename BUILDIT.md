@@ -425,13 +425,16 @@ COV    FILE                                        LINES RELEVANT   MISSED
 
 # 2. Create Schemas to Store Data
 
-This app stores data in two schemas:
+This app stores data in **five** schemas:
 
-1. `users` - https://docs.github.com/en/rest/users/users
-2. `repos` - https://docs.github.com/en/rest/repos/repos
+1. `users` - https://docs.github.com/en/rest/users/users - the GitHub [**`users`**](https://dwyl.github.io/book/auth/07-notes-on-naming.html).
+2. `orgs` - https://docs.github.com/en/rest/orgs/orgs - organizations which can have `users` as members and `repositories`.
+3. `repositories` - https://docs.github.com/en/rest/repos/repos - the repositories of code on GitHub.
+4. `stars` - [https://docs.github.com/en/rest/activity/starring](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers) - the `stars` (on `repositories`) associated with each `user`.
+5. `follows` - https://docs.github.com/en/rest/users/followers - List the `people` a `user` follows
 
 For each of these schemas we are storing
-a subset of the data; only what we need right now.
+a _subset_ of the data; only what we need right now.
 We can always add more later as needed.
 
 
@@ -443,7 +446,9 @@ commands:
 
 ```sh
 mix phx.gen.schema User users login:string avatar_url:string name:string company:string bio:string blog:string location:string email:string created_at:string two_factor_authentication:boolean followers:integer following:integer
+
 mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
+
 ```
 
 At the end of this step,
