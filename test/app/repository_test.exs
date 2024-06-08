@@ -9,6 +9,8 @@ defmodule App.RepositoryTest do
       forks_count: 110,
       full_name: "dwyl/start-here",
       id: 17338019,
+      owner_id: 123,
+      owner_name: "dwyl",
       name: "start-here",
       open_issues_count: 98,
       pushed_at: "2022-08-10T07:41:05Z",

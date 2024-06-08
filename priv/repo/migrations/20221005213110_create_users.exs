@@ -4,19 +4,19 @@ defmodule App.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :avatar_url, :string
-      add :login, :string
-      add :name, :string
-      add :company, :string
       add :bio, :string
       add :blog, :string
-      add :location, :string
-      add :email, :string
+      add :company, :string
       add :created_at, :string
-      add :two_factor_authentication, :boolean, default: false, null: false
+      add :email, :string
       add :followers, :integer
       add :following, :integer
       add :hireable, :boolean, default: false, null: false
+      add :location, :string
+      add :login, :string
+      add :name, :string
       add :public_repos, :integer
+      add :two_factor_authentication, :boolean, default: false, null: false
 
       timestamps()
     end

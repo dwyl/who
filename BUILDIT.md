@@ -435,7 +435,7 @@ This app stores data in **five** schemas:
 
 For each of these schemas we are storing
 a _subset_ of the data; 
-only what we need right now.
+only what we need right now. <br />
 We can always add more 
 ("[backfill](https://stackoverflow.com/questions/70871818/what-is-backfilling-in-data)") 
 later as needed.
@@ -450,8 +450,8 @@ commands:
 ```sh
 mix phx.gen.schema User users login:string avatar_url:string name:string company:string bio:string blog:string location:string email:string created_at:string two_factor_authentication:boolean followers:integer following:integer
 mix phx.gen.schema Org orgs login:string avatar_url:string name:string company:string public_repos:integer location:string description:string followers:integer
-mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
-
+mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer owner_name:string description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
+mix phx.gen.schema Stars stars repo_id:integer 
 ```
 
 At the end of this step,

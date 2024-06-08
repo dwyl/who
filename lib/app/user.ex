@@ -18,8 +18,8 @@ defmodule App.User do
     field :location, :string
     field :login, :string
     field :name, :string
-    field :two_factor_authentication, :boolean, default: false
     field :public_repos, :integer
+    field :two_factor_authentication, :boolean, default: false
 
     timestamps()
   end
