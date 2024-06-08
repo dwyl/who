@@ -11,7 +11,7 @@ to the question:
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/who/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/who/actions/workflows/ci.yml)
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
 [![Hex.pm](https://img.shields.io/hexpm/v/elixir_auth_google?color=brightgreen&style=flat-square)](https://hex.pm/packages/elixir_auth_google)
-[![contributions welcome](https://img.shields.io/badge/feedback-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/app-who/issues)
+[![contributions welcome](https://img.shields.io/badge/feedback-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/who/issues)
 [![HitCount](https://hits.dwyl.com/dwyl/app-who.svg)](https://hits.dwyl.com/dwyl/app-who)
 
 
@@ -25,11 +25,10 @@ to the question:
 
 # *Why*? 
 
-We needed an **easy/fast/reliable _system_** 
-to **_visualize_ who** is joining
+We needed an **easy, fast & reliable _system_** 
+to **_visualize_ `who`** is joining
 the **`@dwyl` community** <br />
-so that we can 
-**track growth** over time. 📈
+and **track growth** over time. 📈
 
 The [**start-here** > ***who***](https://github.com/dwyl/start-here/tree/8bbd28d2ab0c3b5a2a266a1e41fd160fc6ee3038#who) 
 section ~~is~~ _was_ *woefully* out of date
@@ -63,12 +62,10 @@ This list only scratches the surface!
 ## 2. List all contributors to dwyl repos on GitHub
 
 Read the Commit History for all the dwyl repos on GitHub
-and extract the names of people ... 
-
+and extract the names of people ... <br />
 As you can imagine, 
 this second option 
-is _painful_ to do _manually_ ... ⏳
-
+is _painful_ to do _manually_ ... ⏳ <br />
 So we _had_ to create a mini-App 
 to do it for us 
 via the **`GitHub` API**! 💡
@@ -99,7 +96,7 @@ see:
 [learn-elixir#installation](https://github.com/dwyl/learn-elixir#installation)
 and 
 [learn-postgresql#installation](https://github.com/dwyl/learn-postgresql#installation)
-> respectively.
+> respectively. <br />
 > **Tip**: check the prerequisites in:
 > [**/phoenix-chat-example**](https://github.com/dwyl/phoenix-chat-example#0-pre-requisites-before-you-start)
 
@@ -115,7 +112,7 @@ That will download the **`code`**,
 install dependencies
 and create the necessary database + tables.
 
-_Next+ you need to do **`1 minute`** of setup. ⏱️
+_Next_ you need to do **`1 minute`** of setup. ⏱️
 ### Create `.env` file
 
 Create an `.env` file by copying the sample:
