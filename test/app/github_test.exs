@@ -6,7 +6,7 @@ defmodule App.GitHubTest do
     owner = "dwyl"
     reponame = "start-here"
 
-    GitHub.repository(owner, reponame) |> IO.inspect
+    GitHub.repository(owner, reponame) # |> IO.inspect
     # assert html_response(conn, 200) =~ "LiveView App Page"
   end
 

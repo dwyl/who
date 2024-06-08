@@ -14,7 +14,8 @@ defmodule App.GitHub do
   """
   def repository(owner, reponame) do
     Logger.info "Fetching repository #{owner}/#{reponame}"
-    {_status, data, _res} = Tentacat.Repositories.repo_get(@client, owner, reponame)
+    {_status, data, _res} =
+      Tentacat.Repositories.repo_get(@client, owner, reponame)
     data |> Useful.atomize_map_keys()
   end
 

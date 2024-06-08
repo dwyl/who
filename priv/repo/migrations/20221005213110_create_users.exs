@@ -3,8 +3,8 @@ defmodule App.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :login, :string
       add :avatar_url, :string
+      add :login, :string
       add :name, :string
       add :company, :string
       add :bio, :string

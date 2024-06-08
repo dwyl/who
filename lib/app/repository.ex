@@ -38,6 +38,4 @@ defmodule App.Repository do
     |> Repo.insert()
   end
 
-
-
 end

@@ -3,14 +3,16 @@ defmodule App.Repo.Migrations.CreateOrgs do
 
   def change do
     create table(:orgs) do
-      add :login, :string
       add :avatar_url, :string
-      add :name, :string
+      add :blog, :string
       add :company, :string
-      add :public_repos, :integer
-      add :location, :string
+      add :created_at, :string
       add :description, :string
       add :followers, :integer
+      add :location, :string
+      add :login, :string
+      add :name, :string
+      add :public_repos, :integer
 
       timestamps()
     end
