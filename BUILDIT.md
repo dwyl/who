@@ -451,8 +451,8 @@ commands:
 mix phx.gen.schema User users login:string avatar_url:string name:string company:string bio:string blog:string location:string email:string created_at:string two_factor_authentication:boolean followers:integer following:integer
 mix phx.gen.schema Org orgs login:string avatar_url:string name:string company:string public_repos:integer location:string description:string followers:integer
 mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer owner_name:string description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
-mix phx.gen.schema Stars stars repo_id:integer user_id:integer stop:utc_datetime
-mix phx.gen.schema Follows follows follower_id:integer following_id:integer stop:utc_datetime
+mix phx.gen.schema Star stars repo_id:integer user_id:integer stop:utc_datetime
+mix phx.gen.schema Follow follows follower_id:integer following_id:integer stop:utc_datetime
 ```
 
 At the end of this step,
