@@ -67,7 +67,7 @@ defmodule App.MixProject do
       {:useful, "~> 1.14.0", override: true},
 
       # JSON Parsing: https://hex.pm/packages/poison
-      {:poison, "~> 5.0.0"},
+      {:poison, "~> 6.0.0"},
 
       # Create docs on localhost by running "mix docs"
       {:ex_doc, "~> 0.34.0", only: :dev, runtime: false},
