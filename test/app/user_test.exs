@@ -1,5 +1,6 @@
 defmodule App.UserTest do
   use App.DataCase
+  # alias App.User
 
   test "App.User.create/1" do
     user = %{
@@ -23,5 +24,15 @@ defmodule App.UserTest do
     }
     assert {:ok, inserted_user} = App.User.create(user)
     assert inserted_user.name == user.name
+  end
+
+  test "get_org_members_from_api/1" do
+    App.User.get_org_members_from_api("dwyl") |> dbg
+    assert true == true
+  end
+
+  test "get_user_from_api/1" do
+    data = App.User.get_user_from_api("iteles") |> dbg
+    assert data.public_repos > 30
   end
 end
