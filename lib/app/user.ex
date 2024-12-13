@@ -39,4 +39,36 @@ defmodule App.User do
     |> changeset(attrs)
     |> Repo.insert()
   end
+
+  # Envar.require_env_file(".env")
+
+  def get_org_members_from_api(org_name) do
+    # dbg(org_name)
+    token = Envar.get("GH_PERSONAL_ACCESS_TOKEN")
+
+    client = Tentacat.Client.new(%{access_token: token})
+    {200, data, _res} = Tentacat.Organizations.Members.list(client, org_name)
+    dbg(data)
+    Useful.atomize_map_keys(data)
+  end
+
+  def get_user_from_api(username) do
+    token = Envar.get("GH_PERSONAL_ACCESS_TOKEN")
+    client = Tentacat.Client.new(%{access_token: token})
+    {200, data, _res} = Tentacat.Users.find(client, username)
+    Useful.atomize_map_keys(data)
+  end
+
+  # Next: get list of org members
+  # get user for each in the list
+  # map data to our table
+  # insert data
+
+  def map_github_user_fieldsre(entry) do
+    %{
+
+    }
+  end
+
+
 end
