@@ -48,7 +48,7 @@ defmodule App.User do
 
     client = Tentacat.Client.new(%{access_token: token})
     {200, data, _res} = Tentacat.Organizations.Members.list(client, org_name)
-    dbg(data)
+    # dbg(data)
     Useful.atomize_map_keys(data)
   end
 
@@ -56,7 +56,12 @@ defmodule App.User do
     token = Envar.get("GH_PERSONAL_ACCESS_TOKEN")
     client = Tentacat.Client.new(%{access_token: token})
     {200, data, _res} = Tentacat.Users.find(client, username)
-    Useful.atomize_map_keys(data)
+    {:ok, entry} = Useful.atomize_map_keys(data)
+    |> dbg
+    |> map_github_user_fields_to_table()
+    |> create()
+
+    entry
   end
 
   # Next: get list of org members
@@ -64,9 +69,24 @@ defmodule App.User do
   # map data to our table
   # insert data
 
-  def map_github_user_fieldsre(entry) do
+  def map_github_user_fields_to_table(u) do
     %{
-
+      id: u.id,
+      avatar_url: String.split(u.avatar_url, "?") |> List.first,
+      bio: u.bio,
+      blog: u.blog,
+      company: String.replace(u.company, "@", ""),
+      created_at: u.created_at,
+      email: u.email,
+      followers: u.followers,
+      following: u.following,
+      hireable: u.hireable,
+      location: u.location,
+      login: u.login,
+      name: u.name,
+      public_repos: u.public_repos,
+      two_factor_authentication: false,
+      updated_at: u.updated_at
     }
   end
 
