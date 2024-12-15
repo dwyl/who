@@ -37,13 +37,12 @@ defmodule App.User do
   def create(attrs) do
     %User{}
     |> changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id])
   end
 
   # Envar.require_env_file(".env")
 
   def get_org_members_from_api(org_name) do
-    # dbg(org_name)
     token = Envar.get("GH_PERSONAL_ACCESS_TOKEN")
 
     client = Tentacat.Client.new(%{access_token: token})
