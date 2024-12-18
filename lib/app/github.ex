@@ -10,7 +10,7 @@ defmodule App.GitHub do
 
 
   @doc """
-  Returns the GitHub user profile data.
+  Returns the GitHub repository data.
   """
   def repository(owner, reponame) do
     Logger.info "Fetching repository #{owner}/#{reponame}"
@@ -26,6 +26,5 @@ defmodule App.GitHub do
     Logger.info "Fetching user #{username}"
     {_status, data, _res} = Tentacat.Users.find @client, username
     data |> Useful.atomize_map_keys()
-
   end
 end
