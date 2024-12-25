@@ -27,4 +27,5 @@ defmodule App.GitHub do
     {_status, data, _res} = Tentacat.Users.find @client, username
     data |> Useful.atomize_map_keys()
   end
+
 end

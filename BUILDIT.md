@@ -43,27 +43,12 @@ where (_hopefully_) it will all be clear.
 > please open an issue:
 > [dwyl/who/issues](https://github.com/dwyl/who/issues)
 
-At the end of each step,
-remember to run the tests:
-
-```sh
-mix test
-```
-
-This will help you keep track of where you are
-and retrace your steps if something is not working as expected.
-
-We suggest keeping two terminal tabs/windows running; <br />
-one for the server `mix phx.server` and the other for the **tests**. <br />
-That way you can also see the UI as you progress.
-
-With that in place, let's get building!
 
 - [Build Log 👩🏻‍💻](#build-log-)
 - [0. Prerequisites: _Before_ You Start](#0-prerequisites-before-you-start)
 - [1. Create a New `Phoenix` App](#1-create-a-new-phoenix-app)
   - [1.1 Run the `Phoenix` App](#11-run-the-phoenix-app)
-  - [1.2 Run the tests:](#12-run-the-tests)
+  - [1.2 Run the tests](#12-run-the-tests)
     - [Test Coverage? ](#test-coverage-)
   - [1.3 Setup `Tailwind`](#13-setup-tailwind)
   - [1.4 Setup `LiveView`](#14-setup-liveview)
@@ -109,6 +94,7 @@ make sure you have `Phoenix` and `Postgres` installed,
 see how at:
 [dwyl/phoenix#how](https://github.com/dwyl/phoenix-chat-example?tab=readme-ov-file#how)
 
+With everything installed & running, let's get building! 👷🏻‍♀️
 
 # 1. Create a New `Phoenix` App
 
@@ -123,15 +109,13 @@ mix phx.new app --no-mailer --no-dashboard --no-gettext
 When asked to install the dependencies,
 type `Y` and `[Enter]` (_to install everything_).
 
-The MVP won't
+The `Who` App won't
 send emails,
-display dashboards 
+display dashboards
 or translate to other languages
 (sorry). <br />
-_All_ of those things 
-will be in the _main_ 
-[dwyl/**app**](https://github.com/dwyl/app). <br />
-We're excluding them here
+We can add `i18n` _later_.
+We're excluding for now
 to reduce complexity/dependencies.
 
 ## 1.1 Run the `Phoenix` App
@@ -163,11 +147,17 @@ You should see something similar to the following
 
 ![phoenix-default-homepage](https://user-images.githubusercontent.com/194400/174807257-34120dc5-723e-4b2c-9e8e-4b6f3aefca14.png)
 
+## 1.2 Run the tests
 
-## 1.2 Run the tests:
+Run the tests with the command:
 
-To run the tests with 
+```sh
+mix test
+```
 
+> **Note**: we recommend keeping _two_ terminal tabs/windows running; <br />
+one for the server `mix phx.server` and the other for the **tests**. <br />
+That way you can also see the UI as you progress.
 
 You should see output similar to:
 
@@ -180,14 +170,12 @@ Finished in 0.1 seconds (0.07s async, 0.07s sync)
 
 That tells us everything is working as expected. 🚀
 
-
 ### Test Coverage? [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
 
 If you prefer to see **test coverage** - we certainly do -
-then you will need to add a few lines to the 
+then you will need to add a few lines to the
 [`mix.exs`](https://github.com/dwyl/who/blob/main/mix.exs)
-file and
-create a 
+file and create a 
 [`coveralls.json`](https://github.com/dwyl/who/blob/main/coveralls.json)
 file to exclude `Phoenix` files from `excoveralls` checking.
 Add alias (shortcuts) in `mix.exs` `defp aliases do` list. 
