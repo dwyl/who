@@ -5,14 +5,13 @@ defmodule App.GitHubTest do
   test "App.GitHub.repository/1" do
     owner = "dwyl"
     reponame = "start-here"
-
-    GitHub.repository(owner, reponame) # |> IO.inspect
-    # assert html_response(conn, 200) =~ "LiveView App Page"
+    repo = GitHub.repository(owner, reponame) # |> dbg
+    assert repo.stargazers_count > 1700
   end
 
   test "App.GitHub.user/1" do
-    user = "iteles"
-    GitHub.user(user) # |> IO.inspect
-    # assert html_response(conn, 200) =~ "LiveView App Page"
+    username = "iteles"
+    user = GitHub.user(username) # |> dbg
+    assert user.public_repos > 30
   end
 end
