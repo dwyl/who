@@ -16,7 +16,7 @@ defmodule App.GitHub do
     Logger.info "Fetching repository #{owner}/#{reponame}"
     {_status, data, _res} =
       Tentacat.Repositories.repo_get(@client, owner, reponame)
-    data |> Useful.atomize_map_keys()
+    data
   end
 
   @doc """
@@ -25,7 +25,7 @@ defmodule App.GitHub do
   def user(username) do
     Logger.info "Fetching user #{username}"
     {_status, data, _res} = Tentacat.Users.find @client, username
-    data |> Useful.atomize_map_keys()
+    data
   end
 
 end
