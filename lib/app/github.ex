@@ -28,4 +28,13 @@ defmodule App.GitHub do
     data
   end
 
+  @doc """
+  `org_user_list/1` Returns the list of GitHub users for an org.
+  """
+  def org_user_list(orgname) do
+    Logger.info "Fetching org user list for #{orgname}"
+    {_status, data, _res} =
+        Tentacat.Organizations.Members.list(@client, orgname)
+    data
+  end
 end
