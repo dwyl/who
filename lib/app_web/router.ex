@@ -16,7 +16,7 @@ defmodule AppWeb.Router do
 
   scope "/", AppWeb do
     pipe_through :browser
-  
+
     live "/", AppLive
   end
 
