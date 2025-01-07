@@ -28,7 +28,7 @@ defmodule App.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:id, :login, :avatar_url, :name, :company, :bio, :blog, :location, :email, :created_at, :hireable, :two_factor_authentication, :public_repos, :followers, :following])
-    |> validate_required([:id, :login, :avatar_url, :name, :created_at, :followers, :following])
+    |> validate_required([:id, :login, :avatar_url, :created_at, :followers, :following])
   end
 
   @doc """
@@ -40,27 +40,12 @@ defmodule App.User do
     |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id])
   end
 
-  # Envar.require_env_file(".env")
-
-  def get_org_members_from_api(org_name) do
-    token = Envar.get("GH_PERSONAL_ACCESS_TOKEN")
-
-    client = Tentacat.Client.new(%{access_token: token})
-    {200, data, _res} = Tentacat.Organizations.Members.list(client, org_name)
-    # dbg(data)
-    Useful.atomize_map_keys(data)
-  end
-
   def get_user_from_api(username) do
-    token = Envar.get("GH_PERSONAL_ACCESS_TOKEN")
-    client = Tentacat.Client.new(%{access_token: token})
-    {200, data, _res} = Tentacat.Users.find(client, username)
-    {:ok, entry} = Useful.atomize_map_keys(data)
-    |> dbg
+    {:ok, data} = App.GitHub.user(username)
     |> map_github_user_fields_to_table()
     |> create()
 
-    entry
+    data
   end
 
   # Next: get list of org members
@@ -74,7 +59,7 @@ defmodule App.User do
       avatar_url: String.split(u.avatar_url, "?") |> List.first,
       bio: u.bio,
       blog: u.blog,
-      company: String.replace(u.company, "@", ""),
+      company: clean_company(u.company),
       created_at: u.created_at,
       email: u.email,
       followers: u.followers,
@@ -89,5 +74,13 @@ defmodule App.User do
     }
   end
 
+  def clean_company(company) do
+    # avoid `String.replace(nil, "@", "", [])` error
+    if company == nil do
+      ""
+    else
+      String.replace(company, "@", "")
+    end
+  end
 
 end
