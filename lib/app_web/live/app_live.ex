@@ -8,7 +8,9 @@ defmodule AppWeb.AppLive do
     if connected?(socket) do
       AppWeb.Endpoint.subscribe(@topic) # subscribe to the channel
     end
-    p = %{id: 1, login: "Alex", avatar_url: "#{@img}1"}
+    p = %{id: 183617417, login: "Alex",
+      avatar_url: "#{@img}183617417", name: "Alexander",
+      bio: "Love learning", created_at: "2015", company: "dwyl"}
     {:ok, assign(socket, %{data: p})}
   end
 
@@ -23,7 +25,7 @@ defmodule AppWeb.AppLive do
   end
 
   def handle_event("dec", _, socket) do
-    val = socket.assigns.val - 1
+    val = socket.assigns.data.id - 1
     p = %{id: val, login: "Alex", avatar_url: "#{@img}#{val}"}
     new_state = assign(socket, %{data: p})
     broadcast("dec", new_state.assigns)
@@ -31,33 +33,19 @@ defmodule AppWeb.AppLive do
   end
 
   def handle_event("sync", _value, socket) do
-    IO.inspect("sync")
     sync(socket)
-    # val = socket.assigns.val + 1
-    # p = %{login: "Alex", avatar_url: "#{@img}#{val}"}
-    # new_state = assign(socket, %{val: val, data: p})
-    # broadcast("inc", new_state.assigns)
-
-    # :timer.apply_interval(1000, IO, :puts, ["weeeee"])
 
     {:noreply, socket}
   end
 
   def handle_event("update", _value, socket) do
-    IO.inspect("- - - - - - - - - - - - - - - - - - - handle_event: update")
     {:noreply, socket}
   end
 
   # update `data` by broadcasting it as the profiles are crawled:
   def sync(socket) do
-
-    dbg(socket.assigns)
-    list = App.GitHub.org_user_list("dwyl")
-    # dbg(list)
-    # Iterate through the list of people
-    # Enum.map(list, Task.async( fn u ->
-    #   dbg(u)
-    # end))
+    list = App.GitHub.org_user_list("ideaq")
+    # Iterate through the list of people and fetch profiles from API
     list
     |> Stream.with_index
     |> Enum.map(fn {u, i} ->
