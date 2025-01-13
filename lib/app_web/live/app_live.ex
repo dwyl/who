@@ -9,8 +9,9 @@ defmodule AppWeb.AppLive do
       AppWeb.Endpoint.subscribe(@topic) # subscribe to the channel
     end
     p = %{id: 183617417, login: "Alex",
-      avatar_url: "#{@img}183617417", name: "Alexander",
-      bio: "Love learning", created_at: "2015", company: "dwyl"}
+      avatar_url: "#{@img}128895421", name: "Alexander the Greatest",
+      bio: "Love learning how to code with my crew of cool cats!",
+      created_at: "2010-02-02T08:44:49Z", company: "dwyl"}
     {:ok, assign(socket, %{data: p})}
   end
 
@@ -46,15 +47,14 @@ defmodule AppWeb.AppLive do
   def sync(socket) do
     list = App.GitHub.org_user_list("ideaq")
     # Iterate through the list of people and fetch profiles from API
-    list
-    |> Stream.with_index
-    |> Enum.map(fn {u, i} ->
-      IO.inspect("- - - Enum.map u.login: #{i}: #{u.login}")
+    Stream.with_index(list)
+    |> Enum.map(fn {u, index} ->
+      # IO.inspect("- - - Enum.map u.login: #{index}: #{u.login}")
       data = App.User.get_user_from_api(u.login)
       data = AuthPlug.Helpers.strip_struct_metadata(data)
       new_state = assign(socket, %{data: data})
       Task.start(fn ->
-        :timer.sleep(300 + 100 * i)
+        :timer.sleep(300 + 100 * index)
         AppWeb.Endpoint.broadcast(@topic, "update", new_state.assigns)
       end)
     end)
@@ -68,5 +68,14 @@ defmodule AppWeb.AppLive do
 
   def broadcast(msg, assigns) do
     AppWeb.Endpoint.broadcast_from(self(), @topic, msg, assigns)
+  end
+
+  # Template Helper Functions
+  def short_date(date) do
+    String.split(date, "T") |> List.first
+  end
+
+  def truncate_bio(bio) do
+    Useful.truncate(bio, 29, " ...")
   end
 end
