@@ -15,24 +15,6 @@ defmodule AppWeb.AppLive do
     {:ok, assign(socket, %{data: p})}
   end
 
-  def handle_event("inc", _value, socket) do
-    dbg(socket.assigns)
-    val = socket.assigns.data.id + 1
-    p = %{id: val, login: "Alex #{val}", avatar_url: "#{@img}#{val}"}
-    new_state = assign(socket, %{data: p})
-    broadcast("inc", new_state.assigns)
-
-    {:noreply, new_state}
-  end
-
-  def handle_event("dec", _, socket) do
-    val = socket.assigns.data.id - 1
-    p = %{id: val, login: "Alex", avatar_url: "#{@img}#{val}"}
-    new_state = assign(socket, %{data: p})
-    broadcast("dec", new_state.assigns)
-    {:noreply, new_state}
-  end
-
   def handle_event("sync", _value, socket) do
     sync(socket)
 
@@ -45,18 +27,25 @@ defmodule AppWeb.AppLive do
 
   # update `data` by broadcasting it as the profiles are crawled:
   def sync(socket) do
-    list = App.GitHub.org_user_list("ideaq")
+    list = App.GitHub.org_user_list("dwyl")
     # Iterate through the list of people and fetch profiles from API
     Stream.with_index(list)
     |> Enum.map(fn {u, index} ->
-      # IO.inspect("- - - Enum.map u.login: #{index}: #{u.login}")
-      data = App.User.get_user_from_api(u.login)
-      data = AuthPlug.Helpers.strip_struct_metadata(data)
-      new_state = assign(socket, %{data: data})
-      Task.start(fn ->
-        :timer.sleep(300 + 100 * index)
-        AppWeb.Endpoint.broadcast(@topic, "update", new_state.assigns)
-      end)
+      # don't have time to waste on this right now ...
+      if u.login == "kittenking" do
+        IO.inspect(" - - - - - - - - - - - - - - - - - kittenking: ")
+        dbg(u)
+        IO.inspect(" - - - - - - - - - - - - - - - - - - - - - - - ")
+      else
+        # IO.inspect("- - - Enum.map u.login: #{index}: #{u.login}")
+        data = App.User.get_user_from_api(u.login)
+        data = AuthPlug.Helpers.strip_struct_metadata(data)
+        new_state = assign(socket, %{data: data})
+        Task.start(fn ->
+          :timer.sleep(300 + 100 * index)
+          AppWeb.Endpoint.broadcast(@topic, "update", new_state.assigns)
+        end)
+      end
     end)
 
     {:noreply, socket}

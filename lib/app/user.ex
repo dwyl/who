@@ -28,7 +28,7 @@ defmodule App.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:id, :login, :avatar_url, :name, :company, :bio, :blog, :location, :email, :created_at, :hireable, :two_factor_authentication, :public_repos, :followers, :following])
-    |> validate_required([:id, :login, :avatar_url, :created_at, :followers, :following])
+    |> validate_required([:id, :login, :avatar_url])
   end
 
   @doc """
@@ -41,7 +41,27 @@ defmodule App.User do
   end
 
   def get_user_from_api(username) do
+
+
+    # case App.GitHub.user(user.login) do
+    #   {:ok, data} ->
+    #     cols = res.columns
+    #     [first_row | _] = res.rows
+    #     [new_id, validation_token, auth_token, success, message] = first_row
+    #     {:ok, %RegistrationResult{
+    #       success: success,
+    #       message: message,
+    #       new_id: new_id,
+    #       authentication_token: auth_token,
+    #       validation_token: validation_token
+    #   }}
+
+    #   {:error, err} ->
+
+    # end
+
     {:ok, data} = App.GitHub.user(username)
+    |> dbg()
     |> map_github_user_fields_to_table()
     |> create()
 
@@ -83,4 +103,24 @@ defmodule App.User do
     end
   end
 
+  # create function that returns dummy user data
+  def dummy_data(u \\ %{}) do
+    Map.merge(%{
+      id: :rand.uniform(1_000_000_000) + 1_000_000_000,
+      avatar_url: "https://avatars.githubusercontent.com/u/10137",
+      bio: "",
+      blog: "",
+      company: "good",
+      created_at: "",
+      email: "",
+      followers: 0,
+      following: 0,
+      hireable: false,
+      location: "",
+      login: "al3x",
+      name: "Lex",
+      public_repos: 0,
+      two_factor_authentication: false
+    }, u)
+  end
 end

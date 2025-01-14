@@ -30,6 +30,11 @@ defmodule App.UserTest do
     data = App.User.get_user_from_api("iteles") # |> dbg
     assert data.public_repos > 30
   end
+
+  test "dummy_data/0" do
+    data = App.User.dummy_data(%{id: 42})
+    assert data.company == "good"
+  end
 end
 
 %{
