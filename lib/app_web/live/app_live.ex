@@ -13,7 +13,10 @@ defmodule AppWeb.AppLive do
       avatar_url: "#{@img}128895421", name: "Alexander the Greatest",
       bio: "Love learning how to code with my crew of cool cats!",
       created_at: "2010-02-02T08:44:49Z", company: "ideaq"}
-    {:ok, assign(socket, %{data: p})}
+    # NEXT: prepend avatars to list ...
+
+
+    {:ok, assign(socket, %{data: p, avatars: App.User.list_users_avatars()})}
   end
 
   def handle_event("sync", value, socket) do
@@ -63,5 +66,9 @@ defmodule AppWeb.AppLive do
 
   def truncate_bio(bio) do
     Useful.truncate(bio, 29, " ...")
+  end
+
+  def tiny_avatar(src) do
+    "#{src}?s=40"
   end
 end

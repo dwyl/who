@@ -1,7 +1,7 @@
 defmodule App.User do
   use Ecto.Schema
   alias App.{Repo}
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
   require Logger
   alias __MODULE__
 
@@ -43,7 +43,7 @@ defmodule App.User do
   # `user` map must include the `id` and `login` fields
   def get_user_from_api(user) do
     data = App.GitHub.user(user.login)
-    # prolly wouldn't do this in a "real" app ... feel free to refactor.
+    # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
       # IO.inspect(" - - - - - - - - - - - - - - - - - #{user.login}")
       # dbg(user)
@@ -60,30 +60,12 @@ defmodule App.User do
     end
   end
 
-  # Next: get list of org members
-  # get user for each in the list
-  # map data to our table
-  # insert data
-
+  # tidy data before insertion
   def map_github_user_fields_to_table(u) do
-    %{
-      id: u.id,
+    Map.merge(u, %{
       avatar_url: String.split(u.avatar_url, "?") |> List.first,
-      bio: u.bio,
-      blog: u.blog,
       company: clean_company(u.company),
-      created_at: u.created_at,
-      email: u.email,
-      followers: u.followers,
-      following: u.following,
-      hireable: u.hireable,
-      location: u.location,
-      login: u.login,
-      name: u.name,
-      public_repos: u.public_repos,
-      two_factor_authentication: false,
-      updated_at: u.updated_at
-    }
+    })
   end
 
   def clean_company(company) do
@@ -114,5 +96,24 @@ defmodule App.User do
       public_repos: 0,
       two_factor_authentication: false
     }, u)
+  end
+
+  # def list_users do
+  #   User
+  #   |> limit(20)
+  #   |> order_by(desc: :inserted_at)
+  #   |> Repo.all()
+  # end
+
+  def list_users_avatars  do
+    from(u in User, select: %{avatar_url: u.avatar_url})
+    # |> limit(20)
+    |> order_by(desc: :inserted_at)
+    # |> distinct(true)
+    |> Repo.all()
+    # return a list of urls not a list of maps
+    |> Enum.reduce([], fn u, acc ->
+      [u.avatar_url | acc]
+    end)
   end
 end
