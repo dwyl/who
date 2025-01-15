@@ -27,8 +27,23 @@ defmodule App.UserTest do
   end
 
   test "get_user_from_api/1" do
-    data = App.User.get_user_from_api("iteles") # |> dbg
+    data = App.User.get_user_from_api(%{login: "iteles"}) # |> dbg
     assert data.public_repos > 30
+  end
+
+  test "get_user_from_api/1 unhappy path (kittenking)" do
+    user = %{
+      id: 53072918,
+      type: "User",
+      url: "https://api.github.com/users/kittenking",
+      avatar_url: "https://avatars.githubusercontent.com/u/53072918?v=4",
+      login: "kittenking",
+      node_id: "MDQ6VXNlcjUzMDcyOTE4",
+      user_view_type: "public",
+      site_admin: false
+    }
+    data = App.User.get_user_from_api(user)
+    assert data.id == user.id
   end
 
   test "dummy_data/0" do

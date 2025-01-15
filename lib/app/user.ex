@@ -40,32 +40,24 @@ defmodule App.User do
     |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id])
   end
 
-  def get_user_from_api(username) do
+  # `user` map must include the `id` and `login` fields
+  def get_user_from_api(user) do
+    data = App.GitHub.user(user.login)
+    # prolly wouldn't do this in a "real" app ... feel free to refactor.
+    if Map.has_key?(data, :status) && data.status == "404" do
+      # IO.inspect(" - - - - - - - - - - - - - - - - - #{user.login}")
+      # dbg(user)
+      # IO.inspect(" - - - - - - - - - - - - - - - - - - - - - - - ")
+      {:ok, user} = dummy_data(user) |> create()
 
+      user
+    else
+      {:ok, user} =
+      map_github_user_fields_to_table(data)
+      |> create()
 
-    # case App.GitHub.user(user.login) do
-    #   {:ok, data} ->
-    #     cols = res.columns
-    #     [first_row | _] = res.rows
-    #     [new_id, validation_token, auth_token, success, message] = first_row
-    #     {:ok, %RegistrationResult{
-    #       success: success,
-    #       message: message,
-    #       new_id: new_id,
-    #       authentication_token: auth_token,
-    #       validation_token: validation_token
-    #   }}
-
-    #   {:error, err} ->
-
-    # end
-
-    {:ok, data} = App.GitHub.user(username)
-    |> dbg()
-    |> map_github_user_fields_to_table()
-    |> create()
-
-    data
+      user
+    end
   end
 
   # Next: get list of org members

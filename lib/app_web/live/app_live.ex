@@ -31,21 +31,14 @@ defmodule AppWeb.AppLive do
     # Iterate through the list of people and fetch profiles from API
     Stream.with_index(list)
     |> Enum.map(fn {u, index} ->
-      # don't have time to waste on this right now ...
-      if u.login == "kittenking" do
-        IO.inspect(" - - - - - - - - - - - - - - - - - kittenking: ")
-        dbg(u)
-        IO.inspect(" - - - - - - - - - - - - - - - - - - - - - - - ")
-      else
-        # IO.inspect("- - - Enum.map u.login: #{index}: #{u.login}")
-        data = App.User.get_user_from_api(u.login)
-        data = AuthPlug.Helpers.strip_struct_metadata(data)
-        new_state = assign(socket, %{data: data})
-        Task.start(fn ->
-          :timer.sleep(300 + 100 * index)
-          AppWeb.Endpoint.broadcast(@topic, "update", new_state.assigns)
-        end)
-      end
+      # IO.inspect("- - - Enum.map u.login: #{index}: #{u.login}")
+      data = App.User.get_user_from_api(u)
+      data = AuthPlug.Helpers.strip_struct_metadata(data)
+      new_state = assign(socket, %{data: data})
+      Task.start(fn ->
+        :timer.sleep(300 + 100 * index)
+        AppWeb.Endpoint.broadcast(@topic, "update", new_state.assigns)
+      end)
     end)
 
     {:noreply, socket}
