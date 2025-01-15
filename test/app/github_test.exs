@@ -26,7 +26,4 @@ defmodule App.GitHubTest do
     data = App.GitHub.user(username)
     assert data.status == "404"
   end
-
-
-
 end
