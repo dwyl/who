@@ -24,7 +24,7 @@ defmodule App.GitHub do
   """
   def user(username) do
     Logger.info "Fetching user #{username}"
-    {_status, data, _res} = Tentacat.Users.find @client, username
+    {_status, data, _res} = Tentacat.Users.find(@client, username)
     data
   end
 

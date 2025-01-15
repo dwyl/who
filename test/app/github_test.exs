@@ -20,4 +20,13 @@ defmodule App.GitHubTest do
     list = GitHub.org_user_list(orgname)
     assert length(list) > 2
   end
+
+  test "App.GitHub.user/1 known 404 (unhappy path)" do
+    username ="kittenking"
+    data = App.GitHub.user(username)
+    assert data.status == "404"
+  end
+
+
+
 end
