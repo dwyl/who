@@ -28,5 +28,10 @@ defmodule AppWeb.AppLiveTest do
       bio = "It was a bright cold day in April, and the clocks were striking 13"
       assert AppLive.truncate_bio(bio) == "It was a bright cold day in ..."
     end
+
+    test "avatar/1 prepares the avatar_url for displaying face wall" do
+      assert AppLive.avatar(1) ==
+        "https://avatars.githubusercontent.com/u/1?s=30"
+    end
   end
 end

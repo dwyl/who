@@ -106,14 +106,14 @@ defmodule App.User do
   # end
 
   def list_users_avatars  do
-    from(u in User, select: %{avatar_url: u.avatar_url})
+    from(u in User, select: %{id: u.id})
     # |> limit(20)
     |> order_by(desc: :inserted_at)
     # |> distinct(true)
     |> Repo.all()
     # return a list of urls not a list of maps
     |> Enum.reduce([], fn u, acc ->
-      [u.avatar_url | acc]
+      [u.id | acc]
     end)
   end
 end

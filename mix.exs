@@ -69,6 +69,9 @@ defmodule App.MixProject do
       # JSON Parsing: https://hex.pm/packages/poison
       {:poison, "~> 6.0.0"},
 
+      # Extract image data: https://github.com/elixir-image/image/
+      {:image, "~> 0.37"},
+
       # Create docs on localhost by running "mix docs"
       {:ex_doc, "~> 0.37.1", only: :dev, runtime: false},
       # Track test coverage

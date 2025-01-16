@@ -26,4 +26,10 @@ defmodule App.GitHubTest do
     data = App.GitHub.user(username)
     assert data.status == "404"
   end
+
+  test "App.GitHub.org_repos/1 get repos for org" do
+    org = "ideaq"
+    list = App.GitHub.org_repos(org) |> dbg
+    assert length(list) > 2
+  end
 end

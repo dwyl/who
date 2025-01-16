@@ -8,6 +8,7 @@ defmodule App.Repo.Migrations.CreateRepositories do
       add :fork, :boolean, default: false, null: false
       add :forks_count, :integer
       add :full_name, :string
+      add :language, :string
       add :name, :string
       add :open_issues_count, :integer
       add :owner_id, :integer

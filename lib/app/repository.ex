@@ -11,6 +11,7 @@ defmodule App.Repository do
     field :fork, :boolean, default: false
     field :forks_count, :integer
     field :full_name, :string
+    field :language, :string
     field :name, :string
     field :open_issues_count, :integer
     field :owner_id, :integer
@@ -25,7 +26,9 @@ defmodule App.Repository do
   @doc false
   def changeset(repository, attrs) do
     repository
-    |> cast(attrs, [:id, :name, :full_name, :owner_id, :description, :fork, :forks_count, :watchers_count, :stargazers_count, :topics, :open_issues_count, :created_at, :pushed_at])
+    |> cast(attrs, [:id, :name, :full_name, :language, :owner_id, :description,
+      :fork, :forks_count, :watchers_count, :stargazers_count, :topics,
+      :open_issues_count, :created_at, :pushed_at])
     |> validate_required([:name, :full_name])
   end
 
@@ -38,4 +41,13 @@ defmodule App.Repository do
     |> Repo.insert()
   end
 
+  @doc """
+  Get all repositories for an organization and insert them into DB.
+  """
+  def get_org_repos(org) do
+    App.GitHub.org_repos(org)
+    |> Enum.map(fn repo ->
+      create(repo)
+    end)
+  end
 end
