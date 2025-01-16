@@ -37,7 +37,7 @@ class="w-20 bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 round
 </div>
 
 <div id="faces" class="px-4 mb-4">
-  <span :for={src <- @avatars} class="w-max">
-    <img src={tiny_avatar(src)} class="float-left w-8">
+  <span :for={id <- @ids} class="w-max">
+    <img src={avatar(id)} class="float-left w-6">
   </span>
 </div>

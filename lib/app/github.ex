@@ -20,6 +20,16 @@ defmodule App.GitHub do
   end
 
   @doc """
+  Returns the list of GitHub repositories for an Org.
+  """
+  def org_repos(owner) do
+    Logger.info "Fetching list of repositories for #{owner}"
+    {_status, data, _res} =
+      Tentacat.Repositories.list_orgs(@client, owner)
+    data
+  end
+
+  @doc """
   `user/1` Returns the GitHub user profile data.
   """
   def user(username) do

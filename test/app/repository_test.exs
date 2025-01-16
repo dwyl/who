@@ -22,4 +22,10 @@ defmodule App.RepositoryTest do
     assert {:ok, inserted_repo} = App.Repository.create(repo)
     assert inserted_repo.name == repo.name
   end
+
+  test "App.Repository.get_org_repos/1" do
+
+    App.Repository.get_org_repos("ideaq") # |> dbg
+    # assert inserted_repo.name == repo.name
+  end
 end

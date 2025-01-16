@@ -16,7 +16,7 @@ defmodule AppWeb.AppLive do
     # NEXT: prepend avatars to list ...
 
 
-    {:ok, assign(socket, %{data: p, avatars: App.User.list_users_avatars()})}
+    {:ok, assign(socket, %{data: p, ids: App.User.list_users_avatars()})}
   end
 
   def handle_event("sync", value, socket) do
@@ -42,6 +42,11 @@ defmodule AppWeb.AppLive do
 
   # update `data` by broadcasting it as the profiles are crawled:
   def sync(socket, org) do
+    # Get Repos:
+    Task.start(fn ->
+      App.Repository.get_org_repos(org)
+    end)
+
     list = App.GitHub.org_user_list(org)
     # Iterate through the list of people and fetch profiles from API
     Stream.with_index(list)
@@ -68,7 +73,7 @@ defmodule AppWeb.AppLive do
     Useful.truncate(bio, 29, " ...")
   end
 
-  def tiny_avatar(src) do
-    "#{src}?s=40"
+  def avatar(id) do
+    "https://avatars.githubusercontent.com/u/#{id}?s=30"
   end
 end
