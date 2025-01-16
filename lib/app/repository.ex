@@ -47,6 +47,7 @@ defmodule App.Repository do
   def get_org_repos(org) do
     App.GitHub.org_repos(org)
     |> Enum.map(fn repo ->
+      dbg(repo)
       create(repo)
     end)
   end
