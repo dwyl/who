@@ -16,11 +16,20 @@ defmodule App.ImgTest do
     url2 = "https://avatars.githubusercontent.com/u/194400"
     img_data2 = Img.get_raw_image_data(url2)
     assert Img.extract_color(img_data2) == "F80818"
+
+    url3 = "https://avatars.githubusercontent.com/u/19310512"
+    img_data3 = Img.get_raw_image_data(url3)
+    assert Img.extract_color(img_data3) == "080808"
   end
 
   test "App.Img.get_avatar_color/1 gets the hex color for avatar" do
     avatar_url = "https://avatars.githubusercontent.com/u/4185328"
     assert Img.get_avatar_color(avatar_url) == "F8F8F8"
+
+    avatar_url2 = "https://avatars.githubusercontent.com/u/7805691"
+    assert Img.get_avatar_color(avatar_url2) == "C85878"
+    # https://github.com/harrygfox
+    # https://www.color-hex.com/color/c85878
   end
 
   test "to_hex/1 returns the hex value of an integer" do
