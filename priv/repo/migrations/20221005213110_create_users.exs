@@ -12,6 +12,7 @@ defmodule App.Repo.Migrations.CreateUsers do
       add :followers, :integer
       add :following, :integer
       add :hireable, :boolean, default: false
+      add :hex, :string
       add :location, :string
       add :login, :string
       add :name, :string

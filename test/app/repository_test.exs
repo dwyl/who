@@ -15,8 +15,7 @@ defmodule App.RepositoryTest do
       open_issues_count: 98,
       pushed_at: "2022-08-10T07:41:05Z",
       stargazers_count: 1604,
-      topics: Enum.join(["beginner", "beginner-friendly", "how-to", "howto", "learn",
-       "starter-kit"], ","),
+      topics: ["beginner", "beginner-friendly", "how-to", "learn"],
       watchers_count: 1604
     }
     assert {:ok, inserted_repo} = App.Repository.create(repo)
@@ -24,7 +23,6 @@ defmodule App.RepositoryTest do
   end
 
   test "App.Repository.get_org_repos/1" do
-
     App.Repository.get_org_repos("ideaq") # |> dbg
     # assert inserted_repo.name == repo.name
   end
