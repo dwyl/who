@@ -14,6 +14,7 @@ defmodule App.User do
     field :email, :string
     field :followers, :integer
     field :following, :integer
+    field :hex, :string
     field :hireable, :boolean, default: false
     field :location, :string
     field :login, :string
@@ -27,7 +28,7 @@ defmodule App.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:id, :login, :avatar_url, :name, :company, :bio, :blog, :location, :email, :created_at, :hireable, :two_factor_authentication, :public_repos, :followers, :following])
+    |> cast(attrs, [:id, :login, :avatar_url, :name, :company, :bio, :blog, :location, :email, :created_at, :hex, :hireable, :two_factor_authentication, :public_repos, :followers, :following])
     |> validate_required([:id, :login, :avatar_url])
   end
 
@@ -54,6 +55,7 @@ defmodule App.User do
     else
       {:ok, user} =
       map_github_user_fields_to_table(data)
+      |> Map.put(:hex, App.Img.get_avatar_color(data.avatar_url))
       |> create()
 
       user
@@ -108,7 +110,7 @@ defmodule App.User do
   def list_users_avatars  do
     from(u in User, select: %{id: u.id})
     # |> limit(20)
-    |> order_by(desc: :inserted_at)
+    |> order_by(:hex)
     # |> distinct(true)
     |> Repo.all()
     # return a list of urls not a list of maps

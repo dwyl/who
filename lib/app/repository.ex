@@ -25,10 +25,25 @@ defmodule App.Repository do
 
   @doc false
   def changeset(repository, attrs) do
+    attrs = %{attrs | topics: Enum.join(attrs.topics, ", ")}
+
     repository
-    |> cast(attrs, [:id, :name, :full_name, :language, :owner_id, :description,
-      :fork, :forks_count, :watchers_count, :stargazers_count, :topics,
-      :open_issues_count, :created_at, :pushed_at])
+    |> cast(attrs, [
+      :created_at,
+      :id,
+      :description,
+      :fork,
+      :forks_count,
+      :full_name,
+      :language,
+      :name,
+      :open_issues_count,
+      :owner_id,
+      :pushed_at,
+      :stargazers_count,
+      :topics,
+      :watchers_count
+      ])
     |> validate_required([:name, :full_name])
   end
 
@@ -47,7 +62,6 @@ defmodule App.Repository do
   def get_org_repos(org) do
     App.GitHub.org_repos(org)
     |> Enum.map(fn repo ->
-      dbg(repo)
       create(repo)
     end)
   end
