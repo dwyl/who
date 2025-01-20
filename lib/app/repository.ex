@@ -53,7 +53,7 @@ defmodule App.Repository do
   def create(attrs) do
     %Repository{}
     |> changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id])
   end
 
   @doc """
@@ -76,3 +76,25 @@ defmodule App.Repository do
     end)
   end
 end
+
+"""
+%App.Repository{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "repositories">,
+  id: 35713694,
+  created_at: "2015-05-16T07:06:03Z",
+  description: "Effortless Meteor.js Image Uploads",
+  fork: true,
+  forks_count: 1,
+  full_name: "ideaq/image-uploads",
+  language: "JavaScript",
+  name: "image-uploads",
+  open_issues_count: 0,
+  owner_id: nil,
+  pushed_at: "2016-07-02T12:37:46Z",
+  stargazers_count: 5,
+  topics: nil,
+  watchers_count: 5,
+  inserted_at: ~N[2025-01-20 12:27:57],
+  updated_at: ~N[2025-01-20 12:27:57]
+}
+"""
