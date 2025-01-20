@@ -1,7 +1,7 @@
 defmodule App.Star do
   alias App.{Repo}
   use Ecto.Schema
-  import Ecto.{Changeset, Query}
+  import Ecto.Changeset
   require Logger
   alias __MODULE__
 
@@ -30,17 +30,18 @@ defmodule App.Star do
   end
 
   @doc """
-  Get all repositories for an organization and insert them into DB.
+  `get_stargazers_for_repo/2`
+  gets the starts for a given `owner` and `repo` inserts any new `users`.
   """
   def get_stargazers_for_repo(owner, repo) do
     repo_id = App.Repository.get_repo_id_by_full_name("#{owner}/#{repo}")
     App.GitHub.repo_stargazers(owner, repo)
     |> Enum.map(fn user ->
-      dbg(user)
-      # %{
+      App.User.get_user_from_api(user)
 
-      # }
-      # create(repo)
+      {:ok, star} = create(%{ user_id: user.id, repo_id: repo_id })
+
+      star
     end)
   end
 end
