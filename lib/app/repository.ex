@@ -1,7 +1,7 @@
 defmodule App.Repository do
   use Ecto.Schema
   alias App.{Repo}
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
   require Logger
   alias __MODULE__
 
@@ -57,12 +57,22 @@ defmodule App.Repository do
   end
 
   @doc """
+  `get_repo_id_by_full_name/1` Gets the repository `id` by `full_name`.
+  e.g: get_repo_id_by_full_name("dwyl/start-here") -> 17338019
+  """
+  def get_repo_id_by_full_name(full_name) do
+    from(r in Repository, where: r.full_name == ^full_name, select: r.id)
+    |> Repo.one()
+  end
+
+  @doc """
   Get all repositories for an organization and insert them into DB.
   """
   def get_org_repos(org) do
     App.GitHub.org_repos(org)
     |> Enum.map(fn repo ->
-      create(repo)
+      {:ok, repo} = create(repo)
+      repo
     end)
   end
 end

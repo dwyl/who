@@ -47,4 +47,16 @@ defmodule App.GitHub do
         Tentacat.Organizations.Members.list(@client, orgname)
     data
   end
+
+  @doc """
+  `repo_stargazers/2` Returns the list of GitHub users starring a repo.
+  `owner` - the owner of the repo
+  `repo` - name of the repo to check stargazers for.
+  """
+  def repo_stargazers(owner, repo) do
+    Logger.info "Fetching stargazers for #{owner}/#{repo}"
+    {_status, data, _res} =
+      Tentacat.Users.Starring.stargazers(@client, owner, repo)
+    data
+  end
 end

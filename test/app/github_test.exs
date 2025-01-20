@@ -29,7 +29,14 @@ defmodule App.GitHubTest do
 
   test "App.GitHub.org_repos/1 get repos for org" do
     org = "ideaq"
-    list = App.GitHub.org_repos(org) |> dbg
+    list = App.GitHub.org_repos(org) # |> dbg
     assert length(list) > 2
+  end
+
+  test "App.GitHub.repo_stargazers/2 get stargazers for repo" do
+    owner = "dwyl"
+    repo = "pizza"
+    list = App.GitHub.repo_stargazers(owner, repo) # |> dbg
+    assert length(list) > 0
   end
 end
