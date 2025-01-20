@@ -26,4 +26,17 @@ defmodule App.RepositoryTest do
     App.Repository.get_org_repos("ideaq") # |> dbg
     # assert inserted_repo.name == repo.name
   end
+
+  test "App.Repository.get_repo_id_by_full_name/1" do
+    # Get all repos for ideaQ org:
+    list = App.Repository.get_org_repos("ideaq")
+    full_name = "ideaq/image-uploads"
+    repo = Enum.filter(list, fn(r) ->
+      r.full_name == full_name
+    end)
+    |> List.first()
+
+    assert repo.id == App.Repository.get_repo_id_by_full_name(full_name)
+  end
+
 end
