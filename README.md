@@ -4,7 +4,7 @@
 
 ![who-banner](https://user-images.githubusercontent.com/194400/194710724-0e2de0b1-0b2a-4ee8-83a0-eb07cce74810.png)
 
-The **quick _answer_** 
+The **quick _answer_**
 to the question: 
 **_Who_ is in the `@dwyl` community?**
 
@@ -17,6 +17,7 @@ to the question:
 </div>
 
 # **`TODO`**: re-generate the "wall of faces" using latest data `#HelpWanted`
+
 
 ![face wall](https://user-images.githubusercontent.com/194400/28011265-a95f52d4-6559-11e7-823e-6133d947921a.jpg)
 
@@ -52,9 +53,9 @@ contributing to the
 
 Visit  
 [github.com/orgs/dwyl/people](https://github.com/orgs/dwyl/people)
-you can see a list of people 
-who are _members_ of the Org. 
-*Simple. effective. incomplete*. 
+you can see a list of people
+who are _members_ of the Org.
+*Simple. effective. incomplete*.
 This list only scratches the surface!
 
 ## 2. List all contributors to dwyl repos on `GitHub`
@@ -106,7 +107,8 @@ in your terminal:
 git clone git@github.com:dwyl/who.git && cd who
 mix setup
 ```
-That will download the **`code`**, 
+
+That will download the **`code`**,
 install dependencies
 and create the necessary database + tables.
 
