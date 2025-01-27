@@ -175,15 +175,15 @@ That tells us everything is working as expected. 🚀
 If you prefer to see **test coverage** - we certainly do -
 then you will need to add a few lines to the
 [`mix.exs`](https://github.com/dwyl/who/blob/main/mix.exs)
-file and create a 
+file and create a
 [`coveralls.json`](https://github.com/dwyl/who/blob/main/coveralls.json)
 file to exclude `Phoenix` files from `excoveralls` checking.
-Add alias (shortcuts) in `mix.exs` `defp aliases do` list. 
+Add alias (shortcuts) in `mix.exs` `defp aliases do` list.
 
-e.g: `mix c` runs `mix coveralls.html` 
+e.g: `mix c` runs `mix coveralls.html`
 see: [**`commits/d6ab5ef`**](https://github.com/dwyl/app-mvp/pull/90/commits/d6ab5ef7c2be5dcad7d060e782393ae29c94a526) ...
 
-This is just standard `Phoenix` project setup for us, 
+This is just standard `Phoenix` project setup for us,
 so we don't duplicate any of the steps here. <br />
 For more detail, please see:
 [Automated Testing](https://github.com/dwyl/phoenix-chat-example#testing-our-app-automated-testing)
@@ -202,7 +202,6 @@ You should see output similar to the following:
 
 <img alt="Who tests passing coverage 100%" src="https://github.com/dwyl/who/assets/194400/a82c55f2-d57b-4c97-a781-3b529855ef68">
 
-
 ## 1.3 Setup `Tailwind`
 
 As we're using **`Tailwind CSS`**
@@ -215,10 +214,10 @@ please refer to:
 Should only take **`~1 minute`**.
 
 By the end of this step you should have **`Tailwind`** working.
-When you visit 
-[`localhost:4000`](http://localhost:4000) 
-in your browser, 
-you should see: 
+When you visit
+[`localhost:4000`](http://localhost:4000)
+in your browser,
+you should see:
 
 ![hello world tailwind phoenix](https://user-images.githubusercontent.com/194400/174838767-20bf201e-3179-4ff9-8d5d-751295d1d069.png)
 
@@ -252,7 +251,7 @@ end
 
 Next, create the
 **`lib/app_web/live/app_live.html.heex`**
-file 
+file
 and add the following line of `HTML`:
 
 ```html
@@ -263,9 +262,9 @@ and add the following line of `HTML`:
 ```
 
 Finally, to make the **root layout** simpler, 
-open the 
+open the
 `lib/app_web/templates/layout/root.html.heex`
-file and 
+file and
 update the contents of the `<body>` to:
 
 ```html
@@ -283,7 +282,7 @@ update the contents of the `<body>` to:
 
 Now that you've created the necessary files,
 open the router
-`lib/app_web/router.ex` 
+`lib/app_web/router.ex`
 replace the default route `PageController` controller:
 
 ```elixir
@@ -337,10 +336,10 @@ Finished in 0.1 seconds (0.06s async, 0.1s sync)
 3 tests, 1 failure
 ```
 
-Create a new directory: 
+Create a new directory:
 `test/app_web/live`
 
-Then create the file: 
+Then create the file:
 `test/app_web/live/app_live_test.exs`
 
 With the following content:
@@ -356,7 +355,7 @@ defmodule AppWeb.AppLiveTest do
 end
 ```
 
-Save the file 
+Save the file
 and re-run the tests: `mix test`
 
 You should see output similar to the following:
@@ -374,7 +373,7 @@ Randomized with seed 796477
 
 ## 1.7 Delete Page-related Files
 
-Since we won't be using the `page` in our App, 
+Since we won't be using the `page` in our App,
 we can delete the default files created by `Phoenix`:
 
 ```sh
@@ -391,7 +390,7 @@ and ready to start _building_!
 
 ## Run Tests with Coverage
 
-```
+```sh
 mix c
 ```
 
@@ -418,11 +417,16 @@ COV    FILE                                        LINES RELEVANT   MISSED
 
 This app stores data in **five** schemas:
 
-1. `users` - https://docs.github.com/en/rest/users/users - the GitHub [**`users`**](https://dwyl.github.io/book/auth/07-notes-on-naming.html) that _use_ the platform.
+1. `users` - https://docs.github.com/en/rest/users/users - the GitHub
+   [**`users`**](https://dwyl.github.io/book/auth/07-notes-on-naming.html)
+   that _use_ the platform.
 2. `orgs` - [https://docs.github.com/en/rest/orgs/orgs](https://docs.github.com/en/rest/orgs/orgs?#get-an-organization) - organizations which can have `users` as members and `repositories`.
-3. `repositories` - https://docs.github.com/en/rest/repos/repos - the repositories of code on GitHub.
-4. `stars` - [https://docs.github.com/en/rest/activity/starring](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers) - the `stars` (on `repositories`) associated with each `user`.
-5. `follows` - https://docs.github.com/en/rest/users/followers - List the `people` a `user` follows.
+3. `repositories` - https://docs.github.com/en/rest/repos/repos -
+   the repositories of code on GitHub.
+4. `stars` - [https://docs.github.com/en/rest/activity/starring](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers) -
+   the `stars` (on `repositories`) associated with each `user`.
+5. `follows` - https://docs.github.com/en/rest/users/followers -
+   List the `people` a `user` follows.
 
 For each of these schemas we are storing
 a _subset_ of the data;
@@ -454,7 +458,6 @@ we have the following database
 [Entity Relationship Diagram](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
 (ERD):
 
-
 ![erd](https://user-images.githubusercontent.com/194400/194425189-e44d6161-c8df-4a0d-9d86-bc1045785c95.png)
 
 We created **5 database tables**;
@@ -462,7 +465,6 @@ We created **5 database tables**;
 At present the two tables are unrelated 
 but eventually `repository.owner_id` will refer to `user.id`
 and we will be creating other schemas below.
-
 
 <br />
 
@@ -476,7 +478,7 @@ If we run the tests with coverage:
 mix c
 ```
 
-We note that the test coverage 
+We note that the test coverage
 has dropped considerably:
 
 ```sh
@@ -681,194 +683,83 @@ COV    FILE                                        LINES RELEVANT   MISSED
 We have our starting point for the project,
 let's write some code!
 
+<br />
 
+# 3. Setup `GitHub` API
 
-
-<br /><br /><br /><br /><br />
-
-# 3. Setup `GitHub` API 
-
-We're going to make _many_ requests 
+We're going to make _many_ requests
 to the **`GitHub` REST API`**.
 So we need an effective way of doing that.
 
-
-
-
 Create the directory `test/app`
 and file:
-`test/app/item_test.exs`
+`test/app/github_test.exs`
 with the following code:
 
 ```elixir
-defmodule App.ItemTest do
-  use App.DataCase
-  alias App.{Item, Timer}
+defmodule App.GitHubTest do
+  use ExUnit.Case
+  alias App.GitHub
 
-  describe "items" do
-    @valid_attrs %{text: "some text", person_id: 1, status: 2}
-    @update_attrs %{text: "some updated text"}
-    @invalid_attrs %{text: nil}
-
-    test "get_item!/1 returns the item with given id" do
-      {:ok, item} = Item.create_item(@valid_attrs)
-      assert Item.get_item!(item.id).text == item.text
-    end
-
-    test "create_item/1 with valid data creates a item" do
-      assert {:ok, %Item{} = item} = Item.create_item(@valid_attrs)
-
-      assert item.text == "some text"
-
-      inserted_item = List.first(Item.list_items())
-      assert inserted_item.text == @valid_attrs.text
-    end
-
-    test "create_item/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} =
-               Item.create_item(@invalid_attrs)
-    end
-
-    test "list_items/0 returns a list of items stored in the DB" do
-      {:ok, _item1} = Item.create_item(@valid_attrs)
-      {:ok, _item2} = Item.create_item(@valid_attrs)
-
-      assert Enum.count(Item.list_items()) == 2
-    end
-
-    test "update_item/2 with valid data updates the item" do
-      {:ok, item} = Item.create_item(@valid_attrs)
-
-      assert {:ok, %Item{} = item} = Item.update_item(item, @update_attrs)
-      assert item.text == "some updated text"
-    end
+  test "App.GitHub.user/1" do
+    username = "iteles"
+    user = GitHub.user(username)
+    assert user.public_repos > 30
   end
 end
+
 ```
 
-The first five tests are basic 
-[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+The first test is very basic;
+just fetches a `user` from the `GitHub` API
+and confirms they have more than 30 `public_repos`. 
 
 If you run these tests:
+
 ```sh
-mix test test/app/item_test.exs
+mix test test/app/github_test.exs
 ```
 
 You will see all the testes _fail_.
 This is expected as the code is not there yet!
 
-
-
 ## 3.1 Make the `user` Tests Pass
 
-Open the 
-`lib/app/item.ex` 
-file and replace the contents 
+Open the
+`lib/app/github.ex`
+file and replace the contents
 with the following code:
 
-
 ```elixir
-defmodule App.Item do
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
-  alias App.Repo
-  alias __MODULE__
+defmodule App.GitHub do
+  @moduledoc """
+  Handles all interactions with the GitHub REST API
+  via: github.com/edgurgel/tentacat Elixir GitHub Lib.
+  """
+  require Logger
 
-  schema "items" do
-    field :person_id, :integer
-    field :status, :integer
-    field :text, :string
-
-    timestamps()
-  end
-
-  @doc false
-  def changeset(item, attrs) do
-    item
-    |> cast(attrs, [:person_id, :status, :text])
-    |> validate_required([:text])
-  end
+  @access_token Application.compile_env(:tentacat, :access_token)
+  @client Tentacat.Client.new(%{access_token: @access_token})
 
   @doc """
-  Creates a item.
-
-  ## Examples
-
-      iex> create_item(%{text: "Learn LiveView"})
-      {:ok, %Item{}}
-
-      iex> create_item(%{text: nil})
-      {:error, %Ecto.Changeset{}}
-
+  `user/1` Returns the GitHub user profile data.
   """
-  def create_item(attrs) do
-    %Item{}
-    |> changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Gets a single item.
-
-  Raises `Ecto.NoResultsError` if the Item does not exist.
-
-  ## Examples
-
-      iex> get_item!(123)
-      %Item{}
-
-      iex> get_item!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_item!(id), do: Repo.get!(Item, id)
-
-  @doc """
-  Returns the list of items where the status is different to "deleted"
-
-  ## Examples
-
-      iex> list_items()
-      [%Item{}, ...]
-
-  """
-  def list_items do
-    Item
-    |> order_by(desc: :inserted_at)
-    |> where([i], is_nil(i.status) or i.status != 6)
-    |> Repo.all()
-  end
-
-  @doc """
-  Updates an `item`.
-
-  ## Examples
-
-      iex> update_item(item, %{field: new_value})
-      {:ok, %Item{}}
-
-      iex> update_item(item, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_item(%Item{} = item, attrs) do
-    item
-    |> Item.changeset(attrs)
-    |> Repo.update()
-  end
-
-  # soft delete an item:
-  def delete_item(id) do
-    get_item!(id)
-    |> Item.changeset(%{status: 6})
-    |> Repo.update()
+  def user(username) do
+    Logger.info "Fetching user #{username}"
+    {_status, data, _res} = Tentacat.Users.find(@client, username)
+    data
   end
 end
 ```
 
 Once you have saved the file, re-run the tests.
 They should now pass.
+
+> **Note**: using the `GitHub` API assumes you already
+> have a personal access token defined
+> as an environment variable `GH_PERSONAL_ACCESS_TOKEN`
+> if you don't please see:
+> [dwyl/who#get-your-github-personal-access-token](https://github.com/dwyl/who?tab=readme-ov-file#get-your-github-personal-access-token)
 
 # X. Add Authentication
 

@@ -118,9 +118,8 @@ Create an `.env` file by copying the sample:
 ```sh
 cp .env_sample .env
 ```
-Paste the value of your 
 
-loads the 
+This file will load the
 [environment variables](https://github.com/dwyl/learn-environment-variables)
 required to run the App.
 
