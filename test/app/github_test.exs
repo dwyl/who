@@ -1,5 +1,6 @@
 defmodule App.GitHubTest do
   use ExUnit.Case
+  use App.DataCase
   alias App.GitHub
 
   test "App.GitHub.repository/1" do

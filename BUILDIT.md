@@ -64,6 +64,7 @@ where (_hopefully_) it will all be clear.
     - [2.2.3 Re-run the Tests](#223-re-run-the-tests)
 - [3. Setup `GitHub` API](#3-setup-github-api)
   - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
+- [4. Log All `GitHub` API Request](#4-log-all-github-api-request)
 - [X. Add Authentication](#x-add-authentication)
   - [X.1 Add `auth_plug` to `deps`](#x1-add-auth_plug-to-deps)
   - [X.2 Get your `AUTH_API_KEY`](#x2-get-your-auth_api_key)
@@ -760,6 +761,143 @@ They should now pass.
 > as an environment variable `GH_PERSONAL_ACCESS_TOKEN`
 > if you don't please see:
 > [dwyl/who#get-your-github-personal-access-token](https://github.com/dwyl/who?tab=readme-ov-file#get-your-github-personal-access-token)
+
+# 4. Log All `GitHub` API Request
+
+As noted in
+[who#226](https://github.com/dwyl/who/issues/226)
+the `GitHub` API is rate-limited to
+`5,000 requests per hour`.
+We would immediately exhaust this limit in a minute
+and be **blocked** with a 
+[`429 Error`](https://www.rfc-editor.org/rfc/rfc6585#section-4) 🚫
+if we make all the requests we need in one go.
+So instead we need to _log_ all the requests
+so that we know not to exceed the `5k/h` limit.
+
+Create the `Request Log` (`Reqlog`) schema with the following command:
+
+```sh
+mix phx.gen.schema Reqlog reqlogs req:string param:string
+```
+
+The output is:
+
+```sh
+* creating lib/app/reqlog.ex
+* creating priv/repo/migrations/20250127180724_create_reqlogs.exs
+```
+
+But for whatever reason it doesn't automatically the test file.
+Create it manually with:
+
+```sh
+vi test/app/reqlog_test.exs
+```
+
+And _paste_ the following code:
+
+```elixir
+defmodule App.ReqlogTest do
+  use App.DataCase
+
+  test "App.Reqlog.create/1" do
+    owner = "dwyl"
+    reponame = "mvp"
+    record = %{
+      created_at: "2014-03-02T13:20:04Z",
+      req: "repository",
+      param: "#{owner}/#{reponame}"
+    }
+    assert {:ok, inserted} = App.Reqlog.create(record)
+    assert inserted.req == record.req
+  end
+
+  test "App.Reqlog.log/2" do
+    owner = "dwyl"
+    reponame = "mvp"
+
+    assert {:ok, inserted} = App.Reqlog.log("repo", "#{owner}/#{reponame}")
+    assert inserted.req == "repo"
+    assert inserted.param == "#{owner}/#{reponame}"
+  end
+end
+```
+
+Running the test will fail:
+
+```sh
+mix test test/app/reqlog_test.exs
+```
+
+Open the `lib/app/reqlog.ex` file
+and add the following code:
+
+```elixir
+  @doc """
+  Creates a `reqlog` (request log) record.
+  """
+  def create(attrs) do
+    %Reqlog{}
+    |> changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def log(req, param) do
+    Logger.info "Fetching #{req} #{param}"
+    create(%{req: req, param: param})
+  end
+```
+
+At the top of the file under the `defmodule` add these two lines:
+
+```sh
+  alias App.{Repo}
+  alias __MODULE__
+  require Logger
+```
+
+One allows us to use `Repo.insert/1`
+`alias __MODULE__`  defines an alias for our Elixir module.
+`require Logger` loads the [`Logger`](https://hexdocs.pm/logger).
+
+Ref:
+https://alphahydrae.com/2021/03/how-to-make-an-elixir-module-alias-itself/
+
+With that code in-place, we can _use_ it in our `GitHub` file.
+
+Remember to add the line:
+
+```elixir
+  use App.DataCase
+```
+
+to the top of the file `test/app/github_test.exs`
+to ensure that the `GitHub` API requests get logged during testing.
+
+In the `lib/app/github.ex` file,
+add the following line to the top:
+
+```elixir
+import App.Reqlog, only: [log: 2]
+```
+
+Then replace the line:
+
+```elixir
+Logger.info "Fetching repository #{owner}/#{reponame}"
+```
+
+with:
+
+```elixir
+log("repository", "#{owner}/#{reponame}")
+```
+
+Replace any other instances of `Logger.info` with `log/2`.
+
+
+
 
 # X. Add Authentication
 
