@@ -65,6 +65,7 @@ where (_hopefully_) it will all be clear.
 - [3. Setup `GitHub` API](#3-setup-github-api)
   - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
 - [4. Log All `GitHub` API Request](#4-log-all-github-api-request)
+  - [4.1 Limit API Requests](#41-limit-api-requests)
 - [X. Add Authentication](#x-add-authentication)
   - [X.1 Add `auth_plug` to `deps`](#x1-add-auth_plug-to-deps)
   - [X.2 Get your `AUTH_API_KEY`](#x2-get-your-auth_api_key)
@@ -895,6 +896,9 @@ log("repository", "#{owner}/#{reponame}")
 ```
 
 Replace any other instances of `Logger.info` with `log/2`.
+
+## 4.1 Limit API Requests
+
 
 
 

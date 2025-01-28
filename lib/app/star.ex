@@ -37,6 +37,9 @@ defmodule App.Star do
     repo_id = App.Repository.get_repo_id_by_full_name("#{owner}/#{repo}")
     App.GitHub.repo_stargazers(owner, repo)
     |> Enum.map(fn user ->
+      # We have multiple repos over 1k stars
+      # Therefore issuing all these requests at once
+      # would instantly hit the 5k/h GitHub API Request Limit
       App.User.get_user_from_api(user)
 
       {:ok, star} = create(%{ user_id: user.id, repo_id: repo_id })

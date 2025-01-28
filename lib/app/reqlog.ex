@@ -1,6 +1,6 @@
 defmodule App.Reqlog do
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
   alias App.{Repo}
   alias __MODULE__
   require Logger
@@ -33,5 +33,14 @@ defmodule App.Reqlog do
   def log(req, param) do
     Logger.info "Fetching #{req} #{param}"
     create(%{req: req, param: param})
+  end
+
+  def req_count_last_hour() do
+    # Using `DateTime.add/4` with a negative number to subtract. ;-)
+    # via: https://elixirforum.com/t/create-time-with-one-hour-plus/3666/5
+    one_hour_ago = DateTime.utc_now(:second) |> DateTime.add(-3600)
+
+    Repo.one(from r in Reqlog, select: count("*"),
+      where: r.inserted_at > ^one_hour_ago)
   end
 end
