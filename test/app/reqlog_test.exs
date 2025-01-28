@@ -21,4 +21,10 @@ defmodule App.ReqlogTest do
     assert inserted.req == "repo"
     assert inserted.param == "#{owner}/#{reponame}"
   end
+
+  test "App.Reqlog.req_count_last_hour/0" do
+    assert {:ok, _} = App.Reqlog.log("repo", "dwyl/any")
+    count = App.Reqlog.req_count_last_hour()
+    assert count > 0
+  end
 end
