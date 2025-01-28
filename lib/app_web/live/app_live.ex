@@ -15,8 +15,9 @@ defmodule AppWeb.AppLive do
       created_at: "2010-02-02T08:44:49Z", company: "ideaq"}
     # NEXT: prepend avatars to list ...
 
-
-    {:ok, assign(socket, %{data: p, ids: App.User.list_users_avatars()})}
+    {:ok, assign(socket, %{data: p,
+      ids: App.User.list_users_avatars(),
+      count: App.Reqlog.req_count_last_hour()})}
   end
 
   def handle_event("sync", value, socket) do

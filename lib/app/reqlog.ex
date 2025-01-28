@@ -39,7 +39,6 @@ defmodule App.Reqlog do
     # Using `DateTime.add/4` with a negative number to subtract. ;-)
     # via: https://elixirforum.com/t/create-time-with-one-hour-plus/3666/5
     one_hour_ago = DateTime.utc_now(:second) |> DateTime.add(-3600)
-
     Repo.one(from r in Reqlog, select: count("*"),
       where: r.inserted_at > ^one_hour_ago)
   end

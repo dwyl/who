@@ -22,11 +22,15 @@ defmodule App.ApiManager do
   end
 
   defp schedule_work() do
-    Process.send_after(self(), :work, 2 * 60 * 60 * 1000) # In 2 hours
+    Process.send_after(self(), :work, 60 * 1000) # check again in 1 min
   end
 
   def get_users() do
     # Check how many requests have been made in the last hour:
+    count = App.Reqlog.req_count_last_hour()
+    if count < 4920 do
+      # Get the top 80 users that need to be queried
 
+    end
   end
 end
