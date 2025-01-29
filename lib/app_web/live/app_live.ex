@@ -62,7 +62,8 @@ defmodule AppWeb.AppLive do
       # IO.inspect("- - - Enum.map u.login: #{index}: #{u.login}")
       data = App.User.get_user_from_api(u)
         |> AuthPlug.Helpers.strip_struct_metadata()
-      new_state = assign(socket, %{data: data})
+      sock = assign(socket, %{data: data})
+      new_state = assign(sock, %{count: App.Reqlog.req_count_last_hour()})
       Task.start(fn ->
         :timer.sleep(300 + 100 * index)
         AppWeb.Endpoint.broadcast(@topic, "update", new_state.assigns)
