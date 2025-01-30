@@ -40,7 +40,7 @@ defmodule App.Star do
       # We have multiple repos over 1k stars
       # Therefore issuing all these requests at once
       # would instantly hit the 5k/h GitHub API Request Limit
-      App.User.get_user_from_api(user)
+      App.User.create_user_with_hex(user)
 
       {:ok, star} = create(%{ user_id: user.id, repo_id: repo_id })
 
