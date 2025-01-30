@@ -46,36 +46,37 @@ defmodule App.User do
     data = App.GitHub.user(user.login)
     # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
-      # IO.inspect(" - - - - - - - - - - - - - - - - - #{user.login}")
-      # dbg(user)
-      # IO.inspect(" - - - - - - - - - - - - - - - - - - - - - - - ")
       {:ok, user} = dummy_data(user) |> create()
 
       user
     else
-      {:ok, user} =
+      create_user_with_hex(data)
+    end
+  end
+
+  def create_user_with_hex(data) do
+    {:ok, user} =
       map_github_user_fields_to_table(data)
       |> Map.put(:hex, App.Img.get_avatar_color(data.avatar_url))
       |> create()
 
-      user
-    end
+    user
   end
 
   # tidy data before insertion
   def map_github_user_fields_to_table(u) do
     Map.merge(u, %{
       avatar_url: String.split(u.avatar_url, "?") |> List.first,
-      company: clean_company(u.company),
+      company: clean_company(u),
     })
   end
 
-  def clean_company(company) do
+  def clean_company(u) do
     # avoid `String.replace(nil, "@", "", [])` error
-    if company == nil do
+    if not Map.has_key?(u, :company) or u.company == nil do
       ""
     else
-      String.replace(company, "@", "")
+      String.replace(u.company, "@", "")
     end
   end
 
