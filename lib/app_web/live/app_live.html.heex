@@ -4,12 +4,14 @@ class="w-20 bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 round
 </button>
 <h1 class="float-right">{@count}</h1>
 
-<div class="flex flex-row justify-center items-center bg-lime-500">
+<div class="w-full flex flex-row justify-center items-center" style="background-color:Olive;">
   <h1>Newest person:</h1>
   <div class="w-64 m-10 max-w-sm">
     <div class="rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
       <div class="relative mx-auto w-36 rounded-full">
-        <span class="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
+        <span class="absolute right-0 m-3 h-3 w-3 rounded-full
+         bg-green-500 ring-2 ring-green-300 ring-offset-2">
+        </span>
         <img class="mx-auto h-auto w-full rounded-full" 
         src={@data.avatar_url} alt={@data.name} />
       </div>
@@ -40,7 +42,7 @@ class="w-20 bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 round
   </div>
 </div>
 
-<div id="faces" class="px-4 mb-4">
+<div id="faces" class="w-full px-4 mb-4">
   <span :for={id <- @ids} class="h-auto">
     <img src={avatar(id)} class="float-left w-6">
   </span>

@@ -14,7 +14,6 @@ defmodule App.GitHub do
   """
   def repository(owner, reponame) do
     log("repository", "#{owner}/#{reponame}")
-    # Logger.info "Fetching repository #{owner}/#{reponame}"
     {_status, data, _res} =
       Tentacat.Repositories.repo_get(@client, owner, reponame)
     data
@@ -25,7 +24,6 @@ defmodule App.GitHub do
   """
   def org_repos(owner) do
     log("org_repos", owner)
-    # Logger.info "Fetching list of repositories for #{owner}"
     {_status, data, _res} =
       Tentacat.Repositories.list_orgs(@client, owner)
     data
@@ -35,7 +33,6 @@ defmodule App.GitHub do
   `user/1` Returns the GitHub user profile data.
   """
   def user(username) do
-    # Logger.info "Fetching user #{username}"
     log("user", username)
     {_status, data, _res} = Tentacat.Users.find(@client, username)
     data
@@ -45,7 +42,6 @@ defmodule App.GitHub do
   `org_user_list/1` Returns the list of GitHub users for an org.
   """
   def org_user_list(orgname) do
-    # Logger.info "Fetching org user list for #{orgname}"
     log("org_user_list", orgname)
     {_status, data, _res} =
         Tentacat.Organizations.Members.list(@client, orgname)
@@ -57,9 +53,9 @@ defmodule App.GitHub do
   `owner` - the owner of the repo
   `repo` - name of the repo to check stargazers for.
   """
-  def repo_stargazers(owner, repo) do
+  def repo_stargazers(fullname) do
+    [owner, repo] = String.split(fullname, "/")
     log("repo_stargazers", "#{owner}/#{repo}")
-    # Logger.info "Fetching stargazers for #{owner}/#{repo}"
     {_status, data, _res} =
       Tentacat.Users.Starring.stargazers(@client, owner, repo)
     data

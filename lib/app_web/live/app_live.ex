@@ -48,9 +48,9 @@ defmodule AppWeb.AppLive do
       App.Repository.get_org_repos(org)
       # get all stargazers for a given repo
       |> Enum.map(fn repo ->
-        dbg(repo)
-        # App.Star.get_stargazers_for_repo(owner, repo)
-        repo
+        # dbg(repo)
+        App.Star.get_stargazers_for_repo(repo.full_name)
+        # repo
       end)
 
     end)
