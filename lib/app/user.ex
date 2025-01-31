@@ -46,7 +46,7 @@ defmodule App.User do
     data = App.GitHub.user(user.login)
     # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
-      {:ok, user} = dummy_data(user) |> create()
+      # {:ok, user} = dummy_data(user) |> create() # don't insert dummy data!
 
       user
     else
@@ -115,6 +115,9 @@ defmodule App.User do
     }, u)
   end
 
+  # When a user is returned by `org_user_list/1` it is incomplete
+  # Therefore we need to back-fill the data by selecting and querying
+  # SELECT COUNT(*) FROM users WHERE created_at IS NULL
   def list_incomplete_users do
     from(u in User, select: %{login: u.login}, where: is_nil(u.created_at))
     |> limit(80)
