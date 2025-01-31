@@ -63,6 +63,20 @@ defmodule App.User do
     user
   end
 
+  # This is useful when inserting partial user records e.g. stargazers
+  def create_incomplete_user_no_overwrite(data) do
+    partial_data =
+      map_github_user_fields_to_table(data)
+      |> Map.put(:hex, App.Img.get_avatar_color(data.avatar_url))
+
+    {:ok, user} =
+      %User{}
+      |> changeset(partial_data)
+      |> Repo.insert(on_conflict: :nothing, conflict_target: [:id])
+
+    user
+  end
+
   # tidy data before insertion
   def map_github_user_fields_to_table(u) do
     Map.merge(u, %{
@@ -101,12 +115,12 @@ defmodule App.User do
     }, u)
   end
 
-  # def list_users do
-  #   User
-  #   |> limit(20)
-  #   |> order_by(desc: :inserted_at)
-  #   |> Repo.all()
-  # end
+  def list_incomplete_users do
+    from(u in User, select: %{login: u.login}, where: is_nil(u.created_at))
+    |> limit(80)
+    |> order_by(desc: :inserted_at)
+    |> Repo.all()
+  end
 
   def list_users_avatars  do
     from(u in User, select: %{id: u.id})

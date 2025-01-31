@@ -37,7 +37,7 @@ defmodule App.GitHubTest do
   test "App.GitHub.repo_stargazers/2 get stargazers for repo" do
     owner = "dwyl"
     repo = "pizza"
-    list = App.GitHub.repo_stargazers(owner, repo) # |> dbg
+    list = App.GitHub.repo_stargazers("#{owner}/#{repo}") # |> dbg
     assert length(list) > 0
   end
 end
