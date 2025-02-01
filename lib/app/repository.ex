@@ -71,8 +71,9 @@ defmodule App.Repository do
   def get_org_repos(org) do
     App.GitHub.org_repos(org)
     |> Enum.map(fn repo ->
-      {:ok, repo} = create(repo)
-      repo
+      {:ok, inserted_repo} = create(repo)
+
+      inserted_repo
     end)
   end
 end

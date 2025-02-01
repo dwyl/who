@@ -66,6 +66,7 @@ where (_hopefully_) it will all be clear.
   - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
 - [4. Log All `GitHub` API Request](#4-log-all-github-api-request)
   - [4.1 Limit API Requests](#41-limit-api-requests)
+- [5. Org \<-\> Users](#5-org---users)
 - [X. Add Authentication](#x-add-authentication)
   - [X.1 Add `auth_plug` to `deps`](#x1-add-auth_plug-to-deps)
   - [X.2 Get your `AUTH_API_KEY`](#x2-get-your-auth_api_key)
@@ -899,7 +900,46 @@ Replace any other instances of `Logger.info` with `log/2`.
 
 ## 4.1 Limit API Requests
 
+Given that `GitHub` has a hard limit of
+**`5,000 requests per hour`**:
+https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
 
+<img width="927" alt="Image" src="https://github.com/user-attachments/assets/f33793ce-049d-425e-9b04-33d94b7ace0f" />
+
+We need to stay within this limit to avoid being blocked.
+
+Rather than duplicate all the code here,
+we've left a bunch of comments in the file:
+
+[`/lib/app/api_manager.ex`](https://github.com/dwyl/who/blob/02096766d9efc88fe8fb645aa59de69b3991f970/lib/app/api_manager.ex)
+
+It's enabled in:
+[/lib/app/application.ex#L21](https://github.com/dwyl/who/blob/02096766d9efc88fe8fb645aa59de69b3991f970/lib/app/application.ex#L21)
+
+Hopefully it's self-explanatory.
+But if not, please comment on:
+[**who#226**](https://github.com/dwyl/who/issues/226)
+💬
+
+# 5. Org <-> Users
+
+We need to know the `users` who are `members` of an `org`.
+Create the schema:
+
+```elixir
+mix phx.gen.schema Orgmember orgmembers org_id:integer user_id:integer stop:utc_datetime
+```
+
+That will output:
+
+```sh
+* creating lib/app/orgmember.ex
+* creating priv/repo/migrations/20250131111017_create_orgmembers.exs
+
+Remember to update your repository by running migrations:
+
+    $ mix ecto.migrate
+```
 
 
 

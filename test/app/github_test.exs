@@ -16,6 +16,15 @@ defmodule App.GitHubTest do
     assert user.public_repos > 30
   end
 
+  test "App.GitHub.user_orgs/1" do
+    username = "iteles"
+    list = GitHub.user_orgs(username) # |> dbg
+    assert length(list) > 2
+
+    [org | _] = Enum.filter(list, fn org -> org.login == "dwyl" end)
+    assert org.id == 11708465
+  end
+
   test "App.GitHub.org_user_list/1" do
     orgname = "ideaq"
     list = GitHub.org_user_list(orgname)
@@ -26,6 +35,12 @@ defmodule App.GitHubTest do
     username ="kittenking"
     data = App.GitHub.user(username)
     assert data.status == "404"
+  end
+
+  test "App.GitHub.org/1 get org data" do
+    org = "ideaq"
+    App.GitHub.org(org) |> dbg
+    # assert length(list) > 2
   end
 
   test "App.GitHub.org_repos/1 get repos for org" do

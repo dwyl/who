@@ -15,7 +15,7 @@ defmodule App.StarTest do
     App.Repository.get_org_repos(owner)
     repo = "image-uploads"
     list = App.Star.get_stargazers_for_repo("#{owner}/#{repo}")
-    star = Enum.filter(list, fn(s) -> s.user_id == 194_400 end) |> List.first
+    [star | _] = Enum.filter(list, fn(s) -> s.user_id == 194_400 end)
 
     assert star.user_id == 194_400
     assert star.repo_id == 35_713_694
