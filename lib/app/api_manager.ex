@@ -42,12 +42,8 @@ defmodule App.ApiManager do
         App.User.get_user_from_api(user)
         App.Orgmember.get_orgs_for_user(user)
       end)
-
-      App.Org.list_incomplete_orgs()
-      |> Enum.each(fn org ->
-        App.Org.get_org_from_api(org)
-      end)
-
+      # Backfill 5 orgs with full data:
+      App.Org.backfill()
     end
   end
 end
