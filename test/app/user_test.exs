@@ -65,7 +65,7 @@ defmodule App.UserTest do
   end
 
   test "list_users_avatars/0" do
-    user = user() |> User.map_github_user_fields_to_table()
+    user = user() |> User.map_github_fields_to_table()
     User.create(user)
     list = App.User.list_users_avatars()
     assert length(list) > 0

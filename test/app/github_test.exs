@@ -22,7 +22,7 @@ defmodule App.GitHubTest do
     assert length(list) > 2
 
     [org | _] = Enum.filter(list, fn org -> org.login == "dwyl" end)
-    assert org.id == 11708465
+    assert org.id == 11_708_465
   end
 
   test "App.GitHub.org_user_list/1" do
@@ -32,15 +32,14 @@ defmodule App.GitHubTest do
   end
 
   test "App.GitHub.user/1 known 404 (unhappy path)" do
-    username ="kittenking"
+    username = "kittenking"
     data = App.GitHub.user(username)
     assert data.status == "404"
   end
 
   test "App.GitHub.org/1 get org data" do
-    org = "ideaq"
-    App.GitHub.org(org) |> dbg
-    # assert length(list) > 2
+    org = App.GitHub.org("ideaq")
+    assert org.id == 6_831_072
   end
 
   test "App.GitHub.org_repos/1 get repos for org" do

@@ -25,7 +25,7 @@ defmodule App.Org do
   @doc false
   def changeset(org, attrs) do
     org
-    |> cast(attrs, [:id, :login, :avatar_url, :description, :name, :company, :created_at, :public_repos, :location, :followers, :show])
+    |> cast(attrs, [:id, :login, :avatar_url, :hex, :description, :name, :company, :created_at, :public_repos, :location, :followers, :show])
     |> validate_required([:id, :login, :avatar_url])
   end
 
@@ -38,9 +38,14 @@ defmodule App.Org do
     |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id]) # upsert
   end
 
+  def get_org(login) do
+    from(o in Org, where: o.login == ^login)
+    |> Repo.one()
+  end
+
   # `org` map must include the `id` and `login` fields
   def get_org_from_api(org) do
-    data = App.GitHub.org(org.login) # |> dbg()
+    data = App.GitHub.org(org.login)
     # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
       # {:ok, user} = dummy_data(user) |> create() # don't insert dummy data!
@@ -69,9 +74,19 @@ defmodule App.Org do
   # Therefore we need to back-fill the data by selecting and querying
   # SELECT COUNT(*) FROM orgs WHERE created_at IS NULL
   def list_incomplete_orgs do
-    from(o in Org, select: %{login: o.login}, where: is_nil(o.created_at))
+    from(o in Org,
+      select: %{login: o.login},
+      where: is_nil(o.created_at)
+    )
     |> limit(5)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
+  end
+
+  def backfill do
+    list_incomplete_orgs()
+    |> Enum.each(fn org ->
+      get_org_from_api(org)
+    end)
   end
 end
