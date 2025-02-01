@@ -6,8 +6,9 @@ defmodule App.Follow do
   alias __MODULE__
 
   schema "follows" do
-    field :follower_id, :integer
-    field :following_id, :integer
+    field :follower_id, :integer, primary_key: true
+    field :following_id, :integer, primary_key: true
+    field :is_org, :boolean, default: false
     field :stop, :utc_datetime
 
     timestamps()
@@ -16,7 +17,8 @@ defmodule App.Follow do
   @doc false
   def changeset(follow, attrs) do
     follow
-    |> cast(attrs, [:follower_id, :following_id, :stop])
+    |> cast(attrs, [:follower_id, :following_id, :is_org, :stop])
+    |> unique_constraint(:follows_unique_constraint, name: :follows_unique)
     |> validate_required([:follower_id, :following_id])
   end
 
@@ -26,6 +28,7 @@ defmodule App.Follow do
   def create(attrs) do
     %Follow{}
     |> changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: :nothing,
+      conflict_target: [:follower_id, :following_id])
   end
 end

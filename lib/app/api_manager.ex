@@ -37,11 +37,17 @@ defmodule App.ApiManager do
     if count < 4920 do
       # Get the top 80 users that need to be queried:
       App.User.list_incomplete_users()
-      |> Enum.map(fn user ->
-        # dbg(user)
+      |> Enum.each(fn user ->
         # Get and insert the full user data:
         App.User.get_user_from_api(user)
+        App.Orgmember.get_orgs_for_user(user)
       end)
+
+      App.Org.list_incomplete_orgs()
+      |> Enum.each(fn org ->
+        App.Org.get_org_from_api(org)
+      end)
+
     end
   end
 end

@@ -21,7 +21,7 @@ to the question:
 
 ![face wall](https://user-images.githubusercontent.com/194400/28011265-a95f52d4-6559-11e7-823e-6133d947921a.jpg)
 
-# *Why*? 
+# *Why*?
 
 We needed an **easy, fast & reliable _system_**
 to **_visualize_ `who`** is joining

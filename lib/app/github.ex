@@ -20,6 +20,17 @@ defmodule App.GitHub do
   end
 
   @doc """
+  Returns org data.
+  """
+  def org(login) do
+    log("org_repos", login)
+    {_status, data, _res} =
+      Tentacat.Organizations.find(@client, login)
+    data
+  end
+
+
+  @doc """
   Returns the list of GitHub repositories for an Org.
   """
   def org_repos(owner) do
@@ -38,6 +49,15 @@ defmodule App.GitHub do
     data
   end
 
+    @doc """
+  `user_orgs/1` Returns the list of `public` GitHub orgs for a user.
+  """
+  def user_orgs(username) do
+    log("user_orgs", username)
+    {_status, data, _res} =  Tentacat.Organizations.list(@client, username)
+    data
+  end
+
   @doc """
   `org_user_list/1` Returns the list of GitHub users for an org.
   """
@@ -47,6 +67,8 @@ defmodule App.GitHub do
         Tentacat.Organizations.Members.list(@client, orgname)
     data
   end
+
+
 
   @doc """
   `repo_stargazers/2` Returns the list of GitHub users starring a repo.

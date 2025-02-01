@@ -9,10 +9,12 @@ defmodule App.Repo.Migrations.CreateOrgs do
       add :created_at, :string
       add :description, :string
       add :followers, :integer
+      add :hex, :string
       add :location, :string
       add :login, :string
       add :name, :string
       add :public_repos, :integer
+      add :show, :boolean, default: false
 
       timestamps()
     end

@@ -35,6 +35,7 @@ defmodule App.Star do
   """
   def get_stargazers_for_repo(fullname) do
     repo_id = App.Repository.get_repo_id_by_full_name(fullname)
+    # dbg("#{fullname} -> #{repo_id}")
     App.GitHub.repo_stargazers(fullname)
     |> Enum.map(fn user ->
       # We have multiple repos over 1k stars

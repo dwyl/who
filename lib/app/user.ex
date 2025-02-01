@@ -43,7 +43,7 @@ defmodule App.User do
 
   # `user` map must include the `id` and `login` fields
   def get_user_from_api(user) do
-    data = App.GitHub.user(user.login)
+    data = App.GitHub.user(user.login) # |> dbg()
     # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
       # {:ok, user} = dummy_data(user) |> create() # don't insert dummy data!
@@ -56,7 +56,7 @@ defmodule App.User do
 
   def create_user_with_hex(data) do
     {:ok, user} =
-      map_github_user_fields_to_table(data)
+      map_github_fields_to_table(data)
       |> Map.put(:hex, App.Img.get_avatar_color(data.avatar_url))
       |> create()
 
@@ -66,7 +66,7 @@ defmodule App.User do
   # This is useful when inserting partial user records e.g. stargazers
   def create_incomplete_user_no_overwrite(data) do
     partial_data =
-      map_github_user_fields_to_table(data)
+      map_github_fields_to_table(data)
       |> Map.put(:hex, App.Img.get_avatar_color(data.avatar_url))
 
     {:ok, user} =
@@ -78,7 +78,7 @@ defmodule App.User do
   end
 
   # tidy data before insertion
-  def map_github_user_fields_to_table(u) do
+  def map_github_fields_to_table(u) do
     Map.merge(u, %{
       avatar_url: String.split(u.avatar_url, "?") |> List.first,
       company: clean_company(u),
@@ -119,8 +119,11 @@ defmodule App.User do
   # Therefore we need to back-fill the data by selecting and querying
   # SELECT COUNT(*) FROM users WHERE created_at IS NULL
   def list_incomplete_users do
-    from(u in User, select: %{login: u.login}, where: is_nil(u.created_at))
-    |> limit(80)
+    from(u in User,
+      select: %{id: u.id, login: u.login},
+      where: is_nil(u.created_at)
+    )
+    |> limit(30)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
   end
