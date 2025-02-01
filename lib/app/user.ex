@@ -123,7 +123,7 @@ defmodule App.User do
       select: %{id: u.id, login: u.login},
       where: is_nil(u.created_at)
     )
-    |> limit(30)
+    |> limit(35)
     |> order_by(desc: :inserted_at)
     |> Repo.all()
   end
