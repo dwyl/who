@@ -75,7 +75,7 @@ defmodule App.Org do
   # SELECT COUNT(*) FROM orgs WHERE created_at IS NULL
   def list_incomplete_orgs do
     from(o in Org,
-      select: %{login: o.login},
+      select: %{login: o.login, id: o.id},
       where: is_nil(o.created_at)
     )
     |> limit(5)
@@ -87,6 +87,8 @@ defmodule App.Org do
     list_incomplete_orgs()
     |> Enum.each(fn org ->
       get_org_from_api(org)
+      App.Orgmember.get_users_for_org(org)
+
     end)
   end
 end

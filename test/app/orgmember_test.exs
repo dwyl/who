@@ -31,4 +31,10 @@ defmodule App.OrgMemberTest do
 
     assert org.id == 11_708_465
   end
+
+  test "Orgmember.get_users_for_org/1" do
+    org = %{id: 6_831_072, login: "ideaq"}
+    users = App.Orgmember.get_users_for_org(org)
+    assert length(users) > 3
+  end
 end
