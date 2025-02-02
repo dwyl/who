@@ -3,6 +3,17 @@ defmodule App.GitHubTest do
   use App.DataCase
   alias App.GitHub
 
+  test "App.GitHub.followers/1" do
+    username = "iteles"
+    list = GitHub.followers(username)
+    assert length(list) > 400
+
+    # confirm works for an organization:
+    org = "dwyl"
+    org_followers = GitHub.followers(org)
+    assert length(org_followers) > 650
+  end
+
   test "App.GitHub.repository/1" do
     owner = "dwyl"
     reponame = "start-here"
