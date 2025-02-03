@@ -20,4 +20,14 @@ defmodule App.FollowTest do
     assert inserted_follow.follower_id == follow.follower_id
     assert inserted_follow.is_org == true
   end
+
+  test "App.Follow.get_followers_from_api/2" do
+    # Get followers for User:
+    user_followers = App.Follow.get_followers_from_api("asntc")
+    assert length(user_followers) > 5
+
+    # Get followers for Org
+    org_followers = App.Follow.get_followers_from_api("ideaq", true)
+    assert length(org_followers) > 0
+  end
 end

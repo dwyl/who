@@ -38,7 +38,7 @@ defmodule App.Org do
     |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id]) # upsert
   end
 
-  def get_org(login) do
+  def get_org_by_login(login) do
     from(o in Org, where: o.login == ^login)
     |> Repo.one()
   end

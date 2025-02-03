@@ -41,6 +41,11 @@ defmodule App.User do
     |> Repo.insert(on_conflict: :replace_all, conflict_target: [:id])
   end
 
+  def get_user_by_login(login) do
+    from(u in User, where: u.login == ^login)
+    |> Repo.one()
+  end
+
   # `user` map must include the `id` and `login` fields
   def get_user_from_api(user) do
     data = App.GitHub.user(user.login) # |> dbg()
