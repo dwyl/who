@@ -41,6 +41,7 @@ defmodule App.ApiManager do
         # Get and insert the full user data:
         App.User.get_user_from_api(user)
         App.Orgmember.get_orgs_for_user(user)
+        App.Follow.get_followers_from_api(user.login)
       end)
       # Backfill 5 orgs with full data:
       App.Org.backfill()
