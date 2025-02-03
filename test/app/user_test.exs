@@ -52,16 +52,15 @@ defmodule App.UserTest do
   end
 
   test "list_users" do
-    data = App.User.dummy_data(%{id: 42})
+    data = App.User.dummy_data(%{id: 41, login: "k3v1n"})
     assert data.company == "good"
   end
 
   test "list_incomplete_users/0 returns recent incomplete users" do
-    dummy_data = App.User.dummy_data(%{id: 42})
+    dummy_data = App.User.dummy_data(%{id: 43, login: "c4t"})
     App.User.create_incomplete_user_no_overwrite(dummy_data)
     list = App.User.list_incomplete_users()
     assert length(list) > 0
-    # dbg(list)
   end
 
   test "list_users_avatars/0" do

@@ -9,7 +9,7 @@ defmodule App.ApiManagerTest do
   end
 
   test "App.ApiManager.get_users/0" do
-    dummy_data = App.User.dummy_data(%{id: 42})
+    dummy_data = App.User.dummy_data(%{id: 42, login: "api"})
     App.User.create_incomplete_user_no_overwrite(dummy_data)
     list = App.User.list_incomplete_users()
     assert length(list) > 0
