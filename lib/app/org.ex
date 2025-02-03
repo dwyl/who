@@ -88,7 +88,7 @@ defmodule App.Org do
     |> Enum.each(fn org ->
       get_org_from_api(org)
       App.Orgmember.get_users_for_org(org)
-
+      App.Follower.get_followers_from_api(org.login, true)
     end)
   end
 end
