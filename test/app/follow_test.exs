@@ -30,4 +30,14 @@ defmodule App.FollowTest do
     org_followers = App.Follow.get_followers_from_api("ideaq", true)
     assert length(org_followers) > 0
   end
+
+  test "App.Follow.get_following_id/2 happy path" do
+    # Get an *existing* user:
+    App.User.get_user_from_api(%{login: "charlie"})
+    assert App.Follow.get_following_id("charlie") == 1_763
+
+    # Get an *existing* org:
+    App.Org.get_org_from_api(%{login: "github"})
+    assert App.Follow.get_following_id("github", true) == 9_919
+  end
 end

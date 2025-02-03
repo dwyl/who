@@ -52,7 +52,7 @@ defmodule App.OrgTest do
       login: "ideaq"
     })
     App.Org.backfill()
-    updated_org = App.Org.get_org(org.login)
+    updated_org = App.Org.get_org_by_login(org.login)
     assert updated_org.hex == "F8F8F8"
     assert updated_org.description == "a Q of Ideas"
     assert updated_org.created_at == "2014-03-02T13:18:11Z"
