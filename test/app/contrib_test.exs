@@ -1,4 +1,5 @@
 defmodule App.ContribTest do
+  use ExUnit.Case, async: true
   use App.DataCase
 
   test "App.Contrib.create/1" do

@@ -36,7 +36,7 @@ defmodule App.Orgmember do
   """
   def get_orgs_for_user(user) do
     # Get the list of orgs a user belongs to (public)
-    App.GitHub.user_orgs(user.login)
+    App.GitHub.user_orgs(user.login) # |> dbg()
     |> Enum.map(fn org ->
       {:ok, inserted_org} = App.Org.create(org)
       create(%{org_id: org.id, user_id: user.id})
