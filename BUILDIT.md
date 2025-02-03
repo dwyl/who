@@ -67,6 +67,7 @@ where (_hopefully_) it will all be clear.
 - [4. Log All `GitHub` API Request](#4-log-all-github-api-request)
   - [4.1 Limit API Requests](#41-limit-api-requests)
 - [5. Org \<-\> Users](#5-org---users)
+- [6. Repository Contributors](#6-repository-contributors)
 - [X. Add Authentication](#x-add-authentication)
   - [X.1 Add `auth_plug` to `deps`](#x1-add-auth_plug-to-deps)
   - [X.2 Get your `AUTH_API_KEY`](#x2-get-your-auth_api_key)
@@ -940,6 +941,53 @@ Remember to update your repository by running migrations:
 
     $ mix ecto.migrate
 ```
+
+All the code for this is in:
+`lib/app/orgmember.ex`
+and corresponding tests in:
+`test/app/orgmember_test.exs`
+
+# 6. Repository Contributors
+
+First let's take a quick look at what data we can get from the API:
+https://docs.github.com/en/rest/repos/repos#list-repository-contributors
+
+```json
+[
+  {
+    "login": "octocat",
+    "id": 1,
+    "node_id": "MDQ6VXNlcjE=",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/octocat",
+    "html_url": "https://github.com/octocat",
+    "followers_url": "https://api.github.com/users/octocat/followers",
+    "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+    "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+    "organizations_url": "https://api.github.com/users/octocat/orgs",
+    "repos_url": "https://api.github.com/users/octocat/repos",
+    "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/octocat/received_events",
+    "type": "User",
+    "site_admin": false,
+    "contributions": 32
+  }
+]
+```
+
+Appears to be a `user` record with the addition of the `contributions` field.
+
+So we need to create a new schema with `repo_id`, `user_id` and `contribs`
+(all integers).
+The following command:
+
+```elixir
+mix phx.gen.schema Contrib contribs repo_id:integer user_id:integer count:integer
+```
+
 
 
 

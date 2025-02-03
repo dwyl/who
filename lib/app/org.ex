@@ -48,7 +48,6 @@ defmodule App.Org do
     data = App.GitHub.org(org.login)
     # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
-      # {:ok, user} = dummy_data(user) |> create() # don't insert dummy data!
       # do nothing
       org
     else

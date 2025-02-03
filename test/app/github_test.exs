@@ -21,6 +21,13 @@ defmodule App.GitHubTest do
     assert repo.stargazers_count > 1700
   end
 
+  test "App.GitHub.repo_contribs/2 returns list of contribs (users)" do
+    owner = "dwyl"
+    reponame = "start-here"
+    repo = GitHub.repo_contribs(owner, reponame) |> dbg
+    # assert repo.stargazers_count > 1700
+  end
+
   test "App.GitHub.user/1" do
     username = "iteles"
     user = GitHub.user(username) # |> dbg

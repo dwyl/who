@@ -49,6 +49,16 @@ defmodule App.GitHub do
   end
 
   @doc """
+  Returns the list of contributors for a GitHub repository.
+  """
+  def repo_contribs(owner, reponame) do
+    log("repo_contribs", "#{owner}/#{reponame}")
+    {_status, data, _res} =
+      Tentacat.Repositories.Contributors.list(@client, owner, reponame)
+    data
+  end
+
+  @doc """
   `repo_stargazers/2` Returns the list of GitHub users starring a repo.
   `owner` - the owner of the repo
   `repo` - name of the repo to check stargazers for.
