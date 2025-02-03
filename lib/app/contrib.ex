@@ -29,4 +29,21 @@ defmodule App.Contrib do
     |> Repo.insert(on_conflict: {:replace, [:count]},
       conflict_target: [:repo_id, :user_id])
   end
+
+  def get_contribs_from_api(fullname) do
+    [owner, reponame] = String.split(fullname, "/")
+    repo_id = App.Repository.get_repo_id_by_full_name(fullname)
+    App.GitHub.repo_contribs(owner, reponame) # |> dbg()
+    |> Enum.map(fn user ->
+      App.User.create_incomplete_user_no_overwrite(user)
+      {:ok, contrib} = create(%{
+        repo_id: repo_id,
+        user_id: user.id,
+        count: user.contributions
+      })
+
+      contrib
+    end)
+  end
+
 end

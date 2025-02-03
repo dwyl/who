@@ -49,8 +49,9 @@ defmodule AppWeb.AppLive do
       # |> dbg()
       # get all stargazers for a given repo
       |> Enum.map(fn repo ->
-        # dbg(repo)
         App.Star.get_stargazers_for_repo(repo.full_name)
+        # Get List of Contributors for each Repo:
+        App.Contrib.get_contribs_from_api(repo.full_name)
         # repo
       end)
 
