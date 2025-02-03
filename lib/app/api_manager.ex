@@ -36,7 +36,7 @@ defmodule App.ApiManager do
     # 5000 - 83 = 4917 ... so rounded to 4920.
     if count < 4920 do
       # Get the top 80 users that need to be queried:
-      App.User.list_incomplete_users()
+      App.User.list_incomplete_users() # |> dbg()
       |> Enum.each(fn user ->
         # Get and insert the full user data:
         App.User.get_user_from_api(user)

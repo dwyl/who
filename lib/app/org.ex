@@ -25,7 +25,8 @@ defmodule App.Org do
   @doc false
   def changeset(org, attrs) do
     org
-    |> cast(attrs, [:id, :login, :avatar_url, :hex, :description, :name, :company, :created_at, :public_repos, :location, :followers, :show])
+    |> cast(attrs, [:id, :login, :avatar_url, :hex, :description, :name,
+      :company, :created_at, :public_repos, :location, :followers, :show])
     |> validate_required([:id, :login, :avatar_url])
   end
 

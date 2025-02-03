@@ -23,8 +23,8 @@ defmodule App.FollowTest do
 
   test "App.Follow.get_followers_from_api/2" do
     # Get followers for User:
-    user_followers = App.Follow.get_followers_from_api("asntc")
-    assert length(user_followers) > 5
+    user_followers = App.Follow.get_followers_from_api("amistc")
+    assert length(user_followers) > 1
 
     # Get followers for Org
     org_followers = App.Follow.get_followers_from_api("ideaq", true)

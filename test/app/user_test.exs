@@ -69,4 +69,10 @@ defmodule App.UserTest do
     list = App.User.list_users_avatars()
     assert length(list) > 0
   end
+
+  test "get_user_by_login(login)" do
+    dummy_data = App.User.dummy_data(%{id: 46, login: "hi"})
+    App.User.create_incomplete_user_no_overwrite(dummy_data)
+    App.User.get_user_by_login(dummy_data.login)
+  end
 end

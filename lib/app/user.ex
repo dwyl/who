@@ -42,8 +42,7 @@ defmodule App.User do
   end
 
   def get_user_by_login(login) do
-    from(u in User, where: u.login == ^login)
-    |> Repo.one()
+    Repo.get_by(User, [login: login])
   end
 
   # `user` map must include the `id` and `login` fields

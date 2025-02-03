@@ -1,7 +1,7 @@
 defmodule App.Repository do
   use Ecto.Schema
   alias App.{Repo}
-  import Ecto.{Changeset, Query}
+  import Ecto.{Changeset} #, Query}
   require Logger
   alias __MODULE__
 
@@ -61,8 +61,15 @@ defmodule App.Repository do
   e.g: get_repo_id_by_full_name("dwyl/start-here") -> 17338019
   """
   def get_repo_id_by_full_name(full_name) do
-    from(r in Repository, where: r.full_name == ^full_name, select: r.id)
-    |> Repo.one()
+    repo = Repo.get_by(Repository, [full_name: full_name])
+    if is_nil(repo) do
+      [owner, reponame] = String.split(full_name, "/")
+      {:ok, repo} = App.GitHub.repository(owner, reponame) |> create()
+
+      repo.id
+    else
+      repo.id
+    end
   end
 
   @doc """
