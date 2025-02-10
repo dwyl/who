@@ -52,13 +52,12 @@ defmodule App.Orgmember do
     # Get the list of orgs a user belongs to (public)
     App.GitHub.org_user_list(org.login)
     |> Enum.map(fn user ->
-      # dbg(org)
-      {:ok, inserted_user} = App.User.create_incomplete_user_no_overwrite(user)
+      App.User.create_incomplete_user_no_overwrite(user)
 
       # insert the orgmember record:
       create(%{org_id: org.id, user_id: user.id})
 
-      inserted_user
+      user
     end)
   end
 end
