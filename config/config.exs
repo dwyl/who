@@ -55,7 +55,8 @@ config :joken, default_signer: System.get_env("SECRET_KEY_BASE")
 #   api_key: System.get_env("AUTH_API_KEY")
 
 config :tentacat,
-  access_token: System.get_env("GH_PERSONAL_ACCESS_TOKEN")
+  access_token: System.get_env("GH_PERSONAL_ACCESS_TOKEN"),
+  deserialization_options: [keys: :atoms]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -9,4 +9,15 @@ defmodule App.StarTest do
     assert {:ok, inserted_star} = App.Star.create(star)
     assert inserted_star.repo_id == star.repo_id
   end
+
+  test "App.Star.get_stargazers_for_repo/2 " do
+    owner = "ideaq"
+    App.Repository.get_org_repos(owner)
+    repo = "image-uploads"
+    list = App.Star.get_stargazers_for_repo("#{owner}/#{repo}")
+    [star | _] = Enum.filter(list, fn(s) -> s.user_id == 194_400 end)
+
+    assert star.user_id == 194_400
+    assert star.repo_id == 35_713_694
+  end
 end

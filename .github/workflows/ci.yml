@@ -26,8 +26,8 @@ jobs:
     - name: Set up Elixir
       uses: erlef/setup-beam@v1 # https://github.com/erlef/setup-beam
       with:
-        elixir-version: '1.14.3' # Define the elixir version [required]
-        otp-version: '25.0' # Define the OTP version [required]
+        elixir-version: '1.18.2' # Define the elixir version [required]
+        otp-version: '27.2' # Define the OTP version [required]
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
@@ -42,6 +42,7 @@ jobs:
         MIX_ENV: test
         AUTH_API_KEY: ${{ secrets.AUTH_API_KEY }}
         ENCRYPTION_KEYS: ${{ secrets.ENCRYPTION_KEYS }}
+        GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
 
