@@ -134,9 +134,10 @@ defmodule App.User do
 
   def list_users_avatars  do
     from(u in User, select: %{id: u.id})
-    # |> limit(20)
-    |> order_by(:hex)
+    |> limit(100)
+    # |> order_by(desc: :hex)
     # |> distinct(true)
+    |> order_by(asc: :created_at)
     |> Repo.all()
     # return a list of urls not a list of maps
     |> Enum.reduce([], fn u, acc ->
