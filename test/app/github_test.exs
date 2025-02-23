@@ -46,7 +46,14 @@ defmodule App.GitHubTest do
   test "App.GitHub.org_user_list/1" do
     orgname = "ideaq"
     list = GitHub.org_user_list(orgname)
+    dbg(list)
     assert length(list) > 2
+  end
+
+  test "App.GitHub.org_user_list/1 UNHAPPY PATH issue #244" do
+    orgname = "2024-hgu-ccd-one-in-christ"
+    list = GitHub.org_user_list(orgname)
+    dbg(list)
   end
 
   test "App.GitHub.user/1 known 404 (unhappy path)" do

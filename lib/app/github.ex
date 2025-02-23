@@ -94,8 +94,20 @@ defmodule App.GitHub do
   """
   def org_user_list(orgname) do
     log("org_user_list", orgname)
-    {_status, data, _res} =
-        Tentacat.Organizations.Members.list(@client, orgname)
-    data
+    handler(Tentacat.Organizations.Members.list(@client, orgname))
+  end
+
+  def handler(callee) do
+    # {status, data, _res} = callee
+    # dbg(status)
+    # dbg(data)
+    # data
+    case callee do
+      {200, data, _res} ->
+        data
+      {404, data, res} ->
+        log(res.request_url, res.status_code)
+        dbg(data)
+    end
   end
 end
