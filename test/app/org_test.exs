@@ -57,4 +57,16 @@ defmodule App.OrgTest do
     assert updated_org.description == "a Q of Ideas"
     assert updated_org.created_at == "2014-03-02T13:18:11Z"
   end
+
+  test "App.Org.update_org_created/1 updates the created_at date to now" do
+    {:ok, org} = App.Org.create(%{
+      id: 6_831_072,
+      avatar_url: "https://avatars.githubusercontent.com/u/6831072",
+      login: "myawesomeorg"
+    })
+    assert org.created_at == nil
+    now = App.Org.now()
+    updated_org = App.Org.update_org_created(org)
+    assert updated_org.created_at == now
+  end
 end

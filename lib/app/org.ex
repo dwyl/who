@@ -14,7 +14,7 @@ defmodule App.Org do
     field :followers, :integer
     field :hex, :string
     field :location, :string
-    field :login, :string
+    field :login, :string #, primary_key: true
     field :name, :string
     field :public_repos, :integer
     field :show, :boolean, default: false
@@ -27,7 +27,8 @@ defmodule App.Org do
     org
     |> cast(attrs, [:id, :login, :avatar_url, :hex, :description, :name,
       :company, :created_at, :public_repos, :location, :followers, :show])
-    |> validate_required([:id, :login, :avatar_url])
+    # |> validate_required([:id, :login, :avatar_url])
+    # |> unique_constraint(:login, name: :org_login_unique)
   end
 
   @doc """
@@ -49,8 +50,7 @@ defmodule App.Org do
     data = App.GitHub.org(org.login)
     # Not super happy about this crude error handling ... feel free to refactor.
     if Map.has_key?(data, :status) && data.status == "404" do
-      # do nothing
-      org
+      update_org_created(org)
     else
       create_org_with_hex(data)
     end
@@ -90,5 +90,50 @@ defmodule App.Org do
       App.Orgmember.get_users_for_org(org)
       App.Follow.get_followers_from_api(org.login, true)
     end)
+  end
+
+  @doc """
+  `update_org_created/1` updates the `created_at` date to Now
+  so that we don't keep requesting the data from GitHub.
+  """
+  def update_org_created(org) do
+    org = get_or_create_org(org) |> dbg()
+    {:ok, org_updated} =
+      Ecto.Changeset.change(org, %{created_at: now()})
+    |> App.Repo.update()
+
+    # return the org that was updated:
+    org_updated
+  end
+
+  @doc """
+  `now/0` returns a `NaiveDateTime` as a `String` in format: 2025-02-25 07:29:10
+  """
+  def now do
+    NaiveDateTime.utc_now()
+    |> NaiveDateTime.to_string()
+    |> String.split(".")
+    |> List.first()
+  end
+
+  def strip_struct_metadata(struct) do
+    struct
+    |> Map.delete(:__meta__)
+    |> Map.delete(:__struct__)
+  end
+
+
+  def get_or_create_org(org) do
+    org_data = App.Repo.get_by(App.Org, login: org.login)
+    org_data = if is_nil(org_data) do
+      dbg(org)
+      {:ok, org_data} =
+        create(Map.merge(org, %{id: :rand.uniform(1_000_000_000_000)}))
+
+      org_data
+    else
+      org_data
+    end
+    strip_struct_metadata(org_data)
   end
 end

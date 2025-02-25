@@ -50,14 +50,19 @@ defmodule App.Orgmember do
   """
   def get_users_for_org(org) do
     # Get the list of orgs a user belongs to (public)
-    App.GitHub.org_user_list(org.login)
-    |> Enum.map(fn user ->
-      App.User.create_incomplete_user_no_overwrite(user)
+    data = App.GitHub.org_user_list(org.login)
+    if Map.has_key?(data, :status) && data.status == 404 do
 
-      # insert the orgmember record:
-      create(%{org_id: org.id, user_id: user.id})
+     nil
+    else
+      data
+      |> Enum.map(fn user ->
+        App.User.create_incomplete_user_no_overwrite(user)
+        # insert the orgmember record:
+        create(%{org_id: org.id, user_id: user.id})
 
-      user
-    end)
+        user
+      end)
+    end
   end
 end

@@ -15,7 +15,7 @@ defmodule App.User do
     field :followers, :integer
     field :following, :integer
     field :hex, :string
-    field :hireable, :boolean, default: false
+    field :hireable, :boolean #, default: false
     field :location, :string
     field :login, :string
     field :name, :string
