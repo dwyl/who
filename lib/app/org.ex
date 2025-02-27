@@ -116,11 +116,11 @@ defmodule App.Org do
     |> List.first()
   end
 
-  def strip_struct_metadata(struct) do
-    struct
-    |> Map.delete(:__meta__)
-    |> Map.delete(:__struct__)
-  end
+  # def strip_struct_metadata(struct) do
+  #   struct
+  #   |> Map.delete(:__meta__)
+  #   |> Map.delete(:__struct__)
+  # end
 
 
   def get_or_create_org(org) do
