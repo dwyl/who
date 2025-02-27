@@ -111,8 +111,8 @@ defmodule App.MixProject do
         "phx.digest"
       ],
       test: ["ecto.reset", "test"],
-      t: ["test"],
-      c: ["coveralls.html"],
+      t: ["test --trace"],
+      c: ["coveralls.html --trace"],
       s: ["phx.server"]
     ]
   end

@@ -97,7 +97,7 @@ defmodule App.Org do
   so that we don't keep requesting the data from GitHub.
   """
   def update_org_created(org) do
-    org = get_or_create_org(org) |> dbg()
+    org = get_or_create_org(org)
     {:ok, org_updated} =
       Ecto.Changeset.change(org, %{created_at: now()})
     |> App.Repo.update()
@@ -124,9 +124,9 @@ defmodule App.Org do
 
 
   def get_or_create_org(org) do
-    org_data = App.Repo.get_by(App.Org, login: org.login)
-    org_data = if is_nil(org_data) do
-      dbg(org)
+    org_data = get_org_by_login(org.login)
+    if is_nil(org_data) do
+      # dbg(org)
       {:ok, org_data} =
         create(Map.merge(org, %{id: :rand.uniform(1_000_000_000_000)}))
 
@@ -134,6 +134,5 @@ defmodule App.Org do
     else
       org_data
     end
-    strip_struct_metadata(org_data)
   end
 end

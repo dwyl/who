@@ -51,9 +51,9 @@ defmodule App.Orgmember do
   def get_users_for_org(org) do
     # Get the list of orgs a user belongs to (public)
     data = App.GitHub.org_user_list(org.login)
-    if Map.has_key?(data, :status) && data.status == 404 do
+    if is_map(data) && Map.has_key?(data, :status) && data.status == 404 do
 
-     nil
+     []
     else
       data
       |> Enum.map(fn user ->
