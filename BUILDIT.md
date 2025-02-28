@@ -68,6 +68,7 @@ where (_hopefully_) it will all be clear.
   - [4.1 Limit API Requests](#41-limit-api-requests)
 - [5. Org \<-\> Users](#5-org---users)
 - [6. Repository Contributors](#6-repository-contributors)
+- [7. Dashboard](#7-dashboard)
 - [X. Add Authentication](#x-add-authentication)
   - [X.1 Add `auth_plug` to `deps`](#x1-add-auth_plug-to-deps)
   - [X.2 Get your `AUTH_API_KEY`](#x2-get-your-auth_api_key)
@@ -988,6 +989,35 @@ The following command:
 mix phx.gen.schema Contrib contribs repo_id:integer user_id:integer count:integer
 ```
 
+That creates the migration:
+`priv/repo/migrations/20250203140127_create_contribs.exs`
+
+See:∫
+`lib/app/contrib.ex` for the code
+and
+`test/app/contrib_test.exs`
+for tests.
+
+# 7. Dashboard
+
+We want to have a **`dashboard`** displaying the most important **stats**.
+We have a list of these **stats** including:
+
++ Total number of stars for the @dwyl org ⭐
+  [#238](https://github.com/dwyl/who/issues/238)
++ List of top contributors 🔝
+  [#237](https://github.com/dwyl/who/issues/238)
++ Number of `@dwy`l` org members 👤
+  [#245](https://github.com/dwyl/who/issues/245)
++ ... many more to come!
+
+In order to speed up the rendering of the **`dashboard`**
+and store the _history_ of each stat that we want to track,
+we will have a schema for it which we can add to over time.
+
+```elixir
+mix phx.gen.schema Stat stats stars:integer members:integer total_contribs:integer
+```
 
 
 
