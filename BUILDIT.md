@@ -1,66 +1,54 @@
 <div align="center">
 
-# Build Log 👩‍💻 
+# Build Log 👩🏻‍💻
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/who/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/who/actions/workflows/ci.yml)
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
-[![Hex.pm](https://img.shields.io/hexpm/v/elixir_auth_google?color=brightgreen&style=flat-square)](https://hex.pm/packages/elixir_auth_google)
+[![Hex.pm](https://img.shields.io/hexpm/v/phoenix?color=brightgreen&style=flat-square)](https://hex.pm/packages/phoenix)
 [![contributions welcome](https://img.shields.io/badge/feedback-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/who/issues)
 [![HitCount](https://hits.dwyl.com/dwyl/who-buildit.svg)](https://hits.dwyl.com/dwyl/who-buildit)
 
-This is a log 
-of the steps taken 
+This is a log
+of the steps taken
 to build the **`WHO`** App. 🚀 <br />
-It took us _hours_ 
+It took us _hours_
 to write it,
-but you can 
-[***speedrun***](https://en.wikipedia.org/wiki/Speedrun)
+but you can
+[_**speedrun**_](https://en.wikipedia.org/wiki/Speedrun)
 it in **10 minutes**. 🏁
 
 </div>
 
-> **Note**: we have referenced sections 
+> **Note**: we have referenced sections
 > in our more extensive tutorials/examples
-> to keep this doc 
+> to keep this doc
 > [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself). <br />
 > You don't have to follow every step in
 > the other tutorials/examples,
 > but they are linked in case you get stuck.
 
-In this log we have written the 
-"[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)" 
+In this log we have written the
+"[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)"
 functions first
 and _then_ built the interface. <br />
 We were able to do this because we had a good idea
 of which functions we were going to need. <br />
 If you are reading through this
-and scratching your head 
+and scratching your head
 wondering where a particular function will be used,
 simply scroll down to the interface section
-where (_hopefully_) it will all be clear. 
+where (_hopefully_) it will all be clear.
 
-At the end of each step,
-remember to run the tests:
-
-```sh
-mix test
-```
-
-This will help you keep track of where you are
-and retrace your steps if something is not working as expected.
-
-We suggest keeping two terminal tabs/windows running; <br />
-one for the server `mix phx.server` and the other for the **tests**. <br />
-That way you can also see the UI as you progress.
-
-With that in place, let's get building! 
+> **Note**: if anything is _still_ unclear,
+> please open an issue:
+> [dwyl/who/issues](https://github.com/dwyl/who/issues)
 
 
-
-- [Build Log 👩‍💻](#build-log-)
+- [Build Log 👩🏻‍💻](#build-log-)
+- [0. Prerequisites: _Before_ You Start](#0-prerequisites-before-you-start)
 - [1. Create a New `Phoenix` App](#1-create-a-new-phoenix-app)
   - [1.1 Run the `Phoenix` App](#11-run-the-phoenix-app)
-  - [1.2 Run the tests:](#12-run-the-tests)
+  - [1.2 Run the tests](#12-run-the-tests)
     - [Test Coverage? ](#test-coverage-)
   - [1.3 Setup `Tailwind`](#13-setup-tailwind)
   - [1.4 Setup `LiveView`](#14-setup-liveview)
@@ -76,18 +64,16 @@ With that in place, let's get building!
     - [2.2.3 Re-run the Tests](#223-re-run-the-tests)
 - [3. Setup `GitHub` API](#3-setup-github-api)
   - [3.1 Make the `user` Tests Pass](#31-make-the-user-tests-pass)
-- [4. Create `Timer`](#4-create-timer)
-  - [Make `timer` tests pass](#make-timer-tests-pass)
-- [5. `items` with `timers`](#5-items-with-timers)
-  - [5.1 Test for `accumulate_item_timers/1`](#51-test-for-accumulate_item_timers1)
-  - [5.2 Implement the `accummulate_item_timers/1` function](#52-implement-the-accummulate_item_timers1-function)
-  - [5.3 Test for `items_with_timers/1`](#53-test-for-items_with_timers1)
-  - [5.4 Implement `items_with_timers/1`](#54-implement-items_with_timers1)
-- [6. Add Authentication](#6-add-authentication)
-  - [6.1 Add `auth_plug` to `deps`](#61-add-auth_plug-to-deps)
-  - [6.2 Get your `AUTH_API_KEY`](#62-get-your-auth_api_key)
-  - [6.2 Create Auth Controller](#62-create-auth-controller)
-- [7. Create `LiveView` Functions](#7-create-liveview-functions)
+- [4. Log All `GitHub` API Request](#4-log-all-github-api-request)
+  - [4.1 Limit API Requests](#41-limit-api-requests)
+- [5. Org \<-\> Users](#5-org---users)
+- [6. Repository Contributors](#6-repository-contributors)
+- [7. Dashboard](#7-dashboard)
+- [X. Add Authentication](#x-add-authentication)
+  - [X.1 Add `auth_plug` to `deps`](#x1-add-auth_plug-to-deps)
+  - [X.2 Get your `AUTH_API_KEY`](#x2-get-your-auth_api_key)
+  - [X.3 Create Auth Controller](#x3-create-auth-controller)
+- [Y. Create `LiveView` Functions](#y-create-liveview-functions)
   - [7.1 Write `LiveView` Tests](#71-write-liveview-tests)
   - [7.2 Implement the `LiveView` functions](#72-implement-the-liveview-functions)
 - [8. Implement the `LiveView` UI Template](#8-implement-the-liveview-ui-template)
@@ -106,10 +92,18 @@ With that in place, let's get building!
   - [12.2 Run The App](#122-run-the-app)
 - [Thanks!](#thanks)
 
+# 0. Prerequisites: _Before_ You Start
+
+_Before_ you dive in,
+make sure you have `Phoenix` and `Postgres` installed,
+see how at:
+[dwyl/phoenix#how](https://github.com/dwyl/phoenix-chat-example?tab=readme-ov-file#how)
+
+With everything installed & running, let's get building! 👷🏻‍♀️
 
 # 1. Create a New `Phoenix` App
 
-Open your terminal and 
+Open your terminal and
 **create** a **new `Phoenix` app**
 with the following command:
 
@@ -120,15 +114,13 @@ mix phx.new app --no-mailer --no-dashboard --no-gettext
 When asked to install the dependencies,
 type `Y` and `[Enter]` (_to install everything_).
 
-The MVP won't
+The `Who` App won't
 send emails,
-display dashboards 
+display dashboards
 or translate to other languages
 (sorry). <br />
-_All_ of those things 
-will be in the _main_ 
-[dwyl/**app**](https://github.com/dwyl/app). <br />
-We're excluding them here
+We can add `i18n` _later_.
+We're excluding for now
 to reduce complexity/dependencies.
 
 ## 1.1 Run the `Phoenix` App
@@ -160,11 +152,17 @@ You should see something similar to the following
 
 ![phoenix-default-homepage](https://user-images.githubusercontent.com/194400/174807257-34120dc5-723e-4b2c-9e8e-4b6f3aefca14.png)
 
+## 1.2 Run the tests
 
-## 1.2 Run the tests:
+Run the tests with the command:
 
-To run the tests with 
+```sh
+mix test
+```
 
+> **Note**: we recommend keeping _two_ terminal tabs/windows running; <br />
+one for the server `mix phx.server` and the other for the **tests**. <br />
+That way you can also see the UI as you progress.
 
 You should see output similar to:
 
@@ -177,22 +175,20 @@ Finished in 0.1 seconds (0.07s async, 0.07s sync)
 
 That tells us everything is working as expected. 🚀
 
-
 ### Test Coverage? [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/who/main.svg?style=flat-square)](http://codecov.io/github/dwyl/who?branch=main)
 
 If you prefer to see **test coverage** - we certainly do -
-then you will need to add a few lines to the 
+then you will need to add a few lines to the
 [`mix.exs`](https://github.com/dwyl/who/blob/main/mix.exs)
-file and
-create a 
+file and create a
 [`coveralls.json`](https://github.com/dwyl/who/blob/main/coveralls.json)
 file to exclude `Phoenix` files from `excoveralls` checking.
-Add alias (shortcuts) in `mix.exs` `defp aliases do` list. 
+Add alias (shortcuts) in `mix.exs` `defp aliases do` list.
 
-e.g: `mix c` runs `mix coveralls.html` 
+e.g: `mix c` runs `mix coveralls.html`
 see: [**`commits/d6ab5ef`**](https://github.com/dwyl/app-mvp/pull/90/commits/d6ab5ef7c2be5dcad7d060e782393ae29c94a526) ...
 
-This is just standard `Phoenix` project setup for us, 
+This is just standard `Phoenix` project setup for us,
 so we don't duplicate any of the steps here. <br />
 For more detail, please see:
 [Automated Testing](https://github.com/dwyl/phoenix-chat-example#testing-our-app-automated-testing)
@@ -211,7 +207,6 @@ You should see output similar to the following:
 
 <img alt="Who tests passing coverage 100%" src="https://github.com/dwyl/who/assets/194400/a82c55f2-d57b-4c97-a781-3b529855ef68">
 
-
 ## 1.3 Setup `Tailwind`
 
 As we're using **`Tailwind CSS`**
@@ -224,10 +219,10 @@ please refer to:
 Should only take **`~1 minute`**.
 
 By the end of this step you should have **`Tailwind`** working.
-When you visit 
-[`localhost:4000`](http://localhost:4000) 
-in your browser, 
-you should see: 
+When you visit
+[`localhost:4000`](http://localhost:4000)
+in your browser,
+you should see:
 
 ![hello world tailwind phoenix](https://user-images.githubusercontent.com/194400/174838767-20bf201e-3179-4ff9-8d5d-751295d1d069.png)
 
@@ -261,7 +256,7 @@ end
 
 Next, create the
 **`lib/app_web/live/app_live.html.heex`**
-file 
+file
 and add the following line of `HTML`:
 
 ```html
@@ -272,9 +267,9 @@ and add the following line of `HTML`:
 ```
 
 Finally, to make the **root layout** simpler, 
-open the 
+open the
 `lib/app_web/templates/layout/root.html.heex`
-file and 
+file and
 update the contents of the `<body>` to:
 
 ```html
@@ -292,7 +287,7 @@ update the contents of the `<body>` to:
 
 Now that you've created the necessary files,
 open the router
-`lib/app_web/router.ex` 
+`lib/app_web/router.ex`
 replace the default route `PageController` controller:
 
 ```elixir
@@ -346,10 +341,10 @@ Finished in 0.1 seconds (0.06s async, 0.1s sync)
 3 tests, 1 failure
 ```
 
-Create a new directory: 
+Create a new directory:
 `test/app_web/live`
 
-Then create the file: 
+Then create the file:
 `test/app_web/live/app_live_test.exs`
 
 With the following content:
@@ -365,7 +360,7 @@ defmodule AppWeb.AppLiveTest do
 end
 ```
 
-Save the file 
+Save the file
 and re-run the tests: `mix test`
 
 You should see output similar to the following:
@@ -383,7 +378,7 @@ Randomized with seed 796477
 
 ## 1.7 Delete Page-related Files
 
-Since we won't be using the `page` in our App, 
+Since we won't be using the `page` in our App,
 we can delete the default files created by `Phoenix`:
 
 ```sh
@@ -400,7 +395,7 @@ and ready to start _building_!
 
 ## Run Tests with Coverage
 
-```
+```sh
 mix c
 ```
 
@@ -427,31 +422,39 @@ COV    FILE                                        LINES RELEVANT   MISSED
 
 This app stores data in **five** schemas:
 
-1. `users` - https://docs.github.com/en/rest/users/users - the GitHub [**`users`**](https://dwyl.github.io/book/auth/07-notes-on-naming.html) that _use_ the platform.
+1. `users` - https://docs.github.com/en/rest/users/users - the GitHub
+   [**`users`**](https://dwyl.github.io/book/auth/07-notes-on-naming.html)
+   that _use_ the platform.
 2. `orgs` - [https://docs.github.com/en/rest/orgs/orgs](https://docs.github.com/en/rest/orgs/orgs?#get-an-organization) - organizations which can have `users` as members and `repositories`.
-3. `repositories` - https://docs.github.com/en/rest/repos/repos - the repositories of code on GitHub.
-4. `stars` - [https://docs.github.com/en/rest/activity/starring](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers) - the `stars` (on `repositories`) associated with each `user`.
-5. `follows` - https://docs.github.com/en/rest/users/followers - List the `people` a `user` follows.
+3. `repositories` - https://docs.github.com/en/rest/repos/repos -
+   the repositories of code on GitHub.
+4. `stars` - [https://docs.github.com/en/rest/activity/starring](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-stargazers) -
+   the `stars` (on `repositories`) associated with each `user`.
+5. `follows` - https://docs.github.com/en/rest/users/followers -
+   List the `people` a `user` follows.
 
 For each of these schemas we are storing
-a _subset_ of the data; 
+a _subset_ of the data;
 only what we need right now. <br />
-We can always add more 
-("[backfill](https://stackoverflow.com/questions/70871818/what-is-backfilling-in-data)") 
-later as needed.
+We can always add more
+("[backfill](https://stackoverflow.com/questions/70871818/what-is-backfilling-in-data)")
+_later_ as needed.
 
-
-Create database schemas 
+Create database schemas
 to store the data
-with the following 
+with the following
 [**`mix phx.gen.schema`**](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Schema.html)
 commands:
 
 ```sh
 mix phx.gen.schema User users login:string avatar_url:string name:string company:string bio:string blog:string location:string email:string created_at:string two_factor_authentication:boolean followers:integer following:integer
+
 mix phx.gen.schema Org orgs login:string avatar_url:string name:string company:string public_repos:integer location:string description:string followers:integer
+
 mix phx.gen.schema Repository repositories name:string full_name:string owner_id:integer owner_name:string description:string fork:boolean forks_count:integer watchers_count:integer stargazers_count:integer topics:string open_issues_count:integer created_at:string pushed_at:string
+
 mix phx.gen.schema Star stars repo_id:integer user_id:integer stop:utc_datetime
+
 mix phx.gen.schema Follow follows follower_id:integer following_id:integer stop:utc_datetime
 ```
 
@@ -460,7 +463,6 @@ we have the following database
 [Entity Relationship Diagram](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
 (ERD):
 
-
 ![erd](https://user-images.githubusercontent.com/194400/194425189-e44d6161-c8df-4a0d-9d86-bc1045785c95.png)
 
 We created **5 database tables**;
@@ -468,7 +470,6 @@ We created **5 database tables**;
 At present the two tables are unrelated 
 but eventually `repository.owner_id` will refer to `user.id`
 and we will be creating other schemas below.
-
 
 <br />
 
@@ -482,7 +483,7 @@ If we run the tests with coverage:
 mix c
 ```
 
-We note that the test coverage 
+We note that the test coverage
 has dropped considerably:
 
 ```sh
@@ -505,22 +506,23 @@ Specifically the files:
 `lib/app/repository.ex`
 and 
 `lib/app/user.ex`
-have **_zero_ test coverage**. 
+have **_zero_ test coverage**.
 
 We will address this test coverage shortfall in the next section.
-Yes, we _know_ this is not 
-["TDD"](https://github.com/dwyl/learn-tdd#what-is-tdd)
+Yes, we _know_ this is _not_
+[**TDD**](https://github.com/dwyl/learn-tdd#what-is-tdd)
 because we aren't writing the tests _first_.
 But by creating database schemas,
-we have a scaffold 
+we have a scaffold
 for the next stage.
-See: https://en.wikipedia.org/wiki/Scaffold_(programming)
+See:
+https://en.wikipedia.org/wiki/Scaffold_(programming)
 
 <br />
 
 ## 2.2 Write Tests for Schema/Scaffold Code
 
-The **`mix phx.gen.schema`** command 
+The **`mix phx.gen.schema`** command
 doesn't create the test files for the schemas.
 We can create these quick.
 
@@ -658,10 +660,9 @@ If you get stuck, you can always refer to the
 file in the finished project:
 [`/lib/app/repository.ex`](https://github.com/dwyl/who/blob/56e3445a37fff07f4e7e8561083d7ec77296ed3f/lib/app/repository.ex)
 
-
 ### 2.2.3 Re-run the Tests
 
-At this point, 
+At this point,
 if you re-run _all_ the tests with coverage:
 
 ```sh
@@ -687,188 +688,71 @@ COV    FILE                                        LINES RELEVANT   MISSED
 We have our starting point for the project,
 let's write some code!
 
+<br />
 
+# 3. Setup `GitHub` API
 
-
-<br /><br /><br /><br /><br />
-
-# 3. Setup `GitHub` API 
-
-We're going to make _many_ requests 
+We're going to make _many_ requests
 to the **`GitHub` REST API`**.
 So we need an effective way of doing that.
 
-
-
-
 Create the directory `test/app`
 and file:
-`test/app/item_test.exs`
+`test/app/github_test.exs`
 with the following code:
 
 ```elixir
-defmodule App.ItemTest do
-  use App.DataCase
-  alias App.{Item, Timer}
+defmodule App.GitHubTest do
+  use ExUnit.Case
+  alias App.GitHub
 
-  describe "items" do
-    @valid_attrs %{text: "some text", person_id: 1, status: 2}
-    @update_attrs %{text: "some updated text"}
-    @invalid_attrs %{text: nil}
-
-    test "get_item!/1 returns the item with given id" do
-      {:ok, item} = Item.create_item(@valid_attrs)
-      assert Item.get_item!(item.id).text == item.text
-    end
-
-    test "create_item/1 with valid data creates a item" do
-      assert {:ok, %Item{} = item} = Item.create_item(@valid_attrs)
-
-      assert item.text == "some text"
-
-      inserted_item = List.first(Item.list_items())
-      assert inserted_item.text == @valid_attrs.text
-    end
-
-    test "create_item/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} =
-               Item.create_item(@invalid_attrs)
-    end
-
-    test "list_items/0 returns a list of items stored in the DB" do
-      {:ok, _item1} = Item.create_item(@valid_attrs)
-      {:ok, _item2} = Item.create_item(@valid_attrs)
-
-      assert Enum.count(Item.list_items()) == 2
-    end
-
-    test "update_item/2 with valid data updates the item" do
-      {:ok, item} = Item.create_item(@valid_attrs)
-
-      assert {:ok, %Item{} = item} = Item.update_item(item, @update_attrs)
-      assert item.text == "some updated text"
-    end
+  test "App.GitHub.user/1" do
+    username = "iteles"
+    user = GitHub.user(username)
+    assert user.public_repos > 30
   end
 end
+
 ```
 
-The first five tests are basic 
-[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+The first test is very basic;
+just fetches a `user` from the `GitHub` API
+and confirms they have more than 30 `public_repos`. 
 
 If you run these tests:
+
 ```sh
-mix test test/app/item_test.exs
+mix test test/app/github_test.exs
 ```
 
 You will see all the testes _fail_.
 This is expected as the code is not there yet!
 
-
-
 ## 3.1 Make the `user` Tests Pass
 
-Open the 
-`lib/app/item.ex` 
-file and replace the contents 
+Open the
+`lib/app/github.ex`
+file and replace the contents
 with the following code:
 
-
 ```elixir
-defmodule App.Item do
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
-  alias App.Repo
-  alias __MODULE__
+defmodule App.GitHub do
+  @moduledoc """
+  Handles all interactions with the GitHub REST API
+  via: github.com/edgurgel/tentacat Elixir GitHub Lib.
+  """
+  require Logger
 
-  schema "items" do
-    field :person_id, :integer
-    field :status, :integer
-    field :text, :string
-
-    timestamps()
-  end
-
-  @doc false
-  def changeset(item, attrs) do
-    item
-    |> cast(attrs, [:person_id, :status, :text])
-    |> validate_required([:text])
-  end
+  @access_token Application.compile_env(:tentacat, :access_token)
+  @client Tentacat.Client.new(%{access_token: @access_token})
 
   @doc """
-  Creates a item.
-
-  ## Examples
-
-      iex> create_item(%{text: "Learn LiveView"})
-      {:ok, %Item{}}
-
-      iex> create_item(%{text: nil})
-      {:error, %Ecto.Changeset{}}
-
+  `user/1` Returns the GitHub user profile data.
   """
-  def create_item(attrs) do
-    %Item{}
-    |> changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Gets a single item.
-
-  Raises `Ecto.NoResultsError` if the Item does not exist.
-
-  ## Examples
-
-      iex> get_item!(123)
-      %Item{}
-
-      iex> get_item!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_item!(id), do: Repo.get!(Item, id)
-
-  @doc """
-  Returns the list of items where the status is different to "deleted"
-
-  ## Examples
-
-      iex> list_items()
-      [%Item{}, ...]
-
-  """
-  def list_items do
-    Item
-    |> order_by(desc: :inserted_at)
-    |> where([i], is_nil(i.status) or i.status != 6)
-    |> Repo.all()
-  end
-
-  @doc """
-  Updates an `item`.
-
-  ## Examples
-
-      iex> update_item(item, %{field: new_value})
-      {:ok, %Item{}}
-
-      iex> update_item(item, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_item(%Item{} = item, attrs) do
-    item
-    |> Item.changeset(attrs)
-    |> Repo.update()
-  end
-
-  # soft delete an item:
-  def delete_item(id) do
-    get_item!(id)
-    |> Item.changeset(%{status: 6})
-    |> Repo.update()
+  def user(username) do
+    Logger.info "Fetching user #{username}"
+    {_status, data, _res} = Tentacat.Users.find(@client, username)
+    data
   end
 end
 ```
@@ -876,515 +760,273 @@ end
 Once you have saved the file, re-run the tests.
 They should now pass.
 
+> **Note**: using the `GitHub` API assumes you already
+> have a personal access token defined
+> as an environment variable `GH_PERSONAL_ACCESS_TOKEN`
+> if you don't please see:
+> [dwyl/who#get-your-github-personal-access-token](https://github.com/dwyl/who?tab=readme-ov-file#get-your-github-personal-access-token)
 
-# 4. Create `Timer`
+# 4. Log All `GitHub` API Request
 
-Open the `test/app/timer_test.exs` file and add the following tests:
+As noted in
+[who#226](https://github.com/dwyl/who/issues/226)
+the `GitHub` API is rate-limited to
+`5,000 requests per hour`.
+We would immediately exhaust this limit in a minute
+and be **blocked** with a 
+[`429 Error`](https://www.rfc-editor.org/rfc/rfc6585#section-4) 🚫
+if we make all the requests we need in one go.
+So instead we need to _log_ all the requests
+so that we know not to exceed the `5k/h` limit.
+
+Create the `Request Log` (`Reqlog`) schema with the following command:
+
+```sh
+mix phx.gen.schema Reqlog reqlogs req:string param:string
+```
+
+The output is:
+
+```sh
+* creating lib/app/reqlog.ex
+* creating priv/repo/migrations/20250127180724_create_reqlogs.exs
+```
+
+But for whatever reason it doesn't automatically the test file.
+Create it manually with:
+
+```sh
+vi test/app/reqlog_test.exs
+```
+
+And _paste_ the following code:
 
 ```elixir
-defmodule App.TimerTest do
+defmodule App.ReqlogTest do
   use App.DataCase
-  alias App.{Item, Timer}
 
-  describe "timers" do
-    @valid_item_attrs %{text: "some text", person_id: 1}
+  test "App.Reqlog.create/1" do
+    owner = "dwyl"
+    reponame = "mvp"
+    record = %{
+      created_at: "2014-03-02T13:20:04Z",
+      req: "repository",
+      param: "#{owner}/#{reponame}"
+    }
+    assert {:ok, inserted} = App.Reqlog.create(record)
+    assert inserted.req == record.req
+  end
 
-    test "Timer.start/1 returns timer that has been started" do
-      {:ok, item} = Item.create_item(@valid_item_attrs)
-      assert Item.get_item!(item.id).text == item.text
+  test "App.Reqlog.log/2" do
+    owner = "dwyl"
+    reponame = "mvp"
 
-      started = NaiveDateTime.utc_now()
-
-      {:ok, timer} =
-        Timer.start(%{item_id: item.id, person_id: 1, start: started})
-
-      assert NaiveDateTime.diff(timer.start, started) == 0
-    end
-
-    test "Timer.stop/1 stops the timer that had been started" do
-      {:ok, item} = Item.create_item(@valid_item_attrs)
-      assert Item.get_item!(item.id).text == item.text
-
-      {:ok, started} = 
-        NaiveDateTime.new(Date.utc_today, Time.add(Time.utc_now, -1))
-
-      {:ok, timer} =
-        Timer.start(%{item_id: item.id, person_id: 1, start: started})
-
-      assert NaiveDateTime.diff(timer.start, started) == 0
-
-      ended = NaiveDateTime.utc_now()
-      {:ok, timer} = Timer.stop(%{id: timer.id, stop: ended})
-      assert NaiveDateTime.diff(timer.stop, timer.start) == 1
-    end
-
-    test "stop_timer_for_item_id(item_id) should stop the active timer (happy path)" do
-      {:ok, item} = Item.create_item(@valid_item_attrs)
-      {:ok, seven_seconds_ago} = 
-        NaiveDateTime.new(Date.utc_today, Time.add(Time.utc_now, -7))
-      # Start the timer 7 seconds ago:
-      {:ok, timer} =
-        Timer.start(%{item_id: item.id, person_id: 1, start: seven_seconds_ago})
-      
-      # stop the timer based on it's item_id
-      Timer.stop_timer_for_item_id(item.id)
-      
-      stopped_timer = Timer.get_timer!(timer.id)
-      assert NaiveDateTime.diff(stopped_timer.start, seven_seconds_ago) == 0
-      assert NaiveDateTime.diff(stopped_timer.stop, stopped_timer.start) == 7
-    end
-
-    test "stop_timer_for_item_id(item_id) should not explode if there is no timer (unhappy path)" do
-      zero_item_id = 0 # random int
-      Timer.stop_timer_for_item_id(zero_item_id)
-      assert "Don't stop believing!"
-    end
-
-    test "stop_timer_for_item_id(item_id) should not melt down if item_id is nil (sad path)" do
-      nil_item_id = nil # random int
-      Timer.stop_timer_for_item_id(nil_item_id)
-      assert "Keep on truckin'"
-    end
+    assert {:ok, inserted} = App.Reqlog.log("repo", "#{owner}/#{reponame}")
+    assert inserted.req == "repo"
+    assert inserted.param == "#{owner}/#{reponame}"
   end
 end
 ```
 
-## Make `timer` tests pass
+Running the test will fail:
 
-Open the `lib/app/timer.ex` file
-and replace the contents with the following code:
+```sh
+mix test test/app/reqlog_test.exs
+```
+
+Open the `lib/app/reqlog.ex` file
+and add the following code:
 
 ```elixir
-defmodule App.Timer do
-  use Ecto.Schema
-  import Ecto.Changeset
-  # import Ecto.Query
-  alias App.Repo
-  alias __MODULE__
-  require Logger
-
-  schema "timers" do
-    field :item_id, :id
-    field :start, :naive_datetime
-    field :stop, :naive_datetime
-
-    timestamps()
-  end
-
-  @doc false
-  def changeset(timer, attrs) do
-    timer
-    |> cast(attrs, [:item_id, :start, :stop])
-    |> validate_required([:item_id, :start])
-  end
-
   @doc """
-  `get_timer/1` gets a single Timer.
-
-  Raises `Ecto.NoResultsError` if the Timer does not exist.
-
-  ## Examples
-
-      iex> get_timer!(123)
-      %Timer{}
+  Creates a `reqlog` (request log) record.
   """
-  def get_timer!(id), do: Repo.get!(Timer, id)
-
-
-  @doc """
-  `start/1` starts a timer.
-
-  ## Examples
-
-      iex> start(%{item_id: 1, })
-      {:ok, %Timer{start: ~N[2022-07-11 04:20:42]}}
-
-  """
-  def start(attrs \\ %{}) do
-    %Timer{}
+  def create(attrs) do
+    %Reqlog{}
     |> changeset(attrs)
     |> Repo.insert()
   end
 
-  @doc """
-  `stop/1` stops a timer.
-
-  ## Examples
-
-      iex> stop(%{id: 1})
-      {:ok, %Timer{stop: ~N[2022-07-11 05:15:31], etc.}}
-
-  """
-  def stop(attrs \\ %{}) do
-    get_timer!(attrs.id)
-    |> changeset(%{stop: NaiveDateTime.utc_now})
-    |> Repo.update()
+  def log(req, param) do
+    Logger.info "Fetching #{req} #{param}"
+    create(%{req: req, param: param})
   end
-
-  @doc """
-  `stop_timer_for_item_id/1` stops a timer for the given item_id if there is one.
-  Fails silently if there is no timer for the given item_id.
-
-  ## Examples
-
-      iex> stop_timer_for_item_id(42)
-      {:ok, %Timer{item_id: 42, stop: ~N[2022-07-11 05:15:31], etc.}}
-
-  """
-  def stop_timer_for_item_id(item_id) when is_nil(item_id) do
-    Logger.debug("stop_timer_for_item_id/1 called without item_id: #{item_id} fail.")
-  end
-
-  def stop_timer_for_item_id(item_id) do
-    # get timer by item_id find the latest one that has not been stopped:
-    sql = """
-    SELECT t.id FROM timers t 
-    WHERE t.item_id = $1 
-    AND t.stop IS NULL 
-    ORDER BY t.id 
-    DESC LIMIT 1;
-    """
-    res = Ecto.Adapters.SQL.query!(Repo, sql, [item_id])
-    
-    if res.num_rows > 0 do
-      # IO.inspect(res.rows)
-      timer_id = res.rows |> List.first() |> List.first()
-      Logger.debug("Found timer.id: #{timer_id} for item: #{item_id}, attempting to stop.")
-      stop(%{id: timer_id})
-    else
-      Logger.debug("No active timers found for item: #{item_id}")
-    end
-  end
-end
 ```
 
-The first few functions are simple again.
-The more advanced function is `stop_timer_for_item_id/1`.
-The _reason_ for the function is,
-as it's name suggests,
-to stop a `timer` for an `item` by its' `item_id`. 
+At the top of the file under the `defmodule` add these two lines:
 
-We have written the function using "raw" `SQL` 
-so that it's easier for people who are `new`
-to `Phoenix`, and _specifically_ `Ecto` to understand.
+```sh
+  alias App.{Repo}
+  alias __MODULE__
+  require Logger
+```
 
-# 5. `items` with `timers`
+One allows us to use `Repo.insert/1`
+`alias __MODULE__`  defines an alias for our Elixir module.
+`require Logger` loads the [`Logger`](https://hexdocs.pm/logger).
 
-The _interesting_ thing we are UX-testing in the MVP
-is the _combination_ of (todo list) `items` and `timers`.
+Ref:
+https://alphahydrae.com/2021/03/how-to-make-an-elixir-module-alias-itself/
 
-So we need a way of: <br />
-**a.** Selecting all the `timers` for a given `item` <br />
-**b.** Accumulating the `timers` for the `item` <br />
+With that code in-place, we can _use_ it in our `GitHub` file.
 
-> **Note**: We would have _loved_ 
-to find a single `Ecto` function to do this,
-but we didn't.
-If you know of one,
-please share!
-
-
-## 5.1 Test for `accumulate_item_timers/1`
-
-This might feel like we are working in reverse,
-that's because we _are_!
-We are working _back_ from our stated goal
-of accumulating all the `timer` for a given `item`
-so that we can display a _single_ elapsed time
-when an `item` has had more than one timer.
-
-Open the 
-`test/app/item_test.exs`
-file and add the following block of test code:
+Remember to add the line:
 
 ```elixir
-  describe "accumulate timers for a list of items #103" do
-    test "accumulate_item_timers/1 to display cumulative timer" do
-      # https://hexdocs.pm/elixir/1.13/NaiveDateTime.html#new/2
-      # "Add" -7 seconds: https://hexdocs.pm/elixir/1.13/Time.html#add/3
-      {:ok, seven_seconds_ago} =
-        NaiveDateTime.new(Date.utc_today, Time.add(Time.utc_now, -7))
-
-      # this is the "shape" of the data that items_with_timers/1 will return:
-      items_with_timers = [
-        %{
-          stop: nil,
-          id: 3,
-          start: nil,
-          text: "This item has no timers",
-          timer_id: nil
-        },
-        %{
-          stop: ~N[2022-07-17 11:18:10.000000],
-          id: 2,
-          start: ~N[2022-07-17 11:18:00.000000],
-          text: "Item #2 has one active (no end) and one complete timer should total 17sec",
-          timer_id: 3
-        },
-        %{
-          stop: nil,
-          id: 2,
-          start: seven_seconds_ago,
-          text: "Item #2 has one active (no end) and one complete timer should total 17sec",
-          timer_id: 4
-        },
-        %{
-          stop: ~N[2022-07-17 11:18:31.000000],
-          id: 1,
-          start: ~N[2022-07-17 11:18:26.000000],
-          text: "Item with 3 complete timers that should add up to 42 seconds elapsed",
-          timer_id: 2
-        },
-        %{
-          stop: ~N[2022-07-17 11:18:24.000000],
-          id: 1,
-          start: ~N[2022-07-17 11:18:18.000000],
-          text: "Item with 3 complete timers that should add up to 42 seconds elapsed",
-          timer_id: 1
-        },
-        %{
-          stop: ~N[2022-07-17 11:19:42.000000],
-          id: 1,
-          start: ~N[2022-07-17 11:19:11.000000],
-          text: "Item with 3 complete timers that should add up to 42 seconds elapsed",
-          timer_id: 5
-        }
-      ]
-
-      # The *interesting* timer is the *active* one (started seven_seconds_ago) ...
-      # The "hard" part to test in accumulating timers are the *active* ones ...
-      acc = Item.accumulate_item_timers(items_with_timers)
-      item_map = Map.new(acc, fn item -> {item.id, item} end)
-      item1 = Map.get(item_map, 1)
-      item2 = Map.get(item_map, 2)
-      item3 = Map.get(item_map, 3)
-
-      # It's easy to calculate time elapsed for timers that have an stop:
-      assert NaiveDateTime.diff(item1.stop, item1.start) == 42
-      # This is the fun one that we need to be 17 seconds:
-      assert NaiveDateTime.diff(NaiveDateTime.utc_now(), item2.start) == 17
-      # The diff will always be 17 seconds because we control the start in the test data above.
-      # But we still get the function to calculate it so we know it works.
-
-      # The 3rd item doesn't have any timers, it's the control:
-      assert item3.start == nil
-    end
-  end
+  use App.DataCase
 ```
 
-This is a large test but most of it is the test data (`items_with_timers`) in the format we will be returning from 
-`items_with_timers/1` in the next section. 
+to the top of the file `test/app/github_test.exs`
+to ensure that the `GitHub` API requests get logged during testing.
 
-With that test in place, we can write the function.
-
-## 5.2 Implement the `accummulate_item_timers/1` function
-
-Open the 
-`lib/app/item.ex`
-file and add the following function:
+In the `lib/app/github.ex` file,
+add the following line to the top:
 
 ```elixir
-@doc """
-  `accumulate_item_timers/1` aggregates the elapsed time
-  for all the timers associated with an item
-  and then subtracs that time from the start value of the *current* active timer.
-  This is done to create the appearance that a single timer is being started/stopped
-  when in fact there are multiple timers in the backend.
-  For MVP we *could* have just had a single timer ...
-  and given the "ugliness" of this code, I wish I had done that!!
-  But the "USP" of our product [IMO] is that
-  we can track the completion of a task across multiple work sessions.
-  And having multiple timers is the *only* way to achieve that.
-
-  If you can think of a better way of achieving the same result,
-  please share: https://github.com/dwyl/app-mvp-phoenix/issues/103
-  This function *relies* on the list of items being ordered by timer_id ASC
-  because it "pops" the last timer and ignores it to avoid double-counting.
-  """
-  def accumulate_item_timers(items_with_timers) do
-    # e.g: %{0 => 0, 1 => 6, 2 => 5, 3 => 24, 4 => 7}
-    timer_id_diff_map = map_timer_diff(items_with_timers)
-
-    # e.g: %{1 => [2, 1], 2 => [4, 3], 3 => []}
-    item_id_timer_id_map = Map.new(items_with_timers, fn i ->
-      { i.id, Enum.map(items_with_timers, fn it ->
-          if i.id == it.id, do: it.timer_id, else: nil
-        end)
-        # stackoverflow.com/questions/46339815/remove-nil-from-list
-        |> Enum.reject(&is_nil/1)
-      }
-    end)
-
-    # this one is "wasteful" but I can't think of how to simplify it ...
-    item_id_timer_diff_map = Map.new(items_with_timers, fn item ->
-      timer_id_list = Map.get(item_id_timer_id_map, item.id, [0])
-      # Remove last item from list before summing to avoid double-counting
-      {_, timer_id_list} = List.pop_at(timer_id_list, -1)
-
-      { item.id, Enum.reduce(timer_id_list, 0, fn timer_id, acc ->
-          Map.get(timer_id_diff_map, timer_id) + acc
-        end)
-      }
-    end)
-
-    # creates a nested map: %{ item.id: %{id: 1, text: "my item", etc.}}
-    Map.new(items_with_timers, fn item ->
-      time_elapsed = Map.get(item_id_timer_diff_map, item.id)
-      start = if is_nil(item.start), do: nil,
-        else: NaiveDateTime.add(item.start, -time_elapsed)
-
-      { item.id, %{item | start: start}}
-    end)
-    # Return the list of items without duplicates and only the last/active timer:
-    |> Map.values()
-    # Sort list by item.id descending (ordered by timer_id ASC above) so newest item first:
-    |> Enum.sort_by(fn(i) -> i.id end, :desc)
-  end
+import App.Reqlog, only: [log: 2]
 ```
 
-There's no getting around this,
-the function is huge and not very pretty.
-But hopefully the comments clarify it.
-
-If anything is unclear, we're very happy to expand/explain.
-We're also _very_ happy for anyone `else` to refactor it!
-[Please open an issue](https://github.com/dwyl/app-mvp/issues/) 
-so we can discuss. 🙏
-
-## 5.3 Test for `items_with_timers/1`
-
-Open the 
-`test/app/item_test.exs`
-file and the following test to the bottom:
+Then replace the line:
 
 ```elixir
-    test "Item.items_with_timers/1 returns a list of items with timers" do
-      {:ok, item1} = Item.create_item(@valid_attrs)
-      {:ok, item2} = Item.create_item(@valid_attrs)
-      assert Item.get_item!(item1.id).text == item1.text
-
-      started = NaiveDateTime.utc_now()
-
-      {:ok, timer1} =
-        Timer.start(%{item_id: item1.id, person_id: 1, start: started})
-      {:ok, _timer2} =
-        Timer.start(%{item_id: item2.id, person_id: 1, start: started})
-
-      assert NaiveDateTime.diff(timer1.start, started) == 0
-
-      # list items with timers:
-      item_timers = Item.items_with_timers(1)
-      assert length(item_timers) > 0
-    end
+Logger.info "Fetching repository #{owner}/#{reponame}"
 ```
 
-## 5.4 Implement `items_with_timers/1`
-
-Open the 
-`lib/app/item.ex`
-file and add the following code to the bottom:
+with:
 
 ```elixir
-@doc """
-  `items_with_timers/1` Returns a List of items with the latest associated timers.
-
-  ## Examples
-
-  iex> items_with_timers()
-  [
-    %{text: "hello", person_id: 1, status: 2, start: 2022-07-14 09:35:18},
-    %{text: "world", person_id: 2, status: 7, start: 2022-07-15 04:20:42}
-  ]
-  """
-  #
-  def items_with_timers(person_id \\ 0) do
-    sql = """
-    SELECT i.id, i.text, i.status, i.person_id, t.start, t.stop, t.id as timer_id FROM items i
-    FULL JOIN timers as t ON t.item_id = i.id
-    WHERE i.person_id = $1 AND i.status IS NOT NULL AND i.status != 6
-    ORDER BY timer_id ASC;
-    """
-
-    Ecto.Adapters.SQL.query!(Repo, sql, [person_id])
-    |> map_columns_to_values()
-    |> accumulate_item_timers()
-  end
-
-
-  @doc """
-  `map_columns_to_values/1` takes an Ecto SQL query result
-  which has the List of columns and rows separate
-  and returns a List of Maps where the keys are the column names and values the data.
-
-  Sadly, Ecto returns rows without column keys so we have to map them manually:
-  ref: https://groups.google.com/g/elixir-ecto/c/0cubhSd3QS0/m/DLdQsFrcBAAJ
-  """
-  def map_columns_to_values(res) do
-    Enum.map(res.rows, fn(row) ->
-      Enum.zip(res.columns, row)
-      |> Map.new |> AtomicMap.convert()
-    end)
-  end
-
-  @doc """
-  `map_timer_diff/1` transforms a list of items_with_timers
-  into a flat map where the key is the timer_id and the value is the difference
-  between timer.stop and timer.start
-  If there is no active timer return {0, 0}.
-  If there is no timer.stop return Now - timer.start
-
-  ## Examples
-
-  iex> list = [
-    %{ stop: nil, id: 3, start: nil, timer_id: nil },
-    %{ stop: ~N[2022-07-17 11:18:24], id: 1, start: ~N[2022-07-17 11:18:18], timer_id: 1 },
-    %{ stop: ~N[2022-07-17 11:18:31], id: 1, start: ~N[2022-07-17 11:18:26], timer_id: 2 },
-    %{ stop: ~N[2022-07-17 11:18:24], id: 2, start: ~N[2022-07-17 11:18:00], timer_id: 3 },
-    %{ stop: nil, id: 2, start: seven_seconds_ago, timer_id: 4 }
-  ]
-  iex> map_timer_diff(list)
-  %{0 => 0, 1 => 6, 2 => 5, 3 => 24, 4 => 7}
-  """
-  def map_timer_diff(list) do
-    Map.new(list, fn item ->
-      if is_nil(item.timer_id) do
-        # item without any active timer
-        { 0, 0}
-      else
-        { item.timer_id, timer_diff(item)}
-      end
-    end)
-  end
-
-  @doc """
-  `timer_diff/1` calculates the difference between timer.stop and timer.start
-  If there is no active timer OR timer has not ended return 0.
-  The reasoning is: an *active* timer (no end) does not have to
-  be subtracted from the timer.start in the UI ...
-  Again, DRAGONS!
-  """
-  def timer_diff(timer) do
-    # ignore timers that have not ended (current timer is factored in the UI!)
-    if is_nil(timer.stop) do
-      0
-    else
-      NaiveDateTime.diff(timer.stop, timer.start)
-    end
-  end
+log("repository", "#{owner}/#{reponame}")
 ```
 
-Once again, there is quite a lot going on here.
-We have broken down the functions into chunks
-and added inline comments to clarify the code.
-But again, if anything is unclear please let us know!!
+Replace any other instances of `Logger.info` with `log/2`.
+
+## 4.1 Limit API Requests
+
+Given that `GitHub` has a hard limit of
+**`5,000 requests per hour`**:
+https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+
+<img width="927" alt="Image" src="https://github.com/user-attachments/assets/f33793ce-049d-425e-9b04-33d94b7ace0f" />
+
+We need to stay within this limit to avoid being blocked.
+
+Rather than duplicate all the code here,
+we've left a bunch of comments in the file:
+
+[`/lib/app/api_manager.ex`](https://github.com/dwyl/who/blob/02096766d9efc88fe8fb645aa59de69b3991f970/lib/app/api_manager.ex)
+
+It's enabled in:
+[/lib/app/application.ex#L21](https://github.com/dwyl/who/blob/02096766d9efc88fe8fb645aa59de69b3991f970/lib/app/application.ex#L21)
+
+Hopefully it's self-explanatory.
+But if not, please comment on:
+[**who#226**](https://github.com/dwyl/who/issues/226)
+💬
+
+# 5. Org <-> Users
+
+We need to know the `users` who are `members` of an `org`.
+Create the schema:
+
+```elixir
+mix phx.gen.schema Orgmember orgmembers org_id:integer user_id:integer stop:utc_datetime
+```
+
+That will output:
+
+```sh
+* creating lib/app/orgmember.ex
+* creating priv/repo/migrations/20250131111017_create_orgmembers.exs
+
+Remember to update your repository by running migrations:
+
+    $ mix ecto.migrate
+```
+
+All the code for this is in:
+`lib/app/orgmember.ex`
+and corresponding tests in:
+`test/app/orgmember_test.exs`
+
+# 6. Repository Contributors
+
+First let's take a quick look at what data we can get from the API:
+https://docs.github.com/en/rest/repos/repos#list-repository-contributors
+
+```json
+[
+  {
+    "login": "octocat",
+    "id": 1,
+    "node_id": "MDQ6VXNlcjE=",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/octocat",
+    "html_url": "https://github.com/octocat",
+    "followers_url": "https://api.github.com/users/octocat/followers",
+    "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+    "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+    "organizations_url": "https://api.github.com/users/octocat/orgs",
+    "repos_url": "https://api.github.com/users/octocat/repos",
+    "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/octocat/received_events",
+    "type": "User",
+    "site_admin": false,
+    "contributions": 32
+  }
+]
+```
+
+Appears to be a `user` record with the addition of the `contributions` field.
+
+So we need to create a new schema with `repo_id`, `user_id` and `contribs`
+(all integers).
+The following command:
+
+```elixir
+mix phx.gen.schema Contrib contribs repo_id:integer user_id:integer count:integer
+```
+
+That creates the migration:
+`priv/repo/migrations/20250203140127_create_contribs.exs`
+
+See:∫
+`lib/app/contrib.ex` for the code
+and
+`test/app/contrib_test.exs`
+for tests.
+
+# 7. Dashboard
+
+We want to have a **`dashboard`** displaying the most important **stats**.
+We have a list of these **stats** including:
+
++ Total number of stars for the @dwyl org ⭐
+  [#238](https://github.com/dwyl/who/issues/238)
++ List of top contributors 🔝
+  [#237](https://github.com/dwyl/who/issues/238)
++ Number of `@dwy`l` org members 👤
+  [#245](https://github.com/dwyl/who/issues/245)
++ ... many more to come!
+
+In order to speed up the rendering of the **`dashboard`**
+and store the _history_ of each stat that we want to track,
+we will have a schema for it which we can add to over time.
+
+```elixir
+mix phx.gen.schema Stat stats followers:integer members:integer total_stars:integer total_contribs:integer
+```
 
 
-# 6. Add Authentication
+
+# X. Add Authentication
 
 This section borrows heavily from:
 [dwyl/phoenix-liveview-chat-example](https://github.com/dwyl/phoenix-liveview-chat-example#12-authentication)
 
-## 6.1 Add `auth_plug` to `deps`
+## X.1 Add `auth_plug` to `deps`
 
 Open the `mix.exs` file and add `auth_plug` to the `deps` section:
 
@@ -1399,14 +1041,14 @@ run:
 mix deps.get
 ```
 
-## 6.2 Get your `AUTH_API_KEY`
+## X.2 Get your `AUTH_API_KEY`
 
 Follow the steps in the 
 [docs](https://github.com/dwyl/auth_plug#2-get-your-auth_api_key-)
 to get your `AUTH_API_KEY` environment variable. (1 minute)
 
 
-## 6.2 Create Auth Controller
+## X.3 Create Auth Controller
 
 Create a new file with the path:
 `lib/app_web/controllers/auth_controller.ex`
@@ -1450,7 +1092,7 @@ defmodule AppWeb.AuthController do
 end
 ```
 
-# 7. Create `LiveView` Functions
+# Y. Create `LiveView` Functions
 
 _Finally_ we have all the "CRUD" functions we're going to need
 we can focus on the `LiveView` code that will be the actual UI/UX!
@@ -1458,7 +1100,7 @@ we can focus on the `LiveView` code that will be the actual UI/UX!
 ## 7.1 Write `LiveView` Tests
 
 Opent the 
-`test/app_web/live/app_live_test.exs` 
+`test/app_web/live/app_live_test.exs`
 file and replace the contents with the following test code:
 
 ```elixir

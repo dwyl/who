@@ -5,7 +5,7 @@ defmodule App.MixProject do
     [
       app: :app,
       version: "1.7.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -41,7 +41,7 @@ defmodule App.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.1"},
+      {:phoenix, "~> 1.7.17"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
@@ -68,6 +68,9 @@ defmodule App.MixProject do
 
       # JSON Parsing: https://hex.pm/packages/poison
       {:poison, "~> 6.0.0"},
+
+      # Extract image data: https://github.com/elixir-image/image/
+      {:image, "~> 0.37"},
 
       # Create docs on localhost by running "mix docs"
       {:ex_doc, "~> 0.37.1", only: :dev, runtime: false},
@@ -108,8 +111,8 @@ defmodule App.MixProject do
         "phx.digest"
       ],
       test: ["ecto.reset", "test"],
-      t: ["test"],
-      c: ["coveralls.html"],
+      t: ["test --trace"],
+      c: ["coveralls.html --trace"],
       s: ["phx.server"]
     ]
   end

@@ -11,14 +11,17 @@ defmodule App.Repo.Migrations.CreateUsers do
       add :email, :string
       add :followers, :integer
       add :following, :integer
-      add :hireable, :boolean, default: false, null: false
+      add :hireable, :boolean, default: false
+      add :hex, :string
       add :location, :string
-      add :login, :string
+      add :login, :string #, primary_key: true
       add :name, :string
       add :public_repos, :integer
-      add :two_factor_authentication, :boolean, default: false, null: false
+      add :two_factor_authentication, :boolean, default: false
 
       timestamps()
     end
+
+    # create unique_index(:users, :login, name: :login_unique)
   end
 end
