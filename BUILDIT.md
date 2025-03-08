@@ -1016,7 +1016,7 @@ and store the _history_ of each stat that we want to track,
 we will have a schema for it which we can add to over time.
 
 ```elixir
-mix phx.gen.schema Stat stats stars:integer members:integer total_contribs:integer
+mix phx.gen.schema Stat stats followers:integer members:integer total_stars:integer total_contribs:integer
 ```
 
 
