@@ -85,7 +85,8 @@ defmodule App.MixProject do
       {:tailwind, "~> 0.3.1", runtime: Mix.env() == :dev},
 
       # Elixir GitHub REST API lib: github.com/edgurgel/tentacat
-      {:tentacat, "~> 2.0"}
+      {:tentacat, "~> 2.0"},
+      {:lazy_html, ">= 0.1.0", only: :test}
     ]
   end
 
