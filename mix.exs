@@ -82,7 +82,7 @@ defmodule App.MixProject do
       {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
 
       # Ref: github.com/dwyl/learn-tailwind
-      {:tailwind, "~> 0.3.1", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.4.0", runtime: Mix.env() == :dev},
 
       # Elixir GitHub REST API lib: github.com/edgurgel/tentacat
       {:tentacat, "~> 2.0"},
