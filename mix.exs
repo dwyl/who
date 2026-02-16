@@ -73,7 +73,7 @@ defmodule App.MixProject do
       {:image, "~> 0.37"},
 
       # Create docs on localhost by running "mix docs"
-      {:ex_doc, "~> 0.39.1", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.40.1", only: :dev, runtime: false},
       # Track test coverage
       {:excoveralls, "~> 0.18.0", only: [:test, :dev]},
       # git pre-commit hook runs tests before allowing commits
